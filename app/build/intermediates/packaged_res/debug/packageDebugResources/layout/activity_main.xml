@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <!--logo with "AnimoTrack" header-->
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="43dp"-->
+<!--        android:layout_height="33dp"-->
+<!--        android:layout_marginStart="3dp"-->
+<!--        android:layout_marginTop="11dp"-->
+<!--        android:contentDescription="@string/animotrack_logo"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/animotrack_logo" />-->
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginStart="52dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="@string/app_name"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="18sp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <LinearLayout
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/appLogo"
+                android:layout_width="43dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/animotrack_logo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/animotrack_logo" />
+
+            <TextView
+                android:id="@+id/appName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/app_name"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+        <!-- Green rectangle & text -->
+    <View
+        android:id="@+id/rectangleView"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/rectangle_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/greetNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="45dp"
+        android:text="@string/hello_name"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout" />
+
+    <TextView
+        android:id="@+id/greetingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:text="@string/greeting"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/greetNameTextView" />
+
+    <!--Categories-->
+    <TextView
+        android:id="@+id/categoriesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/categories"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rectangleView" />
+
+    <!-- categories icons -->
+
+    <!--Upcoming Events and scroll (Recycler) view-->
+
+    <LinearLayout
+        android:id="@+id/category_icons"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginTop="2dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/UpcomingEventsTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categoriesTextView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <ImageView
+                android:id="@+id/orgsIconImageView"
+                android:layout_width="81dp"
+                android:layout_height="68dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="14dp"
+                android:contentDescription="@string/orgs_category_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/icon_orgs" />
+
+            <TextView
+                android:id="@+id/orgsLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="19dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Organizations"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orgsIconImageView"
+                app:layout_constraintVertical_bias="0.538" />
+
+            <ImageView
+                android:id="@+id/acadsIconImageView"
+                android:layout_width="81dp"
+                android:layout_height="68dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="14dp"
+                android:contentDescription="@string/acads_category_icon"
+                app:layout_constraintStart_toEndOf="@+id/orgsIconImageView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/icon_acads" />
+
+            <TextView
+                android:id="@+id/acadsLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="112dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Academics"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/acadsIconImageView"
+                app:layout_constraintVertical_bias="0.562" />
+
+            <ImageView
+                android:id="@+id/seminarIconImageView"
+                android:layout_width="81dp"
+                android:layout_height="68dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="14dp"
+                android:contentDescription="@string/seminar_category_icon"
+                app:layout_constraintStart_toEndOf="@+id/acadsIconImageView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/icon_seminar" />
+
+            <TextView
+                android:id="@+id/seminarLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="30dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Seminars"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/acadsLabel"
+                app:layout_constraintTop_toBottomOf="@+id/seminarIconImageView"
+                app:layout_constraintVertical_bias="0.562" />
+
+            <ImageView
+                android:id="@+id/sportsIconImageView"
+                android:layout_width="81dp"
+                android:layout_height="68dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="14dp"
+                android:contentDescription="@string/sports_category_icon"
+                app:layout_constraintStart_toEndOf="@+id/seminarIconImageView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/icon_sports" />
+
+            <TextView
+                android:id="@+id/sportsLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="118dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Sports"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sportsIconImageView"
+                app:layout_constraintVertical_bias="0.562" />
+
+            <ImageView
+                android:id="@+id/culturalIconImageView"
+                android:layout_width="81dp"
+                android:layout_height="68dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="14dp"
+                android:contentDescription="@string/cultural_category_icon"
+                app:layout_constraintStart_toEndOf="@+id/sportsIconImageView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/icon_cultural" />
+
+            <TextView
+                android:id="@+id/culturalLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="34dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Cultural"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/culturalIconImageView"
+                app:layout_constraintVertical_bias="0.562" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/UpcomingEventsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/upcoming_events"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/category_icons" />
+
+    <ImageButton
+        android:id="@+id/upcomingEventsExtButton"
+        android:layout_width="18dp"
+        android:layout_height="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="185dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/right_arrow"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toEndOf="@+id/UpcomingEventsTextView"
+        app:layout_constraintTop_toBottomOf="@+id/rectangleView"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewUpcomingEvents"
+        android:layout_width="435dp"
+        android:layout_height="363dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toTopOf="@id/circular_button_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UpcomingEventsTextView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!-- Right arrow button -->
+    <!-- Circular Image Buttons at the Bottom -->
+
+
+    <LinearLayout
+        android:id="@+id/circular_button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="105dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Black line separator -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp">
+
+            <ImageButton
+                android:id="@+id/homeButton"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/home_button"
+                android:scaleType="centerCrop"
+                android:src="@drawable/home_vector"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/homeLabel"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="28dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/home"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="14sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/homeButton" />-->
+
+            <ImageButton
+                android:id="@+id/eventsButton"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="105dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/events_button"
+                android:scaleType="centerCrop"
+                android:src="@drawable/event_vector"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/eventsLabel"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="120dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/events"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="14sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/eventsButton"-->
+<!--                app:layout_constraintVertical_bias="0.0" />-->
+
+            <ImageButton
+                android:id="@+id/bookmarksButton"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginEnd="105dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/bookmarks_button"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bookmark_vector"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/bookmarksLabel"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginEnd="105dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/bookmarks"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="14sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/bookmarksButton"-->
+<!--                app:layout_constraintVertical_bias="0.0" />-->
+
+            <ImageButton
+                android:id="@+id/profileButton"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/profile_buton"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_vector"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/profileLabel"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginEnd="26dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/profile"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="14sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/profileButton"-->
+<!--                app:layout_constraintVertical_bias="0.0" />-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/my_image_button"
+        android:layout_width="112dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="55dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:contentDescription="@string/add_event"
+        android:focusable="true"
+        android:src="@drawable/add_event"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+<!--    <Button-->
+<!--        android:id="@+id/button2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:backgroundTint="@color/white"-->
+<!--        android:text="More"-->
+<!--        tools:layout_editor_absoluteX="353dp"-->
+<!--        tools:layout_editor_absoluteY="344dp" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/floatingActionButton2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="188dp"-->
+<!--        android:layout_marginBottom="90dp"-->
+<!--        android:backgroundTint="@color/grayish_lime_green"-->
+<!--        android:clickable="true"-->
+<!--        android:focusable="true"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:srcCompat="@android:drawable/ic_menu_add"-->
+<!--        android:scaleX="1.5"-->
+<!--        android:scaleY="1.5" />-->
+

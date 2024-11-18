@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="grayish_lime_green">#C9D3AD</color>
+    <color name="green">#609B6A</color>
+    <color name="light_green">#bad4bd</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="white_ice">#E0F2E9</color>
+    <string name="acads_category_icon">Acads Category Icon</string>
+    <string name="add_event">add_event</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="animotrack_logo">AnimoTrack logo</string>
+    <string name="app_name">AnimoTrack</string>
+    <string name="banner">banner</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="bookmarks_button">Bookmarks Button</string>
+    <string name="categories">Categories</string>
+    <string name="continue_button">CONTINUE</string>
+    <string name="cultural_category_icon">Cultural Category Icon</string>
+    <string name="dont_have_an_account_yet">Don’t have an account yet?</string>
+    <string name="eventposter">eventPoster</string>
+    <string name="events">Events</string>
+    <string name="events_button">Events Button</string>
+    <string name="greeting">Ready to explore today\'s events?</string>
+    <string name="hello_name">Hello, Ange!</string>
+    <string name="home">Home</string>
+    <string name="home_button">Home Button</string>
+    <string name="homescreenimage">homescreenImage</string>
+    <string name="orgs_category_icon">Orgs Category Icon</string>
+    <string name="profile">Profile</string>
+    <string name="profile_buton">Profile Buton</string>
+    <string name="right_arrow_icon_button">Right Arrow Icon Button</string>
+    <string name="seminar_category_icon">Seminar Category Icon</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sports_category_icon">Sports Category Icon</string>
+    <string name="upcoming_events">Upcoming Events</string>
+    <string name="welcome_to_animotrack">Welcome to AnimoTrack</string>
+    <style name="Base.Theme.AnimoTrack" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="Theme.AnimoTrack" parent="Base.Theme.AnimoTrack"/>
+</resources>

@@ -1,0 +1,5 @@
+com.mobdeve.xx22.rivera.josecarlos.animotrack.test.app-core-1.6.1-0 C:\Users\josec\.gradle\caches\8.9\transforms\86f6f39a111d16a9613376ae2e3b76b3\transformed\core-1.6.1\res
+com.mobdeve.xx22.rivera.josecarlos.animotrack.test.app-androidTest-1 C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\build\generated\res\resValues\androidTest\debug
+com.mobdeve.xx22.rivera.josecarlos.animotrack.test.app-mergeDebugAndroidTestResources-2 C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.mobdeve.xx22.rivera.josecarlos.animotrack.test.app-mergeDebugAndroidTestResources-3 C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.mobdeve.xx22.rivera.josecarlos.animotrack.test.app-debugAndroidTest-4 C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

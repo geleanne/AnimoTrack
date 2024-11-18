@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">AnimoTrack</string>
+    <string name="upcoming_events">Upcoming Events</string>
+    <string name="homescreenimage">homescreenImage</string>
+    <string name="eventposter">eventPoster</string>
+    <string name="animotrack_logo">AnimoTrack logo</string>
+    <string name="banner">banner</string>
+    <string name="categories">Categories</string>
+    <string name="hello_name">Hello, Ange!</string>
+    <string name="greeting">Ready to explore today\'s events?</string>
+    <string name="continue_button">CONTINUE</string>
+    <string name="seminar_category_icon">Seminar Category Icon</string>
+    <string name="right_arrow_icon_button">Right Arrow Icon Button</string>
+    <string name="sports_category_icon">Sports Category Icon</string>
+    <string name="profile_buton">Profile Buton</string>
+    <string name="home_button">Home Button</string>
+    <string name="events_button">Events Button</string>
+    <string name="cultural_category_icon">Cultural Category Icon</string>
+    <string name="orgs_category_icon">Orgs Category Icon</string>
+    <string name="acads_category_icon">Acads Category Icon</string>
+    <string name="bookmarks_button">Bookmarks Button</string>
+    <string name="home">Home</string>
+    <string name="events">Events</string>
+    <string name="profile">Profile</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="dont_have_an_account_yet">Don’t have an account yet?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="welcome_to_animotrack">Welcome to AnimoTrack</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="add_event">add_event</string>
+</resources>

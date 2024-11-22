@@ -64,6 +64,10 @@
             android:name="com.mobdeve.xx22.rivera.josecarlos.animotrack.UpcomingEventExtPage"
             android:exported="true" >
         </activity>
+        <activity
+            android:name="com.mobdeve.xx22.rivera.josecarlos.animotrack.CategoryPage"
+            android:exported="true" >
+        </activity>
 
         <provider
             android:name="androidx.startup.InitializationProvider"

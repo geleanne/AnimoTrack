@@ -128,11 +128,12 @@
         android:layout_marginTop="4dp" />
 
     <TextView
-        android:id="@+id/event_facilitators"
+        android:id="@+id/event_facilitator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Facilitators: Mathematics Department"
+        android:text="Facilitator: Mathematics Department"
         android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/event_venue"
         app:layout_constraintStart_toStartOf="@id/event_venue"
         android:layout_marginTop="4dp" />
@@ -143,8 +144,8 @@
         android:layout_height="wrap_content"
         android:text="Join us for a comprehensive review session on Calculus 101, where we will cover core topics such as limits, derivatives, and integrals. ..."
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/event_facilitators"
-        app:layout_constraintStart_toStartOf="@id/event_facilitators"
+        app:layout_constraintTop_toBottomOf="@id/event_facilitator"
+        app:layout_constraintStart_toStartOf="@id/event_facilitator"
         app:layout_constraintEnd_toEndOf="@id/event_image"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp" />

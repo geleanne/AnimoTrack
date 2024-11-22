@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:1:1-52:12
-INJECTED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:1:1-52:12
-INJECTED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:1:1-52:12
-INJECTED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:1:1-52:12
+ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:1:1-56:12
+INJECTED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:1:1-56:12
+INJECTED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:1:1-56:12
+INJECTED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:1:1-56:12
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\josec\.gradle\caches\8.9\transforms\6084cd424954ba15b635dc9c824aa452\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\josec\.gradle\caches\8.9\transforms\092f1c0f1391ca9b4bdca90a6b19ac6e\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat-resources:1.7.0] C:\Users\josec\.gradle\caches\8.9\transforms\594658fa882e5fcc893d7dba45223554\transformed\appcompat-resources-1.7.0\AndroidManifest.xml:2:1-7:12
@@ -56,8 +56,8 @@ MERGED from [androidx.annotation:annotation-experimental:1.4.0] C:\Users\josec\.
 	xmlns:android
 		ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:1:11-69
 application
-ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:4:5-51:19
-INJECTED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:4:5-51:19
+ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:4:5-55:19
+INJECTED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:4:5-55:19
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\josec\.gradle\caches\8.9\transforms\6084cd424954ba15b635dc9c824aa452\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\josec\.gradle\caches\8.9\transforms\6084cd424954ba15b635dc9c824aa452\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\josec\.gradle\caches\8.9\transforms\092f1c0f1391ca9b4bdca90a6b19ac6e\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -154,6 +154,12 @@ ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidM
 		ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:49:13-36
 	android:name
 		ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:48:13-49
+activity#com.mobdeve.xx22.rivera.josecarlos.animotrack.CategoryPage
+ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:51:9-54:20
+	android:exported
+		ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:53:13-36
+	android:name
+		ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:52:13-41
 uses-sdk
 INJECTED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml

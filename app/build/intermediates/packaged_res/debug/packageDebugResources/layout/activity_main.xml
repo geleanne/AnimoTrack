@@ -132,16 +132,30 @@
             android:layout_width="match_parent"
             android:layout_height="100dp">
 
-            <ImageView
-                android:id="@+id/orgsIconImageView"
-                android:layout_width="81dp"
+            <ImageButton
+                android:id="@+id/orgsIconImageButton"
+                android:layout_width="68dp"
                 android:layout_height="68dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="22dp"
                 android:layout_marginTop="14dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/orgs_category_icon"
+                android:src="@drawable/icon_orgs"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/icon_orgs" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+<!--            <ImageView-->
+<!--                android:id="@+id/orgsIconImageView"-->
+<!--                android:layout_width="81dp"-->
+<!--                android:layout_height="68dp"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="14dp"-->
+<!--                android:contentDescription="@string/orgs_category_icon"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:srcCompat="@drawable/icon_orgs" />-->
 
             <TextView
                 android:id="@+id/orgsLabel"
@@ -156,19 +170,32 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/orgsIconImageView"
+                app:layout_constraintTop_toBottomOf="@+id/orgsIconImageButton"
                 app:layout_constraintVertical_bias="0.538" />
 
-            <ImageView
-                android:id="@+id/acadsIconImageView"
-                android:layout_width="81dp"
+            <ImageButton
+                android:id="@+id/acadsIconImageButton"
+                android:layout_width="68dp"
                 android:layout_height="68dp"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="18dp"
                 android:layout_marginTop="14dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/acads_category_icon"
-                app:layout_constraintStart_toEndOf="@+id/orgsIconImageView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/icon_acads" />
+                android:src="@drawable/icon_acads"
+                app:layout_constraintStart_toEndOf="@+id/orgsIconImageButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+<!--            <ImageView-->
+<!--                android:id="@+id/acadsIconImageView"-->
+<!--                android:layout_width="81dp"-->
+<!--                android:layout_height="68dp"-->
+<!--                android:layout_marginStart="4dp"-->
+<!--                android:layout_marginTop="14dp"-->
+<!--                android:contentDescription="@string/acads_category_icon"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/orgsIconImageView"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:srcCompat="@drawable/icon_acads" />-->
 
             <TextView
                 android:id="@+id/acadsLabel"
@@ -183,19 +210,33 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/acadsIconImageView"
+                app:layout_constraintTop_toBottomOf="@+id/acadsIconImageButton"
                 app:layout_constraintVertical_bias="0.562" />
 
-            <ImageView
-                android:id="@+id/seminarIconImageView"
-                android:layout_width="81dp"
+            <ImageButton
+                android:id="@+id/seminarIconImageButton"
+                android:layout_width="68dp"
                 android:layout_height="68dp"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="18dp"
                 android:layout_marginTop="14dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/seminar_category_icon"
-                app:layout_constraintStart_toEndOf="@+id/acadsIconImageView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/icon_seminar" />
+                android:src="@drawable/icon_seminar"
+                app:layout_constraintStart_toEndOf="@+id/acadsIconImageButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+<!--            <ImageView-->
+<!--                android:id="@+id/seminarIconImageView"-->
+<!--                android:layout_width="81dp"-->
+<!--                android:layout_height="68dp"-->
+<!--                android:layout_marginStart="4dp"-->
+<!--                android:layout_marginTop="14dp"-->
+<!--                android:contentDescription="@string/seminar_category_icon"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/acadsIconImageView"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:srcCompat="@drawable/icon_seminar" />-->
 
             <TextView
                 android:id="@+id/seminarLabel"
@@ -210,19 +251,32 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/acadsLabel"
-                app:layout_constraintTop_toBottomOf="@+id/seminarIconImageView"
+                app:layout_constraintTop_toBottomOf="@+id/seminarIconImageButton"
                 app:layout_constraintVertical_bias="0.562" />
 
-            <ImageView
-                android:id="@+id/sportsIconImageView"
-                android:layout_width="81dp"
+            <ImageButton
+                android:id="@+id/sportsIconImageButton"
+                android:layout_width="68dp"
                 android:layout_height="68dp"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="18dp"
                 android:layout_marginTop="14dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/sports_category_icon"
-                app:layout_constraintStart_toEndOf="@+id/seminarIconImageView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/icon_sports" />
+                android:src="@drawable/icon_sports"
+                app:layout_constraintStart_toEndOf="@+id/seminarIconImageButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+<!--            <ImageView-->
+<!--                android:id="@+id/sportsIconImageView"-->
+<!--                android:layout_width="81dp"-->
+<!--                android:layout_height="68dp"-->
+<!--                android:layout_marginStart="4dp"-->
+<!--                android:layout_marginTop="14dp"-->
+<!--                android:contentDescription="@string/sports_category_icon"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/seminarIconImageView"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:srcCompat="@drawable/icon_sports" />-->
 
             <TextView
                 android:id="@+id/sportsLabel"
@@ -240,16 +294,29 @@
                 app:layout_constraintTop_toBottomOf="@+id/sportsIconImageView"
                 app:layout_constraintVertical_bias="0.562" />
 
-            <ImageView
-                android:id="@+id/culturalIconImageView"
-                android:layout_width="81dp"
+            <ImageButton
+                android:id="@+id/culturalIconImageButton"
+                android:layout_width="68dp"
                 android:layout_height="68dp"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="18dp"
                 android:layout_marginTop="14dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/cultural_category_icon"
-                app:layout_constraintStart_toEndOf="@+id/sportsIconImageView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/icon_cultural" />
+                android:src="@drawable/icon_cultural"
+                app:layout_constraintStart_toEndOf="@+id/sportsIconImageButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+<!--            <ImageView-->
+<!--                android:id="@+id/culturalIconImageView"-->
+<!--                android:layout_width="81dp"-->
+<!--                android:layout_height="68dp"-->
+<!--                android:layout_marginStart="4dp"-->
+<!--                android:layout_marginTop="14dp"-->
+<!--                android:contentDescription="@string/cultural_category_icon"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/sportsIconImageView"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:srcCompat="@drawable/icon_cultural" />-->
 
             <TextView
                 android:id="@+id/culturalLabel"

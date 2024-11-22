@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +19,11 @@ public class MainActivity extends AppCompatActivity {
     ImageButton bookmarkButton; // Declare bookmarkButton
     ImageButton homeButton; // Declare homeButton
     ImageButton upcomingEventsExtButton; // Declare upcomingEventsExtButton
+    ImageButton orgsIconImageButton;
+    ImageButton acadsIconImageButton;
+    ImageButton seminarIconImageButton;
+    ImageButton sportsIconImageButton;
+    ImageButton culturalIconImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
         bookmarkButton = findViewById(R.id.bookmarksButton); // Initialize bookmarkButton
         homeButton = findViewById(R.id.homeButton); // Initialize homeButton
         upcomingEventsExtButton = findViewById(R.id.upcomingEventsExtButton); // Initialize upcomingEventsExtButton
+        orgsIconImageButton = findViewById(R.id.orgsIconImageButton);
+        acadsIconImageButton = findViewById(R.id.acadsIconImageButton);
+        seminarIconImageButton = findViewById(R.id.seminarIconImageButton);
+        sportsIconImageButton = findViewById(R.id.sportsIconImageButton);
+        culturalIconImageButton = findViewById(R.id.culturalIconImageButton);
 
         ArrayList<UpcomingEvent> events = DataGenerator.generateUpcomingEventsData();
 
@@ -47,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Set OnClickListener for the profileButton
+        // Set OnClickListener for the buttons
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +78,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(intent); // Start the HomePage activity
+            }
+        });
+
+        // --------------------------------- //
+        // Set OnClickListener for the categories
+        orgsIconImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CategoryPage.class);
+                intent.putExtra("category", "Organizations");
+                startActivity(intent);
             }
         });
     }

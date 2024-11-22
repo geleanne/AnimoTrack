@@ -3140,6 +3140,7 @@ int id SYM 0x7f08000b
 int id TOP_END 0x7f08000c
 int id TOP_START 0x7f08000d
 int id UpcomingEventsTextView 0x7f08000e
+int id acadsIconImageButton 0x7f08023e
 int id acadsIconImageView 0x7f08000f
 int id acadsLabel 0x7f080010
 int id accelerate 0x7f080011
@@ -3240,6 +3241,7 @@ int id cancel_button 0x7f080071
 int id carryVelocity 0x7f080072
 int id categoriesTextView 0x7f080073
 int id category_icons 0x7f080074
+int id category_title 0x7f08023c
 int id center 0x7f080075
 int id centerCrop 0x7f080076
 int id centerInside 0x7f080077
@@ -3271,6 +3273,7 @@ int id coordinator 0x7f080090
 int id cos 0x7f080091
 int id counterclockwise 0x7f080092
 int id cradle 0x7f080093
+int id culturalIconImageButton 0x7f08023f
 int id culturalIconImageView 0x7f080094
 int id culturalLabel 0x7f080095
 int id currentState 0x7f080096
@@ -3334,7 +3337,7 @@ int id eventTitle 0x7f0800cf
 int id event_date 0x7f0800d0
 int id event_date_time 0x7f0800d1
 int id event_description 0x7f0800d2
-int id event_facilitators 0x7f0800d3
+int id event_facilitator 0x7f08023b
 int id event_image 0x7f0800d4
 int id event_name 0x7f0800d5
 int id event_title 0x7f0800d6
@@ -3510,6 +3513,7 @@ int id open_search_view_search_prefix 0x7f08017f
 int id open_search_view_status_bar_spacer 0x7f080180
 int id open_search_view_toolbar 0x7f080181
 int id open_search_view_toolbar_container 0x7f080182
+int id orgsIconImageButton 0x7f080240
 int id orgsIconImageView 0x7f080183
 int id orgsLabel 0x7f080184
 int id outline 0x7f080185
@@ -3537,6 +3541,7 @@ int id radio 0x7f08019b
 int id ratio 0x7f08019c
 int id rectangleView 0x7f08019d
 int id rectangles 0x7f08019e
+int id recyclerViewEventsOfSpecificCategory 0x7f08023d
 int id recyclerViewUpcomingEvents 0x7f08019f
 int id recyclerViewUpcomingEventsExtended 0x7f0801a0
 int id recycler_view_bookmarked_events 0x7f0801a1
@@ -3572,6 +3577,7 @@ int id search_voice_btn 0x7f0801be
 int id select_dialog_listview 0x7f0801bf
 int id selected 0x7f0801c0
 int id selection_type 0x7f0801c1
+int id seminarIconImageButton 0x7f080241
 int id seminarIconImageView 0x7f0801c2
 int id seminarLabel 0x7f0801c3
 int id sharedValueSet 0x7f0801c4
@@ -3593,6 +3599,7 @@ int id spacer 0x7f0801d3
 int id special_effects_controller_view_tag 0x7f0801d4
 int id spline 0x7f0801d5
 int id split_action_bar 0x7f0801d6
+int id sportsIconImageButton 0x7f080242
 int id sportsIconImageView 0x7f0801d7
 int id sportsLabel 0x7f0801d8
 int id spread 0x7f0801d9
@@ -3811,6 +3818,7 @@ int layout activity_signup_page 0x7f0b001e
 int layout animotrack_homepage 0x7f0b001f
 int layout bookmark 0x7f0b0020
 int layout bookmark_events_layout 0x7f0b0021
+int layout category_page 0x7f0b0077
 int layout custom_dialog 0x7f0b0022
 int layout design_bottom_navigation_item 0x7f0b0023
 int layout design_bottom_sheet_dialog 0x7f0b0024
@@ -3829,6 +3837,7 @@ int layout design_text_input_end_icon 0x7f0b0030
 int layout design_text_input_start_icon 0x7f0b0031
 int layout draft 0x7f0b0032
 int layout event_extend 0x7f0b0033
+int layout event_item 0x7f0b0078
 int layout events_registration 0x7f0b0034
 int layout ime_base_split_test_activity 0x7f0b0035
 int layout ime_secondary_split_test_activity 0x7f0b0036

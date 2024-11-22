@@ -14,6 +14,8 @@ public class EventsRegistrationPage extends AppCompatActivity {
     private TextView eventNameTextView;
     private TextView eventDateTextView;
     private TextView eventVenueTextView;
+    private TextView eventFacilitatorTextView;
+    private TextView eventDescriptionTextView;
     private ImageView eventImageView;
 
     ImageButton backArrow; // Declare backArrow
@@ -36,11 +38,16 @@ public class EventsRegistrationPage extends AppCompatActivity {
         eventDateTextView = findViewById(R.id.event_date); // Adjust with actual TextView ID
         eventVenueTextView = findViewById(R.id.event_venue); // Adjust with actual TextView ID
         eventImageView = findViewById(R.id.event_image); // Adjust with actual ImageView ID
+        eventFacilitatorTextView = findViewById(R.id.event_facilitator);
+        eventDescriptionTextView = findViewById(R.id.event_description);
+
 
         // Retrieve data from Intent
         String eventName = getIntent().getStringExtra("event_name");
         String eventDate = getIntent().getStringExtra("event_date");
         String eventVenue = getIntent().getStringExtra("event_venue");
+        String eventFacilitator = getIntent().getStringExtra("event_facilitator");
+        String eventDescription = getIntent().getStringExtra("event_description");
         // Get the image resource ID from the intent
         int eventImageId = getIntent().getIntExtra("event_image", R.drawable.event1);
 
@@ -48,6 +55,8 @@ public class EventsRegistrationPage extends AppCompatActivity {
         eventNameTextView.setText(eventName);
         eventDateTextView.setText(eventDate);
         eventVenueTextView.setText(eventVenue);
+        eventFacilitatorTextView.setText(eventFacilitator);
+        eventDescriptionTextView.setText(eventDescription);
         eventImageView.setImageResource(eventImageId);
 
         // Optionally set the event image if you pass the image resource ID

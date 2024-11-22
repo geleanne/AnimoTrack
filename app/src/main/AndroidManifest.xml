@@ -48,5 +48,9 @@
             android:name=".UpcomingEventExtPage"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".CategoryPage"
+            android:exported="true">
+        </activity>
     </application>
 </manifest>

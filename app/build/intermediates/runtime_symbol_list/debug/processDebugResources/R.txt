@@ -3010,11 +3010,17 @@ int drawable design_password_eye 0x7f07008a
 int drawable design_snackbar_background 0x7f07008b
 int drawable edittext_background 0x7f07008c
 int drawable event1 0x7f07008d
+int drawable event10 0x7f070101
+int drawable event11 0x7f070102
+int drawable event12 0x7f070103
 int drawable event2 0x7f07008e
 int drawable event3 0x7f07008f
 int drawable event4 0x7f070090
 int drawable event5 0x7f070091
 int drawable event6 0x7f070092
+int drawable event7 0x7f070104
+int drawable event8 0x7f070105
+int drawable event9 0x7f070106
 int drawable event_vector 0x7f070093
 int drawable fav_icon 0x7f070094
 int drawable home_vector 0x7f070095

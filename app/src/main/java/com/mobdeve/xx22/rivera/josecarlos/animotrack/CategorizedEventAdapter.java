@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-
 public class CategorizedEventAdapter extends RecyclerView.Adapter<CategorizedEventViewHolder> {
     private Context context;
     private ArrayList<CategorizedEvent> categorizedEvents;
@@ -39,6 +38,6 @@ public class CategorizedEventAdapter extends RecyclerView.Adapter<CategorizedEve
 
     @Override
     public int getItemCount() {
-        return categorizedEvents.size();
+        return categorizedEvents.size(); // Shows multiple items depending on the size of categorizedEvents
     }
 }

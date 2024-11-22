@@ -91,6 +91,42 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        acadsIconImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CategoryPage.class);
+                intent.putExtra("category", "Academics");
+                startActivity(intent);
+            }
+        });
+
+        seminarIconImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CategoryPage.class);
+                intent.putExtra("category", "Seminars");
+                startActivity(intent);
+            }
+        });
+
+        sportsIconImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CategoryPage.class);
+                intent.putExtra("category", "Sports");
+                startActivity(intent);
+            }
+        });
+
+        culturalIconImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CategoryPage.class);
+                intent.putExtra("category", "Cultural");
+                startActivity(intent);
+            }
+        });
     }
 }
 

@@ -4,16 +4,16 @@
         "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\layout\\upcoming_events_layout.xml"
     },
     {
-        "merged": "com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:/layout_event_item.xml.flat",
-        "source": "com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:/layout/event_item.xml"
-    },
-    {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_fav_icon.png.flat",
         "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\fav_icon.png"
     },
     {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\layout_events_registration.xml.flat",
         "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\layout\\events_registration.xml"
+    },
+    {
+        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_event11.jpg.flat",
+        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\event11.jpg"
     },
     {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_icon_seminar.png.flat",
@@ -44,36 +44,40 @@
         "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\layout\\upcoming_events_extend_layout.xml"
     },
     {
-        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_bookmark_vector.png.flat",
-        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\bookmark_vector.png"
-    },
-    {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_event2.jpg.flat",
         "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\event2.jpg"
     },
     {
-        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_left_arrow.png.flat",
-        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\left_arrow.png"
-    },
-    {
-        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\mipmap-xxhdpi\\ic_launcher.webp"
+        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_bookmark_vector.png.flat",
+        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\bookmark_vector.png"
     },
     {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\layout_event_extend.xml.flat",
         "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\layout\\event_extend.xml"
     },
     {
+        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_left_arrow.png.flat",
+        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\left_arrow.png"
+    },
+    {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_icon_sports.png.flat",
         "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\icon_sports.png"
+    },
+    {
+        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\xml_backup_rules.xml.flat",
         "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\xml\\backup_rules.xml"
     },
     {
-        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_event9.jpg.flat",
+        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\event9.jpg"
     },
     {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
@@ -132,12 +136,12 @@
         "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\layout\\category_page.xml"
     },
     {
-        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_rectangle_shape.xml.flat",
-        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\rectangle_shape.xml"
-    },
-    {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_event3.jpg.flat",
         "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\event3.jpg"
+    },
+    {
+        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_rectangle_shape.xml.flat",
+        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\rectangle_shape.xml"
     },
     {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\mipmap-xhdpi_ic_launcher.webp.flat",
@@ -148,8 +152,16 @@
         "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\layout\\activity_main.xml"
     },
     {
+        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_event7.jpg.flat",
+        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\event7.jpg"
+    },
+    {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_icon_acads.png.flat",
         "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\icon_acads.png"
+    },
+    {
+        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_event10.jpg.flat",
+        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\event10.jpg"
     },
     {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\layout_profile_page.xml.flat",
@@ -164,8 +176,16 @@
         "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
+        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_event12.jpg.flat",
+        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\event12.jpg"
+    },
+    {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\layout_bookmark_events_layout.xml.flat",
         "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\layout\\bookmark_events_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\layout_event_item.xml.flat",
+        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\layout\\event_item.xml"
     },
     {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\layout_activity_login_page.xml.flat",
@@ -194,6 +214,10 @@
     {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_edittext_background.xml.flat",
         "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\edittext_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_event8.jpg.flat",
+        "source": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-main-33:\\drawable\\event8.jpg"
     },
     {
         "merged": "C:\\Users\\josec\\.gradle\\daemon\\8.9\\com.mobdeve.xx22.rivera.josecarlos.animotrack.app-debug-31:\\drawable_background_card.xml.flat",

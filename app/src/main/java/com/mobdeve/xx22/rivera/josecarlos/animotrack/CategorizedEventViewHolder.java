@@ -9,10 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CategorizedEventViewHolder extends RecyclerView.ViewHolder {
     ImageView imageView;
-    TextView eventTitle;
-    TextView eventDate;
-    TextView eventLocation;
-    TextView eventCategory;
+    TextView eventTitle, eventDate, eventLocation;
 
     public CategorizedEventViewHolder(@NonNull View itemView) {
         super(itemView);

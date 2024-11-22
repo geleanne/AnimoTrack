@@ -3011,11 +3011,17 @@ drawable design_password_eye
 drawable design_snackbar_background
 drawable edittext_background
 drawable event1
+drawable event10
+drawable event11
+drawable event12
 drawable event2
 drawable event3
 drawable event4
 drawable event5
 drawable event6
+drawable event7
+drawable event8
+drawable event9
 drawable event_vector
 drawable fav_icon
 drawable home_vector

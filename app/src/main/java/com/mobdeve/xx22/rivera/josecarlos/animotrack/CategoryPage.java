@@ -37,7 +37,6 @@ public class CategoryPage  extends AppCompatActivity {
         recyclerViewEventsOfSpecificCategory.setAdapter(adapter);
         recyclerViewEventsOfSpecificCategory.setLayoutManager(new LinearLayoutManager(this));
 
-
         // Set OnClickListener for the buttons
         backArrowButton.setOnClickListener(new View.OnClickListener() {
             @Override

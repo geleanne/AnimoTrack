@@ -31,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerViewUpcomingEvents = findViewById(R.id.recyclerViewUpcomingEvents);
-        profileButton = findViewById(R.id.profileButton); // Initialize profileButton
-        bookmarkButton = findViewById(R.id.bookmarksButton); // Initialize bookmarkButton
-        homeButton = findViewById(R.id.homeButton); // Initialize homeButton
-        upcomingEventsExtButton = findViewById(R.id.upcomingEventsExtButton); // Initialize upcomingEventsExtButton
+        profileButton = findViewById(R.id.profileButton);
+        bookmarkButton = findViewById(R.id.bookmarksButton);
+        homeButton = findViewById(R.id.homeButton);
+        upcomingEventsExtButton = findViewById(R.id.upcomingEventsExtButton);
         orgsIconImageButton = findViewById(R.id.orgsIconImageButton);
         acadsIconImageButton = findViewById(R.id.acadsIconImageButton);
         seminarIconImageButton = findViewById(R.id.seminarIconImageButton);
@@ -42,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
         culturalIconImageButton = findViewById(R.id.culturalIconImageButton);
 
         ArrayList<UpcomingEvent> events = DataGenerator.generateUpcomingEventsData();
+
+        // Limit the number of events displayed
+        int maxEventsToShow = 5;
+        if (events.size() > maxEventsToShow) {
+            events = new ArrayList<>(events.subList(0, maxEventsToShow));
+        }
 
         // Set up the RecyclerView for events
         UpcomingEventAdapter upcomingEventAdapter = new UpcomingEventAdapter(this, events);

@@ -36,25 +36,25 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventView
         holder.imageView.setImageResource(event.getEventTitle().getImageId());
 
         // Set click listener for the entire item view
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start the EventsRegistrationPage activity
-                Intent intent = new Intent(context, EventsRegistrationPage.class);
-                // Optionally, pass event data to the new activity if needed
-                intent.putExtra("event_name", event.getEventTitle().getName());
-                intent.putExtra("event_date", event.getEventDate());
-                intent.putExtra("event_venue", event.getEventVenue());
-                intent.putExtra("event_image", event.getEventTitle().getImageId());
-                intent.putExtra("event_facilitator", event.getEventFacilitator());
-                intent.putExtra("event_description", event.getEventDescription());
-                context.startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(v -> {
+            // Start the EventsRegistrationPage activity with the event details
+            startEventDetailsActivity(context, event);
         });
     }
 
     @Override
     public int getItemCount() {
         return events.size();
+    }
+
+    public void startEventDetailsActivity(Context context, UpcomingEvent event) {
+        Intent intent = new Intent(context, EventsRegistrationPage.class);
+        intent.putExtra("event_name", event.getEventTitle().getName());
+        intent.putExtra("event_date", event.getEventDate());
+        intent.putExtra("event_venue", event.getEventVenue());
+        intent.putExtra("event_image", event.getEventTitle().getImageId());
+        intent.putExtra("event_facilitator", event.getEventFacilitator());
+        intent.putExtra("event_description", event.getEventDescription());
+        context.startActivity(intent);
     }
 }

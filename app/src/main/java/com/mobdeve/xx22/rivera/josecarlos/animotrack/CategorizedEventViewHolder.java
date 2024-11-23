@@ -10,9 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CategorizedEventViewHolder extends RecyclerView.ViewHolder {
     ImageView imageView;
     TextView eventTitle, eventDate, eventLocation;
+    View itemView;
+
 
     public CategorizedEventViewHolder(@NonNull View itemView) {
         super(itemView);
+        this.itemView = itemView; // Store the root view for click handling
+
         imageView = itemView.findViewById(R.id.eventPoster);
         eventTitle = itemView.findViewById(R.id.eventTitle);
         eventDate = itemView.findViewById(R.id.eventDate);

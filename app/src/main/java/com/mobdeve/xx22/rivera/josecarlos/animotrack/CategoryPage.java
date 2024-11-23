@@ -33,7 +33,7 @@ public class CategoryPage  extends AppCompatActivity {
 
         // Get filtered data and set up RecyclerView
         ArrayList<CategorizedEvent> categorizedEvents = DataGenerator.getEventsByCategory(category);
-        CategorizedEventAdapter adapter = new CategorizedEventAdapter(this, categorizedEvents);
+        CategorizedEventAdapter adapter = new CategorizedEventAdapter(this, categorizedEvents, DataGenerator.generateUpcomingEventsData());
         recyclerViewEventsOfSpecificCategory.setAdapter(adapter);
         recyclerViewEventsOfSpecificCategory.setLayoutManager(new LinearLayoutManager(this));
 

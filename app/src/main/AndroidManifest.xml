@@ -52,5 +52,9 @@
             android:name=".CategoryPage"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".CreateEventActivity"
+            android:exported="true">
+        </activity>
     </application>
 </manifest>

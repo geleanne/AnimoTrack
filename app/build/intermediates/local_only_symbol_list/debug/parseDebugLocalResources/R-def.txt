@@ -1,5 +1,6 @@
 R_DEF: Internal format may change without notice
 local
+array event_categories
 color black
 color grayish_lime_green
 color green
@@ -45,12 +46,14 @@ id UpcomingEventsTextView
 id acadsIconImageButton
 id acadsIconImageView
 id acadsLabel
+id add_event_button
 id appLogo
 id appName
 id back_arrow
 id bookmarksButton
 id button
 id buttonLogin
+id buttonSubmitEvent
 id button_rsvp
 id categoriesTextView
 id category_icons
@@ -65,11 +68,18 @@ id editTextIdNumber
 id editTextNumberPassword
 id editTextPassword
 id editTextTextEmailAddress
+id eventCategorySpinner
 id eventDate
+id eventDateEditText
+id eventDescriptionEditText
+id eventFacilitatorEditText
+id eventFormContainer
 id eventLocation
+id eventNameEditText
 id eventPoster
 id eventRegis
 id eventTitle
+id eventVenueEditText
 id event_date
 id event_date_time
 id event_description
@@ -79,7 +89,7 @@ id event_name
 id event_title
 id event_venue
 id eventsButton
-id favorite_icon
+id favorite_button
 id greetNameTextView
 id greetingTextView
 id hasAnAccountButton
@@ -88,6 +98,7 @@ id homepageImageView
 id imageView
 id imageView2
 id loginContainer
+id logoutButton
 id main
 id my_image_button
 id navBookmark
@@ -114,6 +125,7 @@ id toolbar
 id toolbar_layout
 id toolbar_title
 id upcomingEventsExtButton
+layout activity_add_event
 layout activity_login_page
 layout activity_main
 layout activity_signup_page

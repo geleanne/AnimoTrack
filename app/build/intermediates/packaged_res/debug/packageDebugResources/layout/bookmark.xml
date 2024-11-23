@@ -256,7 +256,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/my_image_button"
+        android:id="@+id/add_event_button"
         android:layout_width="112dp"
         android:layout_height="100dp"
         android:layout_marginBottom="55dp"

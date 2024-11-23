@@ -28,4 +28,13 @@
     <string name="welcome_to_animotrack">Welcome to AnimoTrack</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="add_event">add_event</string>
+
+    <!-- Define event categories for the spinner -->
+    <string-array name="event_categories">
+        <item>Organizations</item>
+        <item>Academics</item>
+        <item>Seminars</item>
+        <item>Sports</item>
+        <item>Cultural</item>
+    </string-array>
 </resources>

@@ -17,6 +17,8 @@ public class EventsRegistrationPage extends AppCompatActivity {
     private TextView eventFacilitatorTextView;
     private TextView eventDescriptionTextView;
     private ImageView eventImageView;
+    private boolean clickedFavorite = false;
+    private ImageView favButton;
 
     ImageButton backArrow; // Declare backArrow
     ImageButton profileButton; // Declare profileButton
@@ -59,11 +61,6 @@ public class EventsRegistrationPage extends AppCompatActivity {
         eventDescriptionTextView.setText(eventDescription);
         eventImageView.setImageResource(eventImageId);
 
-        // Optionally set the event image if you pass the image resource ID
-        // Assuming you have the image ID passed as an integer
-         // Use a default image if not provided
-
-
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +89,22 @@ public class EventsRegistrationPage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(EventsRegistrationPage.this, MainActivity.class);
                 startActivity(intent); // Start the HomePage activity
+            }
+        });
+
+        favButton = findViewById(R.id.favorite_button);
+        favButton.setImageResource(android.R.drawable.btn_star);
+
+        favButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickedFavorite = !clickedFavorite;
+
+                if (clickedFavorite) {
+                    favButton.setImageResource(android.R.drawable.btn_star_big_on);
+                } else {
+                    favButton.setImageResource(android.R.drawable.btn_star);
+                }
             }
         });
     }

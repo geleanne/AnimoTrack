@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,10 +16,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewUpcomingEvents;
-    ImageButton profileButton; // Declare profileButton
-    ImageButton bookmarkButton; // Declare bookmarkButton
-    ImageButton homeButton; // Declare homeButton
-    ImageButton upcomingEventsExtButton; // Declare upcomingEventsExtButton
+    ImageView addEventButton;
+    ImageButton profileButton;
+    ImageButton bookmarkButton;
+    ImageButton homeButton;
+    ImageButton upcomingEventsExtButton;
     ImageButton orgsIconImageButton;
     ImageButton acadsIconImageButton;
     ImageButton seminarIconImageButton;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         seminarIconImageButton = findViewById(R.id.seminarIconImageButton);
         sportsIconImageButton = findViewById(R.id.sportsIconImageButton);
         culturalIconImageButton = findViewById(R.id.culturalIconImageButton);
+        addEventButton = findViewById(R.id.add_event_button);
 
         ArrayList<UpcomingEvent> events = DataGenerator.generateUpcomingEventsData();
 
@@ -63,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Set OnClickListener for the buttons
+        addEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CreateEventActivity.class);
+                startActivity(intent); // Start the CreateEvent activity
+            }
+        });
+
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

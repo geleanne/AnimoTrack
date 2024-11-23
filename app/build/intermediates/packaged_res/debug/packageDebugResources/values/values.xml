@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="event_categories">
+        <item>Organizations</item>
+        <item>Academics</item>
+        <item>Seminars</item>
+        <item>Sports</item>
+        <item>Cultural</item>
+    </string-array>
     <color name="black">#FF000000</color>
     <color name="grayish_lime_green">#C9D3AD</color>
     <color name="green">#609B6A</color>

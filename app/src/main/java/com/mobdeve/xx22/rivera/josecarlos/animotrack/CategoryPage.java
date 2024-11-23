@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class CategoryPage  extends AppCompatActivity {
     private ImageButton backArrowButton, profileButton, bookmarkButton, homeButton;
     private RecyclerView recyclerViewEventsOfSpecificCategory;
+    private ImageView addEventButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class CategoryPage  extends AppCompatActivity {
         profileButton = findViewById(R.id.profileButton); // Initialize profileButton
         bookmarkButton = findViewById(R.id.bookmarksButton); // Initialize bookmarkButton
         homeButton = findViewById(R.id.homeButton); // Initialize homeButton
+        addEventButton = findViewById(R.id.add_event_button); // Initialize addEventButton
         recyclerViewEventsOfSpecificCategory = findViewById(R.id.recyclerViewEventsOfSpecificCategory);
 
         // Retrieve category from intent
@@ -38,6 +41,14 @@ public class CategoryPage  extends AppCompatActivity {
         recyclerViewEventsOfSpecificCategory.setLayoutManager(new LinearLayoutManager(this));
 
         // Set OnClickListener for the buttons
+        addEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CategoryPage.this, CreateEventActivity.class);
+                startActivity(intent); // Start the CreateEventActivity activity
+            }
+        });
+
         backArrowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -77,6 +77,7 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
+array event_categories
 attr SharedValue
 attr SharedValueId
 attr actionBarDivider
@@ -3208,6 +3209,7 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id add_event_button
 id alertTitle
 id aligned
 id all
@@ -3242,6 +3244,7 @@ id bounceStart
 id button
 id buttonLogin
 id buttonPanel
+id buttonSubmitEvent
 id button_rsvp
 id cache_measures
 id callMeasure
@@ -3337,11 +3340,18 @@ id endToStart
 id enterAlways
 id enterAlwaysCollapsed
 id escape
+id eventCategorySpinner
 id eventDate
+id eventDateEditText
+id eventDescriptionEditText
+id eventFacilitatorEditText
+id eventFormContainer
 id eventLocation
+id eventNameEditText
 id eventPoster
 id eventRegis
 id eventTitle
+id eventVenueEditText
 id event_date
 id event_date_time
 id event_description
@@ -3355,7 +3365,7 @@ id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
 id fade
-id favorite_icon
+id favorite_button
 id fill
 id fill_horizontal
 id fill_vertical
@@ -3421,6 +3431,7 @@ id linear
 id listMode
 id list_item
 id loginContainer
+id logoutButton
 id m3_side_sheet
 id main
 id marquee
@@ -3820,6 +3831,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_add_event
 layout activity_login_page
 layout activity_main
 layout activity_signup_page

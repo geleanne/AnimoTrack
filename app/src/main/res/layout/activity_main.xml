@@ -8,30 +8,6 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
-    <!--logo with "AnimoTrack" header-->
-<!--    <ImageView-->
-<!--        android:id="@+id/imageView"-->
-<!--        android:layout_width="43dp"-->
-<!--        android:layout_height="33dp"-->
-<!--        android:layout_marginStart="3dp"-->
-<!--        android:layout_marginTop="11dp"-->
-<!--        android:contentDescription="@string/animotrack_logo"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:srcCompat="@drawable/animotrack_logo" />-->
-
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_marginStart="52dp"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:text="@string/app_name"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="18sp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <LinearLayout
         android:id="@+id/toolbar_layout"
         android:layout_width="match_parent"
@@ -145,18 +121,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-<!--            <ImageView-->
-<!--                android:id="@+id/orgsIconImageView"-->
-<!--                android:layout_width="81dp"-->
-<!--                android:layout_height="68dp"-->
-<!--                android:layout_marginStart="16dp"-->
-<!--                android:layout_marginTop="14dp"-->
-<!--                android:contentDescription="@string/orgs_category_icon"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:srcCompat="@drawable/icon_orgs" />-->
-
             <TextView
                 android:id="@+id/orgsLabel"
                 android:layout_width="0dp"
@@ -185,17 +149,6 @@
                 android:src="@drawable/icon_acads"
                 app:layout_constraintStart_toEndOf="@+id/orgsIconImageButton"
                 app:layout_constraintTop_toTopOf="parent" />
-
-<!--            <ImageView-->
-<!--                android:id="@+id/acadsIconImageView"-->
-<!--                android:layout_width="81dp"-->
-<!--                android:layout_height="68dp"-->
-<!--                android:layout_marginStart="4dp"-->
-<!--                android:layout_marginTop="14dp"-->
-<!--                android:contentDescription="@string/acads_category_icon"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/orgsIconImageView"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:srcCompat="@drawable/icon_acads" />-->
 
             <TextView
                 android:id="@+id/acadsLabel"
@@ -226,18 +179,6 @@
                 app:layout_constraintStart_toEndOf="@+id/acadsIconImageButton"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-<!--            <ImageView-->
-<!--                android:id="@+id/seminarIconImageView"-->
-<!--                android:layout_width="81dp"-->
-<!--                android:layout_height="68dp"-->
-<!--                android:layout_marginStart="4dp"-->
-<!--                android:layout_marginTop="14dp"-->
-<!--                android:contentDescription="@string/seminar_category_icon"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/acadsIconImageView"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:srcCompat="@drawable/icon_seminar" />-->
-
             <TextView
                 android:id="@+id/seminarLabel"
                 android:layout_width="0dp"
@@ -267,17 +208,6 @@
                 app:layout_constraintStart_toEndOf="@+id/seminarIconImageButton"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <ImageView-->
-<!--                android:id="@+id/sportsIconImageView"-->
-<!--                android:layout_width="81dp"-->
-<!--                android:layout_height="68dp"-->
-<!--                android:layout_marginStart="4dp"-->
-<!--                android:layout_marginTop="14dp"-->
-<!--                android:contentDescription="@string/sports_category_icon"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/seminarIconImageView"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:srcCompat="@drawable/icon_sports" />-->
-
             <TextView
                 android:id="@+id/sportsLabel"
                 android:layout_width="0dp"
@@ -306,17 +236,6 @@
                 android:src="@drawable/icon_cultural"
                 app:layout_constraintStart_toEndOf="@+id/sportsIconImageButton"
                 app:layout_constraintTop_toTopOf="parent" />
-
-<!--            <ImageView-->
-<!--                android:id="@+id/culturalIconImageView"-->
-<!--                android:layout_width="81dp"-->
-<!--                android:layout_height="68dp"-->
-<!--                android:layout_marginStart="4dp"-->
-<!--                android:layout_marginTop="14dp"-->
-<!--                android:contentDescription="@string/cultural_category_icon"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/sportsIconImageView"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:srcCompat="@drawable/icon_cultural" />-->
 
             <TextView
                 android:id="@+id/culturalLabel"
@@ -373,10 +292,6 @@
         app:layout_constraintTop_toBottomOf="@+id/UpcomingEventsTextView"
         app:layout_constraintVertical_bias="0.0" />
 
-    <!-- Right arrow button -->
-    <!-- Circular Image Buttons at the Bottom -->
-
-
     <LinearLayout
         android:id="@+id/circular_button_layout"
         android:layout_width="match_parent"
@@ -388,7 +303,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!-- Black line separator -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -411,19 +325,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/homeLabel"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="28dp"-->
-<!--                android:gravity="center"-->
-<!--                android:text="@string/home"-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:textSize="14sp"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/homeButton" />-->
-
             <ImageButton
                 android:id="@+id/eventsButton"
                 android:layout_width="85dp"
@@ -435,22 +336,6 @@
                 android:src="@drawable/event_vector"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-<!--            <TextView-->
-<!--                android:id="@+id/eventsLabel"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginStart="120dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:gravity="center"-->
-<!--                android:text="@string/events"-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:textSize="14sp"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/eventsButton"-->
-<!--                app:layout_constraintVertical_bias="0.0" />-->
 
             <ImageButton
                 android:id="@+id/bookmarksButton"
@@ -465,22 +350,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/bookmarksLabel"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginEnd="105dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:gravity="center"-->
-<!--                android:text="@string/bookmarks"-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:textSize="14sp"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/bookmarksButton"-->
-<!--                app:layout_constraintVertical_bias="0.0" />-->
-
             <ImageButton
                 android:id="@+id/profileButton"
                 android:layout_width="85dp"
@@ -494,21 +363,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/profileLabel"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginEnd="26dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:gravity="center"-->
-<!--                android:text="@string/profile"-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:textSize="14sp"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/profileButton"-->
-<!--                app:layout_constraintVertical_bias="0.0" />-->
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
@@ -526,31 +380,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-<!--    <Button-->
-<!--        android:id="@+id/button2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:backgroundTint="@color/white"-->
-<!--        android:text="More"-->
-<!--        tools:layout_editor_absoluteX="353dp"-->
-<!--        tools:layout_editor_absoluteY="344dp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/floatingActionButton2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="188dp"-->
-<!--        android:layout_marginBottom="90dp"-->
-<!--        android:backgroundTint="@color/grayish_lime_green"-->
-<!--        android:clickable="true"-->
-<!--        android:focusable="true"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:srcCompat="@android:drawable/ic_menu_add"-->
-<!--        android:scaleX="1.5"-->
-<!--        android:scaleY="1.5" />-->
 

@@ -93,20 +93,18 @@ public class LoginPage extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
-                                String fullName = user.getDisplayName();
-                                Toast.makeText(LoginPage.this, "Sign In Successful!", Toast.LENGTH_SHORT).show();
-
-                                // Redirect to MainActivity and pass the display name
+                                String fullName = user.getDisplayName();  // Get the full name from Firebase user profile
                                 Intent intent = new Intent(LoginPage.this, MainActivity.class);
                                 intent.putExtra("fullName", fullName);
                                 startActivity(intent);
                                 finish();
                             }
                         } else {
-                            Toast.makeText(LoginPage.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginPage.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+
     }
 
 }

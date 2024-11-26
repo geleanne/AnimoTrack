@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ public class ProfilePage extends AppCompatActivity {
     ImageButton homeButton; // Declare homeButton
     private ImageView addEventButton;
     private Button logoutButton;
+    TextView fullNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,13 @@ public class ProfilePage extends AppCompatActivity {
         homeButton = findViewById(R.id.homeButton); // Initialize homeButton
         addEventButton = findViewById(R.id.add_event_button); // Initialize addEventButton
         logoutButton = findViewById(R.id.logoutButton); // Initialize log-out button
+        fullNameTextView = findViewById(R.id.fullNameTextView); // Initialize fullNameTextView
+
+        String fullName = getIntent().getStringExtra("fullName");
+
+        if (fullName != null && !fullName.isEmpty()) {
+            fullNameTextView.setText(fullName);
+        }
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,20 +60,24 @@ public class ProfilePage extends AppCompatActivity {
         });
         profileButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, ProfilePage.class);
+            intent.putExtra("fullName", fullName);
             startActivity(intent); // Start the LoginPage activity
         });
 
         bookmarkButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, BookmarkPage.class);
+            intent.putExtra("fullName", fullName);
             startActivity(intent); // Start the BookmarksPage activity
         });
 
         homeButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, MainActivity.class);
+            intent.putExtra("fullName", fullName);
             startActivity(intent); // Start the HomePage activity
         });
         addEventButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, CreateEventActivity.class);
+            intent.putExtra("fullName", fullName);
             startActivity(intent); // Start the CreateEventActivity activity
         });
     }

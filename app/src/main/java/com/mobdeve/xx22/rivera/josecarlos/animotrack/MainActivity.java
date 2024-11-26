@@ -54,9 +54,7 @@ public class MainActivity extends AppCompatActivity {
         String fullName = getIntent().getStringExtra("fullName");
 
         if (fullName != null && !fullName.isEmpty()) {
-            greetNameTextView.setText("Hello, " + fullName + "!??!");
-        } else {
-            greetNameTextView.setText("Hello, User! :))");
+            greetNameTextView.setText("Hello, " + fullName + "!");
         }
 
         ArrayList<UpcomingEvent> events = DataGenerator.generateUpcomingEventsData();
@@ -76,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, UpcomingEventExtPage.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the UpcomingEventsPage activity
             }
         });
@@ -85,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreateEventActivity.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the CreateEvent activity
             }
         });
@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ProfilePage.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the LoginPage activity
             }
         });
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BookmarkPage.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the BookmarksPage activity
             }
         });
@@ -109,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the HomePage activity
             }
         });

@@ -92,9 +92,8 @@ public class SignupPage extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         FirebaseUser user = mAuth.getCurrentUser();
-
-                                        // Update the user's profile with the full name
                                         if (user != null) {
+                                            // Update the user's profile with the full name
                                             user.updateProfile(new UserProfileChangeRequest.Builder()
                                                             .setDisplayName(fullName)
                                                             .build())
@@ -102,24 +101,25 @@ public class SignupPage extends AppCompatActivity {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
                                                             if (task.isSuccessful()) {
+                                                                // Successfully updated the profile
                                                                 Toast.makeText(SignupPage.this, "Account created!", Toast.LENGTH_SHORT).show();
-
-                                                                // Redirect to LoginPage
+                                                                // Redirect to MainActivity and pass the full name
                                                                 Intent intent = new Intent(SignupPage.this, LoginPage.class);
                                                                 intent.putExtra("fullName", fullName);
                                                                 startActivity(intent);
                                                                 finish();
                                                             } else {
-                                                                Toast.makeText(SignupPage.this, "Profile update failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                                Toast.makeText(SignupPage.this, "Profile update failed", Toast.LENGTH_SHORT).show();
                                                             }
                                                         }
                                                     });
                                         }
                                     } else {
-                                        Toast.makeText(SignupPage.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SignupPage.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
+
 
                 }
             }

@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -26,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton seminarIconImageButton;
     ImageButton sportsIconImageButton;
     ImageButton culturalIconImageButton;
+    TextView greetNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,16 @@ public class MainActivity extends AppCompatActivity {
         sportsIconImageButton = findViewById(R.id.sportsIconImageButton);
         culturalIconImageButton = findViewById(R.id.culturalIconImageButton);
         addEventButton = findViewById(R.id.add_event_button);
+        greetNameTextView = findViewById(R.id.greetNameTextView);
+
+        // get the name of the user from the signed in user and display it in the greetNameTextView
+        String fullName = getIntent().getStringExtra("fullName");
+
+        if (fullName != null && !fullName.isEmpty()) {
+            greetNameTextView.setText("Hello, " + fullName + "!??!");
+        } else {
+            greetNameTextView.setText("Hello, User! :))");
+        }
 
         ArrayList<UpcomingEvent> events = DataGenerator.generateUpcomingEventsData();
 

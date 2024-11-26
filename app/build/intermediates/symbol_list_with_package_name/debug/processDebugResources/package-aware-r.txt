@@ -2995,7 +2995,6 @@ drawable animotrack_logo
 drawable avd_hide_password
 drawable avd_show_password
 drawable background_card
-drawable bookmark_vector
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -3025,7 +3024,6 @@ drawable event7
 drawable event8
 drawable event9
 drawable event_vector
-drawable fav_icon
 drawable home_vector
 drawable homepage
 drawable ic_arrow_back_black_24
@@ -3131,9 +3129,13 @@ drawable profile_icon
 drawable profile_vector
 drawable rectangle_shape
 drawable right_arrow
+drawable shaded_bookmark
+drawable shaded_bookmark2
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable unshaded_bookmark
+drawable unshaded_bookmark2
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -3150,7 +3152,6 @@ id TOP_END
 id TOP_START
 id UpcomingEventsTextView
 id acadsIconImageButton
-id acadsIconImageView
 id acadsLabel
 id accelerate
 id accessibility_action_clickable_span
@@ -3235,6 +3236,7 @@ id beginOnFirstDraw
 id beginning
 id bestChoice
 id blocking
+id bookmarkBtn
 id bookmarksButton
 id bottom
 id bounce
@@ -3285,7 +3287,6 @@ id cos
 id counterclockwise
 id cradle
 id culturalIconImageButton
-id culturalIconImageView
 id culturalLabel
 id currentState
 id custom
@@ -3365,7 +3366,6 @@ id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
 id fade
-id favorite_button
 id fill
 id fill_horizontal
 id fill_vertical
@@ -3533,7 +3533,6 @@ id open_search_view_status_bar_spacer
 id open_search_view_toolbar
 id open_search_view_toolbar_container
 id orgsIconImageButton
-id orgsIconImageView
 id orgsLabel
 id outline
 id outward
@@ -3597,7 +3596,6 @@ id select_dialog_listview
 id selected
 id selection_type
 id seminarIconImageButton
-id seminarIconImageView
 id seminarLabel
 id sharedValueSet
 id sharedValueUnset
@@ -3619,7 +3617,6 @@ id special_effects_controller_view_tag
 id spline
 id split_action_bar
 id sportsIconImageButton
-id sportsIconImageView
 id sportsLabel
 id spread
 id spread_inside
@@ -3855,7 +3852,6 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
-layout draft
 layout event_extend
 layout event_item
 layout events_registration

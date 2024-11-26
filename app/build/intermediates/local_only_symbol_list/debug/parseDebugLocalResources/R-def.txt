@@ -10,7 +10,6 @@ color white_ice
 drawable add_event
 drawable animotrack_logo
 drawable background_card
-drawable bookmark_vector
 drawable circle_background
 drawable edittext_background
 drawable event1
@@ -27,7 +26,6 @@ drawable event7
 drawable event8
 drawable event9
 drawable event_vector
-drawable fav_icon
 drawable home_vector
 drawable homepage
 drawable ic_launcher_background
@@ -42,14 +40,18 @@ drawable profile_icon
 drawable profile_vector
 drawable rectangle_shape
 drawable right_arrow
+drawable shaded_bookmark
+drawable shaded_bookmark2
+drawable unshaded_bookmark
+drawable unshaded_bookmark2
 id UpcomingEventsTextView
 id acadsIconImageButton
-id acadsIconImageView
 id acadsLabel
 id add_event_button
 id appLogo
 id appName
 id back_arrow
+id bookmarkBtn
 id bookmarksButton
 id button
 id buttonLogin
@@ -60,7 +62,6 @@ id category_icons
 id category_title
 id circular_button_layout
 id culturalIconImageButton
-id culturalIconImageView
 id culturalLabel
 id editTextEmailAddress
 id editTextFullName
@@ -89,7 +90,6 @@ id event_name
 id event_title
 id event_venue
 id eventsButton
-id favorite_button
 id greetNameTextView
 id greetingTextView
 id hasAnAccountButton
@@ -105,7 +105,6 @@ id navBookmark
 id navigation_arrows
 id noAccountYetButton
 id orgsIconImageButton
-id orgsIconImageView
 id orgsLabel
 id profileButton
 id rectangleView
@@ -115,10 +114,8 @@ id recyclerViewUpcomingEventsExtended
 id recycler_view_bookmarked_events
 id rsvp_button
 id seminarIconImageButton
-id seminarIconImageView
 id seminarLabel
 id sportsIconImageButton
-id sportsIconImageView
 id sportsLabel
 id textView
 id toolbar
@@ -133,7 +130,6 @@ layout animotrack_homepage
 layout bookmark
 layout bookmark_events_layout
 layout category_page
-layout draft
 layout event_extend
 layout event_item
 layout events_registration

@@ -1,14 +1,23 @@
 package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
 public class Event {
-    private int imageId;
-    private String name;
-    private String category;
+    private final int imageId; // For event image
+    private final String name; // Event title
+    private String category; // Event category
+    private boolean isBookmarked; // Bookmark status
 
-    public Event(int imageId, String name, String category) {
-        this.imageId = imageId;
-        this.name = name;
+    // Main Constructor
+    public Event(int eventImageId, String eventName) {
+        this.imageId = eventImageId;
+        this.name = eventName;
+        this.isBookmarked = false;
+    }
+
+    public Event(int eventImageId, String eventName, String category) {
+        this.imageId = eventImageId;
+        this.name = eventName;
         this.category = category;
+        this.isBookmarked = false;
     }
 
     public int getImageId() {
@@ -17,6 +26,14 @@ public class Event {
 
     public String getName() {
         return this.name;
+    }
+
+    public boolean isBookmarked() {
+        return this.isBookmarked;
+    }
+
+    public void setBookmarked(boolean bookmarked) {
+        this.isBookmarked = bookmarked;
     }
 
     public String getCategory() {

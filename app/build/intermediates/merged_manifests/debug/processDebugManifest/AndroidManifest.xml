@@ -57,7 +57,7 @@
             android:exported="true" >
         </activity>
         <activity
-            android:name="com.mobdeve.xx22.rivera.josecarlos.animotrack.EventsRegistrationPage"
+            android:name="com.mobdeve.xx22.rivera.josecarlos.animotrack.RegistrationEventPage"
             android:exported="true" >
         </activity>
         <activity

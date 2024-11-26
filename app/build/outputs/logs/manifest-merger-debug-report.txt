@@ -142,12 +142,12 @@ ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidM
 		ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:41:13-36
 	android:name
 		ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:40:13-41
-activity#com.mobdeve.xx22.rivera.josecarlos.animotrack.EventsRegistrationPage
+activity#com.mobdeve.xx22.rivera.josecarlos.animotrack.RegistrationEventPage
 ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:43:9-46:20
 	android:exported
 		ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:45:13-36
 	android:name
-		ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:44:13-51
+		ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:44:13-50
 activity#com.mobdeve.xx22.rivera.josecarlos.animotrack.UpcomingEventExtPage
 ADDED from C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:47:9-50:20
 	android:exported

@@ -4,34 +4,44 @@ public class BookmarkEvent {
     private Event event;
     private String eventDate;
     private String eventVenue;
+    private String eventFacilitator;
     private String eventDescription;
-    private String eventOrganizer;
+    private boolean isFavorite;
 
-    public BookmarkEvent(Event event, String eventDate, String eventVenue) {
+    public BookmarkEvent(Event event, String eventDate, String eventVenue, String eventFacilitator, String eventDescription, boolean isFavorite) {
         this.event = event;
         this.eventDate = eventDate;
         this.eventVenue = eventVenue;
+        this.eventFacilitator = eventFacilitator;
         this.eventDescription = eventDescription;
-        this.eventOrganizer = eventOrganizer;
+        this.isFavorite = isFavorite;
     }
 
-    public Event getBookmarkEventTitle() {
+    public Event getEventTitle() {
         return this.event;
     }
 
-    public String getBookmarkEventDate() {
+    public String getEventDate() {
         return this.eventDate;
     }
 
-    public String getBookmarkEventVenue() {
+    public String getEventVenue() {
         return this.eventVenue;
     }
 
-    public String getBookmarkEventDescription() {
+    public String getEventFacilitator() {
+        return this.eventFacilitator;
+    }
+
+    public String getEventDescription() {
         return this.eventDescription;
     }
 
-    public String getBookmarkEventOrganizer() {
-        return this.eventOrganizer;
+    public boolean isFavorite() {
+        return isFavorite;  // Getter for the favorite status
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;  // Setter for the favorite status
     }
 }

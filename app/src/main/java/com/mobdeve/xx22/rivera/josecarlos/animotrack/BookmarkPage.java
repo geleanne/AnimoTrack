@@ -3,14 +3,18 @@ package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
 
 public class BookmarkPage extends AppCompatActivity {
+
+    public static ArrayList<UpcomingEvent> bookmarkEvents = new ArrayList<>();
+    private RecyclerView recyclerViewBookmarkEvents;
+    private UpcomingEventAdapter adapter;
 
     ImageButton backArrow;
     ImageButton profileButton; // Declare profileButton
@@ -22,6 +26,15 @@ public class BookmarkPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bookmark);
+
+//        bookmarkEvents = DataGenerator.getBookmarkedEvents();
+
+        recyclerViewBookmarkEvents = findViewById(R.id.recycler_view_bookmarked_events);
+        recyclerViewBookmarkEvents.setLayoutManager(new LinearLayoutManager(this));
+
+        // Pass the bookmarked events to the adapter
+        adapter = new UpcomingEventAdapter(this, bookmarkEvents);
+        recyclerViewBookmarkEvents.setAdapter(adapter);
 
         backArrow = findViewById(R.id.back_arrow);
         profileButton = findViewById(R.id.profileButton); // Initialize profileButton
@@ -69,4 +82,13 @@ public class BookmarkPage extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adapter != null) {
+            adapter.notifyDataSetChanged(); // Refresh the list
+        }
+    }
+
 }

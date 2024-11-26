@@ -40,12 +40,15 @@ public class UpcomingEventExtAdapter extends RecyclerView.Adapter<UpcomingEventE
             @Override
             public void onClick(View v) {
                 // Start the EventsRegistrationPage activity
-                Intent intent = new Intent(context, EventsRegistrationPage.class);
+                Intent intent = new Intent(context, RegistrationEventPage.class);
                 // Optionally, pass event data to the new activity if needed
                 intent.putExtra("event_name", event.getEventTitle().getName());
                 intent.putExtra("event_date", event.getEventDate());
                 intent.putExtra("event_venue", event.getEventVenue());
                 intent.putExtra("event_image", event.getEventTitle().getImageId());
+                intent.putExtra("event_facilitator", event.getEventFacilitator());
+                intent.putExtra("event_description", event.getEventDescription());
+                intent.putExtra("event_isFavorite", event.isBookmarked());
                 context.startActivity(intent);
             }
         });

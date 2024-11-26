@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,11 +29,21 @@ public class BookmarkEventAdapter extends RecyclerView.Adapter<BookmarkEventView
     @Override
     public void onBindViewHolder(@NonNull BookmarkEventViewHolder holder, int position) {
         BookmarkEvent event = events.get(position);
-        holder.eventTitle.setText(event.getBookmarkEventTitle().getName());
-        holder.eventDate.setText(event.getBookmarkEventDate());
-        holder.eventLocation.setText(event.getBookmarkEventVenue());
 
-        holder.imageView.setImageResource(event.getBookmarkEventTitle().getImageId());
+        holder.eventTitle.setText(event.getEventTitle().getName());
+        holder.eventDate.setText(event.getEventDate());
+        holder.eventLocation.setText(event.getEventVenue());
+        holder.imageView.setImageResource(event.getEventTitle().getImageId());
+
+        holder.rsvpButton.setOnClickListener(v -> {
+            if (holder.rsvpButton.isSelected()) {
+                holder.rsvpButton.setSelected(false);
+                Toast.makeText(holder.itemView.getContext(), "RSVP clicked for " + event.getEventTitle(), Toast.LENGTH_SHORT).show();
+            } else {
+                holder.rsvpButton.setSelected(true);
+                Toast.makeText(holder.itemView.getContext(), "RSVP clicked for " + event.getEventTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

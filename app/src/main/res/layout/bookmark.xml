@@ -108,8 +108,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_bookmarked_events"
-        android:layout_width="390dp"
-        android:layout_height="669dp"
+        android:layout_width="415dp"
+        android:layout_height="528dp"
         android:layout_marginBottom="72dp"
         android:clipToPadding="false"
         android:padding="16dp"
@@ -204,7 +204,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/bookmarks_button"
                 android:scaleType="centerCrop"
-                android:src="@drawable/bookmark_vector"
+                android:src="@drawable/unshaded_bookmark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

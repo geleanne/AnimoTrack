@@ -33,6 +33,7 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventView
         holder.eventDate.setText(event.getEventDate());
         holder.eventLocation.setText(event.getEventVenue());
 
+
         holder.imageView.setImageResource(event.getEventTitle().getImageId());
 
         // Set click listener for the entire item view
@@ -48,13 +49,14 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventView
     }
 
     public void startEventDetailsActivity(Context context, UpcomingEvent event) {
-        Intent intent = new Intent(context, EventsRegistrationPage.class);
+        Intent intent = new Intent(context, RegistrationEventPage.class);
         intent.putExtra("event_name", event.getEventTitle().getName());
         intent.putExtra("event_date", event.getEventDate());
         intent.putExtra("event_venue", event.getEventVenue());
         intent.putExtra("event_image", event.getEventTitle().getImageId());
         intent.putExtra("event_facilitator", event.getEventFacilitator());
         intent.putExtra("event_description", event.getEventDescription());
+        intent.putExtra("event_isFavorite", event.isBookmarked());
         context.startActivity(intent);
     }
 }

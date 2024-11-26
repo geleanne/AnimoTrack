@@ -194,7 +194,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/bookmarks_button"
                 android:scaleType="centerCrop"
-                android:src="@drawable/bookmark_vector"
+                android:src="@drawable/unshaded_bookmark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

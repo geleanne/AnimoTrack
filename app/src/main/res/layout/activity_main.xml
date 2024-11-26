@@ -291,7 +291,7 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sportsIconImageView"
+                app:layout_constraintTop_toBottomOf="@+id/sportsIconImageButton"
                 app:layout_constraintVertical_bias="0.562" />
 
             <ImageButton
@@ -323,7 +323,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginEnd="34dp"
+                android:layout_marginEnd="28dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Cultural"
@@ -331,7 +331,7 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/culturalIconImageView"
+                app:layout_constraintTop_toBottomOf="@+id/culturalIconImageButton"
                 app:layout_constraintVertical_bias="0.562" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -364,11 +364,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewUpcomingEvents"
-        android:layout_width="435dp"
-        android:layout_height="363dp"
-        android:layout_marginStart="20dp"
+        android:layout_width="409dp"
+        android:layout_height="381dp"
         android:layout_marginTop="12dp"
         app:layout_constraintBottom_toTopOf="@id/circular_button_layout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/UpcomingEventsTextView"
         app:layout_constraintVertical_bias="0.0" />
@@ -461,7 +461,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/bookmarks_button"
                 android:scaleType="centerCrop"
-                android:src="@drawable/bookmark_vector"
+                android:src="@drawable/unshaded_bookmark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

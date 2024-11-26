@@ -96,8 +96,8 @@
 58        </activity>
 59        <activity
 59-->C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:43:9-46:20
-60            android:name="com.mobdeve.xx22.rivera.josecarlos.animotrack.EventsRegistrationPage"
-60-->C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:44:13-51
+60            android:name="com.mobdeve.xx22.rivera.josecarlos.animotrack.RegistrationEventPage"
+60-->C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:44:13-50
 61            android:exported="true" >
 61-->C:\Users\josec\AndroidStudioProjects\AnimoTrack\app\src\main\AndroidManifest.xml:45:13-36
 62        </activity>

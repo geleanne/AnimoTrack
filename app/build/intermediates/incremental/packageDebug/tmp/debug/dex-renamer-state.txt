@@ -1,4 +1,4 @@
-#Sat Nov 23 14:44:17 PST 2024
+#Tue Nov 26 14:18:10 PST 2024
 base.0=C\:\\Users\\josec\\AndroidStudioProjects\\AnimoTrack\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\josec\\AndroidStudioProjects\\AnimoTrack\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.2=C\:\\Users\\josec\\AndroidStudioProjects\\AnimoTrack\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex

@@ -14,6 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateEventActivity extends AppCompatActivity {
 
@@ -22,6 +27,7 @@ public class CreateEventActivity extends AppCompatActivity {
     private Spinner eventCategorySpinner;
     private FirebaseDatabase database;
     private DatabaseReference eventsRef;
+    Button buttonSubmitEvent;
     ImageButton backArrow; // Declare backArrow
 
     @Override
@@ -42,7 +48,7 @@ public class CreateEventActivity extends AppCompatActivity {
         eventFacilitatorEditText = findViewById(R.id.eventFacilitatorEditText);
         eventDescriptionEditText = findViewById(R.id.eventDescriptionEditText);
         eventCategorySpinner = findViewById(R.id.eventCategorySpinner);
-        Button buttonSubmitEvent = findViewById(R.id.buttonSubmitEvent);
+        buttonSubmitEvent = findViewById(R.id.buttonSubmitEvent);
 
         backArrow = findViewById(R.id.back_arrow);
 
@@ -62,7 +68,7 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
 
-        // Handle Submit Button click
+// Handle Submit Button click
         buttonSubmitEvent.setOnClickListener(v -> {
             // Capture event details
             String eventName = eventNameEditText.getText().toString().trim();
@@ -76,21 +82,43 @@ public class CreateEventActivity extends AppCompatActivity {
             if (eventName.isEmpty() || eventVenue.isEmpty() || eventDate.isEmpty() || eventFacilitator.isEmpty() || eventDescription.isEmpty()) {
                 Toast.makeText(CreateEventActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             } else {
-                // Save the event to Firebase
-                String eventId = eventsRef.push().getKey();
-                Event event = new Event(0, eventName); // Use a default image or dynamic assignment
+                // Save the event to Firebase Realtime Database
+                String eventId = eventsRef.push().getKey(); // Create a unique event ID
+                Event event = new Event(0, eventName); // Assuming 0 is a placeholder for an image
                 UpcomingEvent upcomingEvent = new UpcomingEvent(event, eventDate, eventVenue, eventFacilitator, eventDescription, false);
+
+                // Save to Firestore "SubmittedEvents" collection
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                CollectionReference submittedEventsRef = db.collection("SubmittedEvents");
+
                 if (eventId != null) {
+                    // Save the event data to Firebase Realtime Database
                     eventsRef.child(eventId).setValue(upcomingEvent)
                             .addOnSuccessListener(aVoid -> {
-                                Toast.makeText(CreateEventActivity.this, "Event Created Successfully", Toast.LENGTH_SHORT).show();
-                                clearFields();
+                                // Now, save the event data to Firestore
+                                Map<String, Object> eventData = new HashMap<>();
+                                eventData.put("eventName", eventName);
+                                eventData.put("eventVenue", eventVenue);
+                                eventData.put("eventDate", eventDate);
+                                eventData.put("eventFacilitator", eventFacilitator);
+                                eventData.put("eventDescription", eventDescription);
+                                eventData.put("eventCategory", eventCategory);
+
+                                // Save the event data to Firestore under "SubmittedEvents" collection
+                                submittedEventsRef.add(eventData)
+                                        .addOnSuccessListener(documentReference -> {
+                                            Toast.makeText(CreateEventActivity.this, "Event Created Successfully", Toast.LENGTH_SHORT).show();
+                                            clearFields();
+                                        })
+                                        .addOnFailureListener(e -> Toast.makeText(CreateEventActivity.this, "Failed to create event in Firestore", Toast.LENGTH_SHORT).show());
                             })
-                            .addOnFailureListener(e -> Toast.makeText(CreateEventActivity.this, "Failed to create event", Toast.LENGTH_SHORT).show());
+                            .addOnFailureListener(e -> Toast.makeText(CreateEventActivity.this, "Failed to create event in Realtime Database", Toast.LENGTH_SHORT).show());
                 }
             }
         });
+
     }
+
 
     // Method to clear all the form fields after submission
     private void clearFields() {

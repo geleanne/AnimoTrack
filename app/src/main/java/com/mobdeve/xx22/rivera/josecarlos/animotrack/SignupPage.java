@@ -65,7 +65,11 @@ public class SignupPage extends AppCompatActivity {
                 String password = passwordField.getText().toString().trim();
 
                 // Simple validation
-                if (fullName.isEmpty() || idNumber.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                // Check for admin credentials (for testing purposes)
+                if (email.equals("admin") && password.equals("123")) {
+                    Toast.makeText(SignupPage.this, "Cannot create an admin account here!", Toast.LENGTH_SHORT).show();
+                }
+                else if (fullName.isEmpty() || idNumber.isEmpty() || email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(SignupPage.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 } else if (!email.endsWith("@dlsu.edu.ph") || email.indexOf('@') == 0) {
                     // Ensure email ends with @dlsu.edu.ph and there is text before the '@'

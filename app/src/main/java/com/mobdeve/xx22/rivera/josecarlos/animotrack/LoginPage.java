@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginPage extends AppCompatActivity {
 
@@ -22,7 +23,7 @@ public class LoginPage extends AppCompatActivity {
     private Button loginButton;
     private Button noAccountYetButton;
 
-    // Declare FirebaseAuth instance
+    private FirebaseFirestore db;
     private FirebaseAuth mAuth;
 
 //    @Override
@@ -43,8 +44,9 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page); // layout's filename
 
-        // Initialize Firebase Auth
+        // Initialize Firebase components
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         // Initialize views
         emailField = findViewById(R.id.editTextTextEmailAddress);
@@ -56,30 +58,43 @@ public class LoginPage extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get input values
                 String email = emailField.getText().toString().trim();
                 String password = passwordField.getText().toString().trim();
 
-                // Check for admin credentials (for testing purposes)
-                if (email.equals("admins") && password.equals("123")) {
-                    // Proceed to the main activity for the admin user
-                    Intent intent = new Intent(LoginPage.this, MainActivity.class);
-                    intent.putExtra("fullName", "Admins Ange and Carlos");
-                    startActivity(intent);
-                    finish();
-                }
-                // Validate the email and password
-                else if (email.isEmpty() || password.isEmpty()) {
+                if (email.equals("admin") && password.equals("123")) {
+                    // Admin login bypass
+                    db.collection("AnimoTrackUsers")
+                            .document("admins") // Admin's Firestore ID
+                            .get()
+                            .addOnSuccessListener(documentSnapshot -> {
+                                if (documentSnapshot.exists()) {
+                                    String fullName = documentSnapshot.getString("name");
+                                    if (fullName != null && !fullName.isEmpty()) {
+                                        Toast.makeText(LoginPage.this, "Welcome, " + fullName + "!", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(LoginPage.this, MainActivity.class);
+                                        intent.putExtra("fullName", fullName);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                } else {
+                                    Toast.makeText(LoginPage.this, "Admin data not found.", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(LoginPage.this, "Error fetching admin data.", Toast.LENGTH_SHORT).show();
+                            });
+                } else if (email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(LoginPage.this, "Please enter your email and password", Toast.LENGTH_SHORT).show();
                 } else if (!email.endsWith("@dlsu.edu.ph") || email.indexOf('@') == 0) {
-                    // Ensure email ends with @dlsu.edu.ph and has characters before '@'
                     Toast.makeText(LoginPage.this, "Please use a valid DLSU email address", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Call signIn method with email and password
+                    Toast.makeText(LoginPage.this, "Logging you in...", Toast.LENGTH_SHORT).show();
                     signInWithEmail(email, password);
                 }
             }
         });
+
+
 
         // onClickListener for the no account yet button
         noAccountYetButton.setOnClickListener(new View.OnClickListener() {

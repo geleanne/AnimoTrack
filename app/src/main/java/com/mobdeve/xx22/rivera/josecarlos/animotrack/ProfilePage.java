@@ -47,23 +47,43 @@ public class ProfilePage extends AppCompatActivity {
         logoutButton = findViewById(R.id.logoutButton);
         fullNameTextView = findViewById(R.id.fullNameTextView);
 
-        // Get the current user
+        // Check if the user is admin (with credentials: admin, 123)
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            // Fetch user data from Firestore using the user's UID
-            db.collection("AnimoTrackUsers").document(currentUser.getUid())
-                    .get()
-                    .addOnSuccessListener(documentSnapshot -> {
-                        if (documentSnapshot.exists()) {
-                            String fullName = documentSnapshot.getString("name");
-                            if (fullName != null && !fullName.isEmpty()) {
-                                fullNameTextView.setText(fullName); // Set the full name to TextView
+            String email = emailField.getText().toString().trim();
+            String password = passwordField.getText().toString().trim();
+
+            if (email.equals("admin") && password.equals("123")) { // admin credentials condition
+                // Fetch admin data from the 'admins' document
+                db.collection("admins").document("CarlosAndAnge") // Assuming this is how admins are stored
+                        .get()
+                        .addOnSuccessListener(documentSnapshot -> {
+                            if (documentSnapshot.exists()) {
+                                String adminFullName = documentSnapshot.getString("name");
+                                if (adminFullName != null && !adminFullName.isEmpty()) {
+                                    fullNameTextView.setText(adminFullName); // Set admin full name to TextView
+                                }
                             }
-                        }
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(ProfilePage.this, "Error fetching user data", Toast.LENGTH_SHORT).show();
-                    });
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(ProfilePage.this, "Error fetching admin data", Toast.LENGTH_SHORT).show();
+                        });
+            } else {
+                // Regular user data fetching from 'AnimoTrackUsers' collection
+                db.collection("AnimoTrackUsers").document(currentUser.getUid())
+                        .get()
+                        .addOnSuccessListener(documentSnapshot -> {
+                            if (documentSnapshot.exists()) {
+                                String fullName = documentSnapshot.getString("name");
+                                if (fullName != null && !fullName.isEmpty()) {
+                                    fullNameTextView.setText(fullName); // Set the full name to TextView
+                                }
+                            }
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(ProfilePage.this, "Error fetching user data", Toast.LENGTH_SHORT).show();
+                        });
+            }
         }
 
         logoutButton.setOnClickListener(v -> {
@@ -78,13 +98,15 @@ public class ProfilePage extends AppCompatActivity {
                     .setNegativeButton("Cancel", null)
                     .show();
         });
+
         eventsButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, CreatedEvent.class);
             startActivity(intent); // Start the CreatedEvent activity
         });
+
         profileButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, ProfilePage.class);
-            startActivity(intent); // Start the LoginPage activity
+            startActivity(intent); // Start the ProfilePage activity
         });
 
         bookmarkButton.setOnClickListener(view -> {
@@ -94,12 +116,12 @@ public class ProfilePage extends AppCompatActivity {
 
         homeButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, MainActivity.class);
-            startActivity(intent); // Start the HomePage activity
+            startActivity(intent); // Start the MainActivity activity
         });
+
         addEventButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, CreateEventActivity.class);
             startActivity(intent); // Start the CreateEventActivity activity
         });
-
     }
 }

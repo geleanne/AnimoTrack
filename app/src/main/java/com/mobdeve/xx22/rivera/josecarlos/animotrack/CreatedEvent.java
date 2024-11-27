@@ -57,7 +57,7 @@ public class CreatedEvent extends AppCompatActivity {
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
                             String fullName = documentSnapshot.getString("name");  // Retrieve the name
-                            titleTextView.setText("Hello, " + fullName);  // Example: set the title or use as needed
+                            titleTextView.setText("Would you like to add an event, " + fullName + "?");  // Example: set the title or use as needed
                         } else {
                             Toast.makeText(CreatedEvent.this, "User data not found", Toast.LENGTH_SHORT).show();
                         }

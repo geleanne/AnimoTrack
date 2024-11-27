@@ -10,6 +10,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 
 public class BookmarkPage extends AppCompatActivity {
@@ -24,12 +29,31 @@ public class BookmarkPage extends AppCompatActivity {
     ImageButton homeButton; // Declare homeButton
     ImageView addEventButton;
 
+    private String fullName; // Store fullName here
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bookmark);
 
-        String fullName = getIntent().getStringExtra("fullName");
+        // Fetch the full name directly from Firebase (or global state) if needed
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Retrieve full name from Firestore or user profile
+            fullName = user.getDisplayName();
+            if (fullName == null) {
+                // If fullName is not set, retrieve it from Firestore if necessary
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("AnimoTrackUsers")
+                        .document(user.getUid())
+                        .get()
+                        .addOnSuccessListener(documentSnapshot -> {
+                            if (documentSnapshot.exists()) {
+                                fullName = documentSnapshot.getString("name");
+                            }
+                        });
+            }
+        }
 
         recyclerViewBookmarkEvents = findViewById(R.id.recycler_view_bookmarked_events);
         recyclerViewBookmarkEvents.setLayoutManager(new LinearLayoutManager(this));
@@ -48,7 +72,6 @@ public class BookmarkPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BookmarkPage.this, BookmarkPage.class);
-                intent.putExtra("fullName", fullName);
                 finish(); // Close current activity and return to the previous one
             }
         });
@@ -58,8 +81,7 @@ public class BookmarkPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BookmarkPage.this, ProfilePage.class);
-                intent.putExtra("fullName", fullName);
-                startActivity(intent); // Start the LoginPage activity
+                startActivity(intent); // Start the ProfilePage activity
             }
         });
 
@@ -67,7 +89,6 @@ public class BookmarkPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(BookmarkPage.this, BookmarkPage.class);
-                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the BookmarksPage activity
             }
         });
@@ -76,7 +97,6 @@ public class BookmarkPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BookmarkPage.this, MainActivity.class);
-                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the HomePage activity
             }
         });
@@ -85,7 +105,6 @@ public class BookmarkPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BookmarkPage.this, CreateEventActivity.class);
-                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the CreateEventActivity activity
             }
         });
@@ -98,5 +117,5 @@ public class BookmarkPage extends AppCompatActivity {
             adapter.notifyDataSetChanged(); // Refresh the list
         }
     }
-
 }
+

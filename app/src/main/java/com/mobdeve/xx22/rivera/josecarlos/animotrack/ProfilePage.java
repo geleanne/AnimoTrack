@@ -9,82 +9,95 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class ProfilePage extends AppCompatActivity {
-    ImageButton profileButton; // Declare profileButton
-    ImageButton bookmarkButton; // Declare bookmarkButton
-    ImageButton homeButton; // Declare homeButton
-    ImageButton eventsButton; // Declare eventsButton
+    ImageButton profileButton;
+    ImageButton bookmarkButton;
+    ImageButton homeButton;
+    ImageButton eventsButton;
     private ImageView addEventButton;
     private Button logoutButton;
     TextView fullNameTextView;
+
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
 
-        profileButton = findViewById(R.id.profileButton); // Initialize profileButton
-        bookmarkButton = findViewById(R.id.bookmarksButton); // Initialize bookmarkButton
-        homeButton = findViewById(R.id.homeButton); // Initialize homeButton
-        addEventButton = findViewById(R.id.add_event_button); // Initialize addEventButton
-        eventsButton = findViewById(R.id.eventsButton); // Initialize eventsButton
-        logoutButton = findViewById(R.id.logoutButton); // Initialize log-out button
-        fullNameTextView = findViewById(R.id.fullNameTextView); // Initialize fullNameTextView
+        // Initialize Firebase components
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
-        String fullName = getIntent().getStringExtra("fullName");
+        profileButton = findViewById(R.id.profileButton);
+        bookmarkButton = findViewById(R.id.bookmarksButton);
+        homeButton = findViewById(R.id.homeButton);
+        addEventButton = findViewById(R.id.add_event_button);
+        eventsButton = findViewById(R.id.eventsButton);
+        logoutButton = findViewById(R.id.logoutButton);
+        fullNameTextView = findViewById(R.id.fullNameTextView);
 
-        if (fullName != null && !fullName.isEmpty()) {
-            fullNameTextView.setText(fullName);
+        // Get the current user
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            // Fetch user data from Firestore using the user's UID
+            db.collection("AnimoTrackUsers").document(currentUser.getUid())
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            String fullName = documentSnapshot.getString("name");
+                            if (fullName != null && !fullName.isEmpty()) {
+                                fullNameTextView.setText(fullName); // Set the full name to TextView
+                            }
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(ProfilePage.this, "Error fetching user data", Toast.LENGTH_SHORT).show();
+                    });
         }
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Show confirmation dialog
-                new AlertDialog.Builder(ProfilePage.this)
-                        .setMessage("Are you sure you want to log out?")
-                        .setCancelable(false)
-                        .setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // If "Log Out" is clicked, redirect to HomepageActivity
-                                Intent intent = new Intent(ProfilePage.this, HomepageActivity.class);
-                                startActivity(intent); // Start the HomepageActivity
-                                finish(); // Close the current activity
-                            }
-                        })
-                        .setNegativeButton("Cancel", null)
-                        .show();
-            }
+        logoutButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(ProfilePage.this)
+                    .setMessage("Are you sure you want to log out?")
+                    .setCancelable(false)
+                    .setPositiveButton("Log Out", (dialog, id) -> {
+                        Intent intent = new Intent(ProfilePage.this, HomepageActivity.class);
+                        startActivity(intent);
+                        finish();
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
         });
         eventsButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, CreatedEvent.class);
-            intent.putExtra("fullName", fullName);
             startActivity(intent); // Start the CreatedEvent activity
         });
         profileButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, ProfilePage.class);
-            intent.putExtra("fullName", fullName);
             startActivity(intent); // Start the LoginPage activity
         });
 
         bookmarkButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, BookmarkPage.class);
-            intent.putExtra("fullName", fullName);
             startActivity(intent); // Start the BookmarksPage activity
         });
 
         homeButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, MainActivity.class);
-            intent.putExtra("fullName", fullName);
             startActivity(intent); // Start the HomePage activity
         });
         addEventButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, CreateEventActivity.class);
-            intent.putExtra("fullName", fullName);
             startActivity(intent); // Start the CreateEventActivity activity
         });
 

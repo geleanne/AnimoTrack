@@ -95,6 +95,8 @@ public class SignupPage extends AppCompatActivity {
                                                                 Map<String, Object> userData = new HashMap<>();
                                                                 userData.put("name", fullName); // Store full name
                                                                 userData.put("id_number", idNumber); // Store id_number
+                                                                userData.put("email", email); // Store email
+                                                                userData.put("password", password); // Store password
 
                                                                 // Get a reference to the 'AnimoTrackUsers' collection
                                                                 CollectionReference usersRef = db.collection("AnimoTrackUsers");

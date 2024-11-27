@@ -11,11 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -30,8 +33,6 @@ public class CreatedEvent extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String fullName = getIntent().getStringExtra("fullName");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.created_events);
 
@@ -45,6 +46,27 @@ public class CreatedEvent extends AppCompatActivity {
         // Initialize Firebase database reference
         eventsRef = FirebaseDatabase.getInstance().getReference("created_events");
 
+        // Get current user info from Firebase
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String userId = currentUser.getUid();  // Use the UID to fetch the full name from Firestore
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("AnimoTrackUsers").document(userId)
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            String fullName = documentSnapshot.getString("name");  // Retrieve the name
+                            titleTextView.setText("Hello, " + fullName);  // Example: set the title or use as needed
+                        } else {
+                            Toast.makeText(CreatedEvent.this, "User data not found", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(CreatedEvent.this, "Error fetching user data", Toast.LENGTH_SHORT).show();
+                    });
+        }
+
         // Set up RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(eventAdapter);
@@ -55,10 +77,10 @@ public class CreatedEvent extends AppCompatActivity {
         // Handle back button click
         backButton.setOnClickListener(v -> {
             Intent intent = new Intent(CreatedEvent.this, MainActivity.class);
-            intent.putExtra("fullName", fullName);
             startActivity(intent);
         });
     }
+
 
     private void fetchCreatedEvents() {
         eventsRef.addValueEventListener(new ValueEventListener() {

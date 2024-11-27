@@ -2,18 +2,24 @@ package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -33,10 +39,17 @@ public class MainActivity extends AppCompatActivity {
     ImageButton culturalIconImageButton;
     TextView greetNameTextView;
 
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize FirebaseAuth and Firestore
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         recyclerViewUpcomingEvents = findViewById(R.id.recyclerViewUpcomingEvents);
         profileButton = findViewById(R.id.profileButton);
@@ -52,22 +65,42 @@ public class MainActivity extends AppCompatActivity {
         addEventButton = findViewById(R.id.add_event_button);
         greetNameTextView = findViewById(R.id.greetNameTextView);
 
-        // get the name of the user from the signed in user and display it in the greetNameTextView
-        String fullName = getIntent().getStringExtra("fullName");
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            String uid = user.getUid();
 
-        if (fullName != null && !fullName.isEmpty()) {
-            greetNameTextView.setText("Hello, " + fullName + "!");
+            // Get the user data from Firestore using the user's UID
+            db.collection("AnimoTrackUsers").document(uid)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    // Get the user's full name from Firestore
+                                    String fullName = document.getString("name");
+                                    if (fullName != null && !fullName.isEmpty()) {
+                                        greetNameTextView.setText("Hello, " + fullName + "!");
+                                    }
+                                } else {
+                                    // Document doesn't exist
+                                    Log.d("MainActivity", "No such document");
+                                }
+                            } else {
+                                Log.d("MainActivity", "Get failed with ", task.getException());
+                            }
+                        }
+                    });
         }
 
+        // Proceed with setting up your RecyclerView and other buttons
         ArrayList<UpcomingEvent> events = DataGenerator.generateUpcomingEventsData();
-
-        // Limit the number of events displayed
         int maxEventsToShow = 5;
         if (events.size() > maxEventsToShow) {
             events = new ArrayList<>(events.subList(0, maxEventsToShow));
         }
 
-        // Set up the RecyclerView for events
         UpcomingEventAdapter upcomingEventAdapter = new UpcomingEventAdapter(this, events);
         recyclerViewUpcomingEvents.setAdapter(upcomingEventAdapter);
         recyclerViewUpcomingEvents.setLayoutManager(new LinearLayoutManager(this));
@@ -76,8 +109,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, UpcomingEventExtPage.class);
-                intent.putExtra("fullName", fullName);
-                startActivity(intent); // Start the UpcomingEventsPage activity
+                startActivity(intent);
             }
         });
 
@@ -86,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreatedEvent.class);
-                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the CreatedEvent activity
             }
         });
@@ -95,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreateEventActivity.class);
-                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the CreateEventActivity
             }
         });
@@ -104,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ProfilePage.class);
-                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the LoginPage activity
             }
         });
@@ -113,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BookmarkPage.class);
-                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the BookmarksPage activity
             }
         });
@@ -122,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the HomePage activity
             }
         });

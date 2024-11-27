@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 
 
@@ -23,18 +26,19 @@ public class CategoryPage  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category_page);
 
-        String fullName = getIntent().getStringExtra("fullName");
+        // Access the current logged-in user's full name directly from Firebase
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String fullName = user != null ? user.getDisplayName() : "Guest"; // Default if null
 
         backArrowButton = findViewById(R.id.back_arrow);
-        profileButton = findViewById(R.id.profileButton); // Initialize profileButton
-        bookmarkButton = findViewById(R.id.bookmarksButton); // Initialize bookmarkButton
-        homeButton = findViewById(R.id.homeButton); // Initialize homeButton
-        addEventButton = findViewById(R.id.add_event_button); // Initialize addEventButton
+        profileButton = findViewById(R.id.profileButton);
+        bookmarkButton = findViewById(R.id.bookmarksButton);
+        homeButton = findViewById(R.id.homeButton);
+        addEventButton = findViewById(R.id.add_event_button);
         recyclerViewEventsOfSpecificCategory = findViewById(R.id.recyclerViewEventsOfSpecificCategory);
 
         // Retrieve category from intent
-        Intent intent = getIntent();
-        String category = intent.getStringExtra("category");
+        String category = getIntent().getStringExtra("category");
 
         // Get filtered data and set up RecyclerView
         ArrayList<CategorizedEvent> categorizedEvents = DataGenerator.getEventsByCategory(category);
@@ -43,49 +47,29 @@ public class CategoryPage  extends AppCompatActivity {
         recyclerViewEventsOfSpecificCategory.setLayoutManager(new LinearLayoutManager(this));
 
         // Set OnClickListener for the buttons
-        addEventButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CategoryPage.this, CreateEventActivity.class);
-                intent.putExtra("fullName", fullName);
-                startActivity(intent); // Start the CreateEventActivity activity
-            }
+        addEventButton.setOnClickListener(v -> {
+            Intent intent = new Intent(CategoryPage.this, CreateEventActivity.class);
+            startActivity(intent); // Start the CreateEventActivity activity
         });
 
-        backArrowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CategoryPage.this, MainActivity.class);
-                intent.putExtra("fullName", fullName);
-                startActivity(intent); // Start the HomePage activity
-            }
+        backArrowButton.setOnClickListener(v -> {
+            Intent intent = new Intent(CategoryPage.this, MainActivity.class);
+            startActivity(intent); // Start the HomePage activity
         });
 
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CategoryPage.this, ProfilePage.class);
-                intent.putExtra("fullName", fullName);
-                startActivity(intent); // Start the LoginPage activity
-            }
+        profileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(CategoryPage.this, ProfilePage.class);
+            startActivity(intent); // Start the ProfilePage activity
         });
 
-        bookmarkButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CategoryPage.this, BookmarkPage.class);
-                intent.putExtra("fullName", fullName);
-                startActivity(intent); // Start the BookmarksPage activity
-            }
+        bookmarkButton.setOnClickListener(v -> {
+            Intent intent = new Intent(CategoryPage.this, BookmarkPage.class);
+            startActivity(intent); // Start the BookmarksPage activity
         });
 
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CategoryPage.this, MainActivity.class);
-                intent.putExtra("fullName", fullName);
-                startActivity(intent); // Start the HomePage activity
-            }
+        homeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(CategoryPage.this, MainActivity.class);
+            startActivity(intent); // Start the HomePage activity
         });
     }
 }

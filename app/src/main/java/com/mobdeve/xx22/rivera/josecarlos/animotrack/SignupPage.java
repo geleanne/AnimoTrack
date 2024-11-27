@@ -20,10 +20,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.CollectionReference;
 
 import java.util.HashMap;
 import java.util.Map;
-
 
 public class SignupPage extends AppCompatActivity {
 
@@ -37,27 +37,14 @@ public class SignupPage extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if (currentUser != null) {
-//            // If a user is already signed in, navigate to the MainActivity
-//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//            startActivity(intent);
-//            finish(); // Optional: To remove LoginPage from the back stack
-//        }
-//    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_page); // Ensure this matches your XML layout name
 
-
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance(); // Initialize Firestore
 
         // Initialize views
         fullNameField = findViewById(R.id.editTextFullName);
@@ -77,13 +64,12 @@ public class SignupPage extends AppCompatActivity {
                 String email = emailField.getText().toString().trim();
                 String password = passwordField.getText().toString().trim();
 
-
                 // Simple validation
                 if (fullName.isEmpty() || idNumber.isEmpty() || email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(SignupPage.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 } else if (!email.endsWith("@dlsu.edu.ph") || email.indexOf('@') == 0) {
                     // Ensure email ends with @dlsu.edu.ph and there is text before the '@'
-                    Toast.makeText(SignupPage.this, "Please use a valid DLSU email address with characters before '@dlsu.edu.ph'", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupPage.this, "Please use a valid DLSU email address", Toast.LENGTH_SHORT).show();
                 } else {
                     // Create a new user with Firebase Authentication
                     mAuth.createUserWithEmailAndPassword(email, password)
@@ -103,11 +89,39 @@ public class SignupPage extends AppCompatActivity {
                                                             if (task.isSuccessful()) {
                                                                 // Successfully updated the profile
                                                                 Toast.makeText(SignupPage.this, "Account created!", Toast.LENGTH_SHORT).show();
-                                                                // Redirect to MainActivity and pass the full name
-                                                                Intent intent = new Intent(SignupPage.this, LoginPage.class);
-                                                                intent.putExtra("fullName", fullName);
-                                                                startActivity(intent);
-                                                                finish();
+
+                                                                // Save additional user data to Firestore
+                                                                // Create a Map to store the user data
+                                                                Map<String, Object> userData = new HashMap<>();
+                                                                userData.put("name", fullName); // Store full name
+                                                                userData.put("id_number", idNumber); // Store id_number
+
+                                                                // Get a reference to the 'AnimoTrackUsers' collection
+                                                                CollectionReference usersRef = db.collection("AnimoTrackUsers");
+
+                                                                // Add the new user document with the user's UID as the document ID
+                                                                usersRef.document(user.getUid()) // Use UID to ensure the document ID is unique
+                                                                        .set(userData)
+                                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                            @Override
+                                                                            public void onSuccess(Void aVoid) {
+                                                                                // Successfully saved user data to Firestore
+                                                                                Log.d("SignupPage", "User data saved to Firestore!");
+                                                                                Toast.makeText(SignupPage.this, "User data saved to Firestore User UID: " + user.getUid(), Toast.LENGTH_SHORT).show();
+
+                                                                                // Redirect to LoginPage
+                                                                                Intent intent = new Intent(SignupPage.this, LoginPage.class);
+                                                                                intent.putExtra("fullName", fullName);
+                                                                                startActivity(intent);
+                                                                                finish();
+                                                                            }
+                                                                        })
+                                                                        .addOnFailureListener(new OnFailureListener() {
+                                                                            @Override
+                                                                            public void onFailure(@NonNull Exception e) {
+                                                                                Toast.makeText(SignupPage.this, "Failed to save user data with User UID: " + user.getUid(), Toast.LENGTH_SHORT).show();
+                                                                            }
+                                                                        });
                                                             } else {
                                                                 Toast.makeText(SignupPage.this, "Profile update failed", Toast.LENGTH_SHORT).show();
                                                             }
@@ -119,12 +133,9 @@ public class SignupPage extends AppCompatActivity {
                                     }
                                 }
                             });
-
-
                 }
             }
         });
-
 
         // Set OnClickListener for the already have an account button
         hasAnAccountButton.setOnClickListener(new View.OnClickListener() {

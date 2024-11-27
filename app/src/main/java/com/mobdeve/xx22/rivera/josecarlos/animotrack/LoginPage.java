@@ -92,7 +92,6 @@ public class LoginPage extends AppCompatActivity {
         });
     }
 
-    // Sign-in method using Firebase Authentication
     private void signInWithEmail(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -112,7 +111,6 @@ public class LoginPage extends AppCompatActivity {
                         }
                     }
                 });
-
     }
 
 }

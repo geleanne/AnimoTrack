@@ -23,6 +23,8 @@ public class CategoryPage  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category_page);
 
+        String fullName = getIntent().getStringExtra("fullName");
+
         backArrowButton = findViewById(R.id.back_arrow);
         profileButton = findViewById(R.id.profileButton); // Initialize profileButton
         bookmarkButton = findViewById(R.id.bookmarksButton); // Initialize bookmarkButton
@@ -45,6 +47,7 @@ public class CategoryPage  extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CategoryPage.this, CreateEventActivity.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the CreateEventActivity activity
             }
         });
@@ -53,6 +56,7 @@ public class CategoryPage  extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CategoryPage.this, MainActivity.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the HomePage activity
             }
         });
@@ -61,6 +65,7 @@ public class CategoryPage  extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CategoryPage.this, ProfilePage.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the LoginPage activity
             }
         });
@@ -69,6 +74,7 @@ public class CategoryPage  extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CategoryPage.this, BookmarkPage.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the BookmarksPage activity
             }
         });
@@ -77,6 +83,7 @@ public class CategoryPage  extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CategoryPage.this, MainActivity.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the HomePage activity
             }
         });

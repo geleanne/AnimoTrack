@@ -17,6 +17,7 @@ public class ProfilePage extends AppCompatActivity {
     ImageButton profileButton; // Declare profileButton
     ImageButton bookmarkButton; // Declare bookmarkButton
     ImageButton homeButton; // Declare homeButton
+    ImageButton eventsButton; // Declare eventsButton
     private ImageView addEventButton;
     private Button logoutButton;
     TextView fullNameTextView;
@@ -30,6 +31,7 @@ public class ProfilePage extends AppCompatActivity {
         bookmarkButton = findViewById(R.id.bookmarksButton); // Initialize bookmarkButton
         homeButton = findViewById(R.id.homeButton); // Initialize homeButton
         addEventButton = findViewById(R.id.add_event_button); // Initialize addEventButton
+        eventsButton = findViewById(R.id.eventsButton); // Initialize eventsButton
         logoutButton = findViewById(R.id.logoutButton); // Initialize log-out button
         fullNameTextView = findViewById(R.id.fullNameTextView); // Initialize fullNameTextView
 
@@ -58,6 +60,11 @@ public class ProfilePage extends AppCompatActivity {
                         .show();
             }
         });
+        eventsButton.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfilePage.this, CreatedEvent.class);
+            intent.putExtra("fullName", fullName);
+            startActivity(intent); // Start the CreatedEvent activity
+        });
         profileButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, ProfilePage.class);
             intent.putExtra("fullName", fullName);
@@ -80,5 +87,6 @@ public class ProfilePage extends AppCompatActivity {
             intent.putExtra("fullName", fullName);
             startActivity(intent); // Start the CreateEventActivity activity
         });
+
     }
 }

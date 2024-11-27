@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton profileButton;
     ImageButton bookmarkButton;
     ImageButton homeButton;
+    ImageButton eventsButton;
     ImageButton upcomingEventsExtButton;
     ImageButton orgsIconImageButton;
     ImageButton acadsIconImageButton;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         profileButton = findViewById(R.id.profileButton);
         bookmarkButton = findViewById(R.id.bookmarksButton);
         homeButton = findViewById(R.id.homeButton);
+        eventsButton = findViewById(R.id.eventsButton);
         upcomingEventsExtButton = findViewById(R.id.upcomingEventsExtButton);
         orgsIconImageButton = findViewById(R.id.orgsIconImageButton);
         acadsIconImageButton = findViewById(R.id.acadsIconImageButton);
@@ -80,12 +82,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Set OnClickListener for the buttons
+        eventsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CreatedEvent.class);
+                intent.putExtra("fullName", fullName);
+                startActivity(intent); // Start the CreatedEvent activity
+            }
+        });
+
         addEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreateEventActivity.class);
                 intent.putExtra("fullName", fullName);
-                startActivity(intent); // Start the CreateEvent activity
+                startActivity(intent); // Start the CreateEventActivity
             }
         });
 

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +29,7 @@ public class BookmarkPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bookmark);
 
-//        bookmarkEvents = DataGenerator.getBookmarkedEvents();
+        String fullName = getIntent().getStringExtra("fullName");
 
         recyclerViewBookmarkEvents = findViewById(R.id.recycler_view_bookmarked_events);
         recyclerViewBookmarkEvents.setLayoutManager(new LinearLayoutManager(this));
@@ -45,6 +47,8 @@ public class BookmarkPage extends AppCompatActivity {
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(BookmarkPage.this, BookmarkPage.class);
+                intent.putExtra("fullName", fullName);
                 finish(); // Close current activity and return to the previous one
             }
         });
@@ -54,6 +58,7 @@ public class BookmarkPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BookmarkPage.this, ProfilePage.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the LoginPage activity
             }
         });
@@ -62,6 +67,7 @@ public class BookmarkPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(BookmarkPage.this, BookmarkPage.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the BookmarksPage activity
             }
         });
@@ -70,6 +76,7 @@ public class BookmarkPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BookmarkPage.this, MainActivity.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the HomePage activity
             }
         });
@@ -78,6 +85,7 @@ public class BookmarkPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BookmarkPage.this, CreateEventActivity.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the CreateEventActivity activity
             }
         });

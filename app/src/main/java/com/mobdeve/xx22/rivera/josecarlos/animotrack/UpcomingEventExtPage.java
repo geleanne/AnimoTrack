@@ -28,6 +28,8 @@ public class UpcomingEventExtPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_extend);
 
+        String fullName = getIntent().getStringExtra("fullName");
+
         recyclerViewUpcomingEventsExtended = findViewById(R.id.recyclerViewUpcomingEventsExtended);
         backArrow = findViewById(R.id.back_arrow);
         profileButton = findViewById(R.id.profileButton); // Initialize profileButton
@@ -45,7 +47,8 @@ public class UpcomingEventExtPage extends AppCompatActivity {
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish(); // Close current activity and return to the previous one
+                Intent intent = new Intent(UpcomingEventExtPage.this, UpcomingEventExtPage.class);
+                intent.putExtra("fullName", fullName);finish(); // Close current activity and return to the previous one
             }
         });
 
@@ -53,6 +56,7 @@ public class UpcomingEventExtPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UpcomingEventExtPage.this, ProfilePage.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the LoginPage activity
             }
         });
@@ -61,6 +65,7 @@ public class UpcomingEventExtPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UpcomingEventExtPage.this, BookmarkPage.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the BookmarksPage activity
             }
         });
@@ -69,6 +74,7 @@ public class UpcomingEventExtPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UpcomingEventExtPage.this, MainActivity.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the HomePage activity
             }
         });

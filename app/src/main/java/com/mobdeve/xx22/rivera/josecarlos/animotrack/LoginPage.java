@@ -60,8 +60,16 @@ public class LoginPage extends AppCompatActivity {
                 String email = emailField.getText().toString().trim();
                 String password = passwordField.getText().toString().trim();
 
+                // Check for admin credentials (for testing purposes)
+                if (email.equals("admins") && password.equals("123")) {
+                    // Proceed to the main activity for the admin user
+                    Intent intent = new Intent(LoginPage.this, MainActivity.class);
+                    intent.putExtra("fullName", "Admins Ange and Carlos");
+                    startActivity(intent);
+                    finish();
+                }
                 // Validate the email and password
-                if (email.isEmpty() || password.isEmpty()) {
+                else if (email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(LoginPage.this, "Please enter your email and password", Toast.LENGTH_SHORT).show();
                 } else if (!email.endsWith("@dlsu.edu.ph") || email.indexOf('@') == 0) {
                     // Ensure email ends with @dlsu.edu.ph and has characters before '@'

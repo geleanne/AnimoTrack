@@ -61,29 +61,7 @@ public class LoginPage extends AppCompatActivity {
                 String email = emailField.getText().toString().trim();
                 String password = passwordField.getText().toString().trim();
 
-                if (email.equals("admin") && password.equals("123")) {
-                    // Admin login bypass
-                    db.collection("AnimoTrackUsers")
-                            .document("admins") // Admin's Firestore ID
-                            .get()
-                            .addOnSuccessListener(documentSnapshot -> {
-                                if (documentSnapshot.exists()) {
-                                    String fullName = documentSnapshot.getString("name");
-                                    if (fullName != null && !fullName.isEmpty()) {
-                                        Toast.makeText(LoginPage.this, "Welcome, " + fullName + "!", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(LoginPage.this, MainActivity.class);
-                                        intent.putExtra("fullName", fullName);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                } else {
-                                    Toast.makeText(LoginPage.this, "Admin data not found.", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(LoginPage.this, "Error fetching admin data.", Toast.LENGTH_SHORT).show();
-                            });
-                } else if (email.isEmpty() || password.isEmpty()) {
+                if (email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(LoginPage.this, "Please enter your email and password", Toast.LENGTH_SHORT).show();
                 } else if (!email.endsWith("@dlsu.edu.ph") || email.indexOf('@') == 0) {
                     Toast.makeText(LoginPage.this, "Please use a valid DLSU email address", Toast.LENGTH_SHORT).show();

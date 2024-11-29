@@ -82,34 +82,9 @@ public class RegistrationEventPage extends AppCompatActivity {
             bookmarkBtn.setImageResource(R.drawable.unshaded_bookmark2);
         }
 
-//        // Set up the initial button state
-//        updateBookmarkButton(bookmarkButton, currentEvent);
-//
-//        bookmarkBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            DataGenerator.toggleBookmark(currentEvent);
-//            updateBookmarkButton(bookmarkButton, currentEvent);
-//
-//                if (currentEvent.isBookmarked()) {
-//                    Toast.makeText(RegistrationEventPage.this, "Event added to bookmarks!", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Toast.makeText(RegistrationEventPage.this, "Event removed from bookmarks!", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-
-
         bookmarkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // add the event to the bookmarks list
-//                BookmarkEvent bookmarkEvent = new BookmarkEvent(new Event(eventImageId, eventName), eventDate, eventVenue, eventFacilitator, eventDescription, clickedFavorite);
-//                BookmarkPage.bookmarkEvents.add(bookmarkEvent);
-
-//                // navigate to the bookmarks page
-//                Intent intent = new Intent(EventsRegistrationPage.this, BookmarkPage.class);
-//                startActivity(intent);
 
                 isBookmarked = !isBookmarked;
 
@@ -176,26 +151,4 @@ public class RegistrationEventPage extends AppCompatActivity {
             }
         });
     }
-
-
-//    private void updateBookmarkButton(ImageButton bookmarkButton, UpcomingEvent event) {
-//        BreakIterator button = null;
-//        if (event.isBookmarked()) {
-//            button.setText("Remove Bookmark");  // Update UI to show "unbookmark"
-//        } else {
-//            button.setText("Bookmark");  // Update UI to show "bookmark"
-//        }
-//    }
-
-//    public void clickBookmark(Event event)  {
-//        if (event.isBookmarked()) {
-//            event.setBookmarked(false);
-//            BookmarkPage.bookmarkEvents.remove(new BookmarkEvent(event, "date", "venue", "facilitator", "description", false));
-//        } else {
-//            event.setBookmarked(true);
-//            BookmarkPage.bookmarkEvents.add(new BookmarkEvent(event, "date", "venue", "facilitator", "description", true));
-//        }
-//    }
-
-
 }

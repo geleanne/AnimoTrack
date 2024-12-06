@@ -130,7 +130,7 @@ public class CreatedEventPage extends AppCompatActivity {
                             if (eventName != null && eventDate != null && eventVenue != null) {
                                 UpcomingEvent event = new UpcomingEvent(
                                         new Event(eventImageId, eventName, "General"),
-                                        eventDate, eventVenue, eventFacilitator, eventDescription, isBookmarked
+                                        eventDate, eventVenue, "Unknown College", eventFacilitator, eventDescription, isBookmarked
                                 );
                                 createdEventsList.add(event);
                             } else {

@@ -29,6 +29,7 @@ public class RegistrationEventPage extends AppCompatActivity {
     private TextView eventDateTextView;
     private TextView eventVenueTextView;
     private TextView eventFacilitatorTextView;
+    TextView eventCollegeTextView;
     private TextView eventDescriptionTextView;
     private ImageView eventImageView;
     private boolean isBookmarked = false;
@@ -59,10 +60,11 @@ public class RegistrationEventPage extends AppCompatActivity {
         joinedButton = findViewById(R.id.joinButton);
 
         // Initialize views
-        eventNameTextView = findViewById(R.id.event_name); // Adjust with actual TextView ID
-        eventDateTextView = findViewById(R.id.event_date); // Adjust with actual TextView ID
-        eventVenueTextView = findViewById(R.id.event_venue); // Adjust with actual TextView ID
-        eventImageView = findViewById(R.id.event_image); // Adjust with actual ImageView ID
+        eventNameTextView = findViewById(R.id.event_name);
+        eventDateTextView = findViewById(R.id.event_date);
+        eventVenueTextView = findViewById(R.id.event_venue);
+        eventCollegeTextView = findViewById(R.id.event_college);
+        eventImageView = findViewById(R.id.event_image);
         eventFacilitatorTextView = findViewById(R.id.event_facilitator);
         eventDescriptionTextView = findViewById(R.id.event_description);
 
@@ -72,15 +74,30 @@ public class RegistrationEventPage extends AppCompatActivity {
         String eventVenue = getIntent().getStringExtra("event_venue");
         String eventFacilitator = getIntent().getStringExtra("event_facilitator");
         String eventDescription = getIntent().getStringExtra("event_description");
+        String eventCollegeText = getIntent().getStringExtra("event_college");
         int eventImageId = getIntent().getIntExtra("event_image", R.drawable.event1);
 
         // Set the data to the TextViews
         eventNameTextView.setText(eventName);
         eventDateTextView.setText(eventDate);
         eventVenueTextView.setText(eventVenue);
-        eventFacilitatorTextView.setText(eventFacilitator);
+        eventCollegeTextView.setText(eventCollegeText);
         eventDescriptionTextView.setText(eventDescription);
         eventImageView.setImageResource(eventImageId);
+
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("AnimoTrackEvents").document(eventName)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String eventCollege = documentSnapshot.getString("collegeDept");
+                        eventCollegeTextView.setText(eventCollege != null ? eventCollege : "Unknown College");
+                    } else {
+                        eventCollegeTextView.setText("Event not found");
+                    }
+                })
+                .addOnFailureListener(e -> Log.e("Firestore", "Error fetching event: ", e));
 
         // Check if the event is already bookmarked
         isBookmarked = false; // Reset the status before checking

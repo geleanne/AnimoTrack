@@ -9,15 +9,6 @@ public class UpcomingEvent {
     private String eventDescription;
     private boolean isBookmarked;
 
-    public UpcomingEvent(Event event, String eventDate, String eventVenue, String eventFacilitator, String eventDescription, boolean isBookmarked) {
-        this.event = event;
-        this.eventDate = eventDate;
-        this.eventVenue = eventVenue;
-        this.eventFacilitator = eventFacilitator;
-        this.eventDescription = eventDescription;
-        this.isBookmarked = isBookmarked;
-    }
-
     public UpcomingEvent(Event event, String eventDate, String eventVenue, String eventCollege, String eventFacilitator, String eventDescription, boolean isBookmarked) {
         this.event = event;
         this.eventDate = eventDate;

@@ -37,15 +37,11 @@ public class Event {
         return this.name;
     }
 
-//    public String getDate() {
-//        return this.date;
-//    }
-
     public String getCategory() {
         return this.category;
     }
 
-    public String getCollegeDept() {
+    public String getEventCollege() {
         return this.collegeDept;
     }
 }

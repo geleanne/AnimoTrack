@@ -21,10 +21,10 @@ public class UpcomingEventExtViewHolder extends RecyclerView.ViewHolder {
         eventLocation = itemView.findViewById(R.id.eventLocation);
     }
 
-    public void bindData(UpcomingEvent event) {
-        imageView.setImageResource(event.getEventTitle().getImageId());
-        eventTitle.setText(event.getEventTitle().getName());
-        eventDate.setText(event.getEventDate());
-        eventLocation.setText(event.getEventVenue());
-    }
+//    public void bindData(UpcomingEvent event) {
+//        imageView.setImageResource(event.getEventTitle().getImageId());
+//        eventTitle.setText(event.getEventTitle().getName());
+//        eventDate.setText(event.getEventDate());
+//        eventLocation.setText(event.getEventVenue());
+//    }
 }

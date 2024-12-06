@@ -58,9 +58,4 @@ public class UpcomingEventExtAdapter extends RecyclerView.Adapter<UpcomingEventE
     public int getItemCount() {
         return events.size();
     }
-
-    public void updateData(ArrayList<UpcomingEvent> filteredEvents) {
-        this.events = filteredEvents;
-        notifyDataSetChanged();
-    }
 }

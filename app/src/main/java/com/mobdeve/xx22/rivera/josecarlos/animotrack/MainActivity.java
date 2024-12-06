@@ -51,9 +51,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // Initialize FirebaseAuth and Firestore
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+        // Call saveEventsToFirestore to save events to Firestore when the app starts
+        DataGenerator dataGenerator = new DataGenerator();
+        dataGenerator.saveEventsToFirestore();
 
         recyclerViewUpcomingEvents = findViewById(R.id.recyclerViewUpcomingEvents);
 

@@ -7,13 +7,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class BookmarkEventViewHolder extends RecyclerView.ViewHolder {
+public class JoinedEventViewHolder extends RecyclerView.ViewHolder {
     ImageView imageView;
     TextView eventTitle;
     TextView eventDate;
     TextView eventLocation;
 
-    public BookmarkEventViewHolder(@NonNull View itemView) {
+    public JoinedEventViewHolder(@NonNull View itemView) {
         super(itemView);
         imageView = itemView.findViewById(R.id.eventPoster);
         eventTitle = itemView.findViewById(R.id.eventTitle);

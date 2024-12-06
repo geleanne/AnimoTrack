@@ -9,21 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ProfilePage extends AppCompatActivity {
+    ImageView eventsJoinedButton;
+    ImageView eventsBookmarkedButton;
     ImageButton profileButton;
     ImageButton bookmarkButton;
     ImageButton homeButton;
@@ -47,6 +42,8 @@ public class ProfilePage extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        eventsJoinedButton = findViewById(R.id.eventsJoinedCountView);
+        eventsBookmarkedButton = findViewById(R.id.eventsBookmarkedCountView);
         profileButton = findViewById(R.id.profileButton);
         bookmarkButton = findViewById(R.id.bookmarksButton);
         homeButton = findViewById(R.id.homeButton);
@@ -57,8 +54,6 @@ public class ProfilePage extends AppCompatActivity {
         fullNameTextView = findViewById(R.id.fullNameTextView);
         numberJoinedEvents = findViewById(R.id.numberJoinedEvents);
         numberBookmarkedEvents = findViewById(R.id.numberBookmarkedEvents);
-
-        int eventImageId = getIntent().getIntExtra("event_image", R.drawable.event1);
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -85,65 +80,22 @@ public class ProfilePage extends AppCompatActivity {
             numberBookmarkedEvents.setText("0");
         }
 
-        // if the user has any events joined by confirming it by clicking the rsvp button, display and update the numberJoinedEvents TextView accordingly
-
-
-//        MaterialCalendarView calendarView = findViewById(R.id.calendarView);
-//
-//        // Fetch decorated dates and event images from DataGenerator
-//        List<CalendarDay> decoratedDates = DataGenerator.getDecoratedDates();
-//        Map<CalendarDay, Integer> eventImages = DataGenerator.getEventImages();
-//
-//        // Apply decorators for each date with a corresponding image
-//        for (Map.Entry<CalendarDay, Integer> entry : eventImages.entrySet()) {
-//            calendarView.addDecorator(new EventImageDecorator(this, entry.getKey(), entry.getValue()));
-//        }
-//
-//        // Highlight the current date
-//        calendarView.setDateSelected(CalendarDay.today(), true);
-//        calendarView.setCurrentDate(CalendarDay.today());
-//        calendarView.setSelectedDate(CalendarDay.today());
-//
-//        // Set date selection behavior
-//        calendarView.setOnDateChangedListener((widget, date, selected) -> {
-//            if (decoratedDates.contains(date)) {
-//                Toast.makeText(this, "Event available on this date.", Toast.LENGTH_SHORT).show();
-//            } else {
-//                Toast.makeText(this, "No events scheduled for this day.", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-
-        MaterialCalendarView calendarView = findViewById(R.id.calendarView);
-
-        // Fetch decorated dates and event images from DataGenerator
-        List<CalendarDay> decoratedDates = DataGenerator.getDecoratedDates();
-//        ArrayList<Event> events = DataGenerator.generateCalendarEventData();
-        List<Integer> eventDrawables = DataGenerator.getEventDrawables();
-
-        // Loop through the event drawables and decorate the calendar
-        for (int drawable : eventDrawables) {
-            // get the respective drawable and add it to the calendar
-            calendarView.addDecorator(new EventImageDecorator(this, decoratedDates, drawable));
+        // if the user has joined events, display and update the numberJoinedEvents TextView accordingly
+        if (!JoinedEventPage.joinedEvents.isEmpty()) {
+            numberJoinedEvents.setText(String.valueOf(JoinedEventPage.joinedEvents.size()));
+        } else {
+            numberJoinedEvents.setText("0");
         }
 
-        // highlight the current date on the calendar
-        calendarView.setDateSelected(CalendarDay.today(), true);
-        calendarView.setCurrentDate(CalendarDay.today());
-        calendarView.setSelectedDate(CalendarDay.today());
-
-        calendarView.setOnDateChangedListener((widget, date, selected) -> {
-            // Do something when a date is selected
-            // if the date has an event scheduled, go to the respective event registration page
-            // else, display a message that there are no events scheduled for that day
-            if (decoratedDates.contains(date)) {
-                Intent intent = new Intent(ProfilePage.this, RegistrationEvent.class);
-                startActivity(intent);
-            } else {
-                Toast.makeText(ProfilePage.this, "No events scheduled for this day.", Toast.LENGTH_SHORT).show();
-            }
+        eventsJoinedButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfilePage.this, JoinedEventPage.class);
+            startActivity(intent); // Start the JoinedEvent activity
         });
 
+        eventsBookmarkedButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfilePage.this, BookmarkPage.class);
+            startActivity(intent); // Start the Bookmark activity
+        });
 
         deleteAccButton.setOnClickListener(v -> {
             if (currentUser != null) {
@@ -152,11 +104,9 @@ public class ProfilePage extends AppCompatActivity {
                         .setMessage("Are you sure you want to delete your account? This action cannot be undone.")
                         .setCancelable(false)
                         .setPositiveButton("Delete Account", (dialog, id) -> {
-                            // Step 1: Delete user data from Firestore
                             db.collection("AnimoTrackUsers").document(currentUser.getUid())
                                     .delete()
                                     .addOnSuccessListener(aVoid -> {
-                                        // Step 2: Delete user from Firebase Authentication
                                         currentUser.delete()
                                                 .addOnSuccessListener(aVoid1 -> {
                                                     Toast.makeText(ProfilePage.this, "Account deleted successfully.", Toast.LENGTH_SHORT).show();
@@ -185,16 +135,25 @@ public class ProfilePage extends AppCompatActivity {
                     .setMessage("Are you sure you want to log out?")
                     .setCancelable(false)
                     .setPositiveButton("Log Out", (dialog, id) -> {
-                        Intent intent = new Intent(ProfilePage.this, HomepageActivity.class);
+                        // Sign out the user from Firebase
+                        FirebaseAuth.getInstance().signOut();
+
+                        // Clear locally stored data
+                        BookmarkPage.bookmarkEvents.clear(); // Clear bookmarked events
+                        JoinedEventPage.joinedEvents.clear(); // Clear joined events
+
+                        // Redirect to the login page
+                        Intent intent = new Intent(ProfilePage.this, LoginPage.class);
                         startActivity(intent);
-                        finish();
+                        finish(); // Close the current activity
                     })
                     .setNegativeButton("Cancel", null)
                     .show();
         });
 
+
         eventsButton.setOnClickListener(view -> {
-            Intent intent = new Intent(ProfilePage.this, CreatedEvent.class);
+            Intent intent = new Intent(ProfilePage.this, CreatedEventPage.class);
             startActivity(intent); // Start the CreatedEvent activity
         });
 

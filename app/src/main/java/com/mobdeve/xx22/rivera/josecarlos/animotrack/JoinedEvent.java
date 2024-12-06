@@ -1,20 +1,20 @@
 package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
-public class BookmarkEvent {
+public class JoinedEvent {
     private Event event;
     private String eventDate;
     private String eventVenue;
     private String eventFacilitator;
     private String eventDescription;
-    private boolean isBookmarked;
+    private boolean isJoined;
 
-    public BookmarkEvent(Event event, String eventDate, String eventVenue, String eventFacilitator, String eventDescription, boolean isBookmarked) {
+    public JoinedEvent(Event event, String eventDate, String eventVenue, String eventFacilitator, String eventDescription, boolean isJoined) {
         this.event = event;
         this.eventDate = eventDate;
         this.eventVenue = eventVenue;
         this.eventFacilitator = eventFacilitator;
         this.eventDescription = eventDescription;
-        this.isBookmarked = isBookmarked;
+        this.isJoined = isJoined;
     }
 
     public Event getEventTitle() {
@@ -37,7 +37,7 @@ public class BookmarkEvent {
         return this.eventDescription;
     }
 
-    public boolean isBookmarked() {
-        return isBookmarked;  // Getter for the favorite status
+    public boolean isJoined() {
+        return isJoined;  // Getter for the joined status
     }
 }

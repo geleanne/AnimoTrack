@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class UpcomingEventExtAdapter extends RecyclerView.Adapter<UpcomingEventExtViewHolder> {
     private final Context context;
-    private final ArrayList<UpcomingEvent> events;
+    private ArrayList<UpcomingEvent> events;
 
     public UpcomingEventExtAdapter(Context context, ArrayList<UpcomingEvent> events) {
         this.context = context;
@@ -57,5 +57,10 @@ public class UpcomingEventExtAdapter extends RecyclerView.Adapter<UpcomingEventE
     @Override
     public int getItemCount() {
         return events.size();
+    }
+
+    public void updateData(ArrayList<UpcomingEvent> filteredEvents) {
+        this.events = filteredEvents;
+        notifyDataSetChanged();
     }
 }

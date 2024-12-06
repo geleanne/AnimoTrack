@@ -81,6 +81,7 @@ public class CreateEventActivity extends AppCompatActivity {
             String eventFacilitator = eventFacilitatorEditText.getText().toString().trim();
             String eventDescription = eventDescriptionEditText.getText().toString().trim();
             String eventCategory = eventCategorySpinner.getSelectedItem().toString();
+            Boolean isBookmarked = false;
 
             // Validate inputs
             if (eventName.isEmpty() || eventVenue.isEmpty() || eventDate.isEmpty() || eventFacilitator.isEmpty() || eventDescription.isEmpty()) {
@@ -114,7 +115,8 @@ public class CreateEventActivity extends AppCompatActivity {
             eventData.put("eventFacilitator", eventFacilitator);
             eventData.put("eventName", eventName);
             eventData.put("eventVenue", eventVenue);
-            eventData.put("eventDrawableId", R.drawable.calendar_event1);
+            eventData.put("isBookmarked", isBookmarked);
+            eventData.put("eventDrawableId", R.drawable.default_poster_squared); // Default image
 
             // Add to Firestore
             eventsCollection.add(eventData)

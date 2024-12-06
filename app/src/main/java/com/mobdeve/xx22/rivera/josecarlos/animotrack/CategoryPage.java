@@ -2,7 +2,6 @@ package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 
 
 public class CategoryPage  extends AppCompatActivity {
-    private ImageButton backArrowButton, profileButton, bookmarkButton, homeButton;
+    private ImageButton backArrowButton, profileButton, bookmarkButton, homeButton, eventsButton;
     private RecyclerView recyclerViewEventsOfSpecificCategory;
     private ImageView addEventButton;
 
@@ -35,6 +34,7 @@ public class CategoryPage  extends AppCompatActivity {
         bookmarkButton = findViewById(R.id.bookmarksButton);
         homeButton = findViewById(R.id.homeButton);
         addEventButton = findViewById(R.id.add_event_button);
+        eventsButton = findViewById(R.id.eventsButton);
         recyclerViewEventsOfSpecificCategory = findViewById(R.id.recyclerViewEventsOfSpecificCategory);
 
         // Retrieve category from intent
@@ -47,6 +47,12 @@ public class CategoryPage  extends AppCompatActivity {
         recyclerViewEventsOfSpecificCategory.setLayoutManager(new LinearLayoutManager(this));
 
         // Set OnClickListener for the buttons
+        eventsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(CategoryPage.this, CreatedEventPage.class);
+            intent.putExtra("fullName", fullName);
+            startActivity(intent); // Start the CreatedEvent activity
+        });
+
         addEventButton.setOnClickListener(v -> {
             Intent intent = new Intent(CategoryPage.this, CreateEventActivity.class);
             startActivity(intent); // Start the CreateEventActivity activity

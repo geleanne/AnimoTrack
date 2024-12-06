@@ -2,6 +2,7 @@ package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -10,8 +11,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
-import java.text.BreakIterator;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegistrationEventPage extends AppCompatActivity {
 
@@ -24,12 +32,18 @@ public class RegistrationEventPage extends AppCompatActivity {
     private TextView eventDescriptionTextView;
     private ImageView eventImageView;
     private boolean isBookmarked = false;
+    private boolean isJoined = false;
+
+    private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
 
     ImageButton bookmarkBtn;
     ImageButton backArrow; // Declare backArrow
     ImageButton profileButton; // Declare profileButton
     ImageButton bookmarkButton; // Declare bookmarkButton
     ImageButton homeButton; // Declare homeButton
+    ImageButton eventsButton;
+    Button joinedButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +55,8 @@ public class RegistrationEventPage extends AppCompatActivity {
         bookmarkButton = findViewById(R.id.bookmarksButton);
         homeButton = findViewById(R.id.homeButton);
         bookmarkBtn = findViewById(R.id.bookmarkBtn);
+        eventsButton = findViewById(R.id.eventsButton);
+        joinedButton = findViewById(R.id.joinButton);
 
         // Initialize views
         eventNameTextView = findViewById(R.id.event_name); // Adjust with actual TextView ID
@@ -68,7 +84,7 @@ public class RegistrationEventPage extends AppCompatActivity {
 
         // Check if the event is already bookmarked
         isBookmarked = false; // Reset the status before checking
-        for (UpcomingEvent bookmarkedEvent : BookmarkPage.bookmarkEvents) {
+        for (BookmarkEvent bookmarkedEvent : BookmarkPage.bookmarkEvents) {
             if (bookmarkedEvent.getEventTitle().getName().equals(eventName)) {
                 isBookmarked = true;
                 break;
@@ -85,45 +101,170 @@ public class RegistrationEventPage extends AppCompatActivity {
         bookmarkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 isBookmarked = !isBookmarked;
 
-                if (isBookmarked) {
-                    bookmarkBtn.setImageResource(R.drawable.shaded_bookmark2);
-                    Toast.makeText(RegistrationEventPage.this, "Event added to bookmarks!", Toast.LENGTH_SHORT).show();
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-                    UpcomingEvent newEvent = new UpcomingEvent(
-                            new Event(eventImageId, eventName),
-                            eventDate,
-                            eventVenue,
-                            eventFacilitator,
-                            eventDescription,
-                            true
-                    );
+                if (currentUser != null) {
+                    String userId = currentUser.getUid();
 
-                    if (!BookmarkPage.bookmarkEvents.contains(newEvent)) {
-                        BookmarkPage.bookmarkEvents.add(newEvent);
-                    }
-                } else {
-                    bookmarkBtn.setImageResource(R.drawable.unshaded_bookmark2);
-                    Toast.makeText(RegistrationEventPage.this, "Event removed from bookmarks!", Toast.LENGTH_SHORT).show();
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    CollectionReference bookmarkedEventsCollection = db.collection("BookmarkedEvents");
 
-                    // Remove the event from the shared list
-                    for (int i = 0; i < BookmarkPage.bookmarkEvents.size(); i++) {
-                        if (BookmarkPage.bookmarkEvents.get(i).getEventTitle().getName().equals(eventName)) {
-                            BookmarkPage.bookmarkEvents.remove(i);
-                            break;
+                    if (isBookmarked) {
+                        bookmarkBtn.setImageResource(R.drawable.shaded_bookmark2);
+                        Toast.makeText(RegistrationEventPage.this, "Event added to bookmarks!", Toast.LENGTH_SHORT).show();
+
+                        BookmarkEvent newEvent = new BookmarkEvent(
+                                new Event(eventImageId, eventName),
+                                eventDate,
+                                eventVenue,
+                                eventFacilitator,
+                                eventDescription,
+                                true
+                        );
+
+                        if (!BookmarkPage.bookmarkEvents.contains(newEvent)) {
+                            BookmarkPage.bookmarkEvents.add(newEvent);
+
+                            // Add the event to Firestore
+                            Map<String, Object> eventData = new HashMap<>();
+                            eventData.put("userId", userId);
+                            eventData.put("eventImageId", eventImageId);
+                            eventData.put("eventName", eventName);
+                            eventData.put("eventDate", eventDate);
+                            eventData.put("eventVenue", eventVenue);
+                            eventData.put("eventFacilitator", eventFacilitator);
+                            eventData.put("eventDescription", eventDescription);
+                            eventData.put("isBookmarked", true);
+
+                            bookmarkedEventsCollection.document(eventName)
+                                    .set(eventData)
+                                    .addOnSuccessListener(aVoid -> Log.d("Firestore", "Event successfully bookmarked."))
+                                    .addOnFailureListener(e -> Log.e("Firestore", "Error bookmarking event: ", e));
                         }
+                    } else {
+                        bookmarkBtn.setImageResource(R.drawable.unshaded_bookmark2);
+                        Toast.makeText(RegistrationEventPage.this, "Event removed from bookmarks!", Toast.LENGTH_SHORT).show();
+
+                        // Remove the event from the shared list
+                        for (int i = 0; i < BookmarkPage.bookmarkEvents.size(); i++) {
+                            if (BookmarkPage.bookmarkEvents.get(i).getEventTitle().getName().equals(eventName)) {
+                                BookmarkPage.bookmarkEvents.remove(i);
+                                break;
+                            }
+                        }
+
+                        // Remove the event from Firestore
+                        bookmarkedEventsCollection.document(eventName)
+                                .delete()
+                                .addOnSuccessListener(aVoid -> Log.d("Firestore", "Event successfully removed from bookmarks."))
+                                .addOnFailureListener(e -> Log.e("Firestore", "Error removing bookmark: ", e));
                     }
                 }
             }
         });
 
+        // Check if the event is already joined
+        isJoined = false; // Reset the status before checking
+        for (JoinedEvent joinedEvent : JoinedEventPage.joinedEvents) {
+            if (joinedEvent.getEventTitle().getName().equals(eventName)) {
+                isJoined = true;
+                break;
+            }
+        }
+
+        // Update joined button state
+        if (isJoined) {
+            joinedButton.setText("Joined");
+            joinedButton.setBackgroundColor(ContextCompat.getColor(RegistrationEventPage.this, R.color.gray));
+        } else {
+            joinedButton.setText("Join");
+            joinedButton.setBackgroundColor(ContextCompat.getColor(RegistrationEventPage.this, R.color.green));
+        }
+
+        joinedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // if it is clicked, it will show a toast message and changed the text of the button to RSVP'd
+                isJoined = !isJoined;
+
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+                if (currentUser != null) {
+                    String userId = currentUser.getUid();
+
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    CollectionReference joinedEventsCollection = db.collection("JoinedEvents");
+
+                    if (isJoined) {
+                        joinedButton.setText("Joined");
+                        joinedButton.setBackgroundColor(ContextCompat.getColor(RegistrationEventPage.this, R.color.gray));
+                        Toast.makeText(RegistrationEventPage.this, "Joining event", Toast.LENGTH_SHORT).show();
+
+                        JoinedEvent newEvent = new JoinedEvent(
+                                new Event(eventImageId, eventName),
+                                eventDate,
+                                eventVenue,
+                                eventFacilitator,
+                                eventDescription,
+                                true
+                        );
+
+                        if (!JoinedEventPage.joinedEvents.contains(newEvent)) {
+                            JoinedEventPage.joinedEvents.add(newEvent);
+
+                            // Add the event to Firestore
+                            Map<String, Object> eventData = new HashMap<>();
+                            eventData.put("userId", userId);
+                            eventData.put("eventImageId", eventImageId);
+                            eventData.put("eventName", eventName);
+                            eventData.put("eventDate", eventDate);
+                            eventData.put("eventVenue", eventVenue);
+                            eventData.put("eventFacilitator", eventFacilitator);
+                            eventData.put("eventDescription", eventDescription);
+                            eventData.put("isJoined", true);
+
+                            joinedEventsCollection.document(eventName)
+                                    .set(eventData)
+                                    .addOnSuccessListener(aVoid -> Log.d("Firestore", "Event successfully joined."))
+                                    .addOnFailureListener(e -> Log.e("Firestore", "Error joining event: ", e));
+                        }
+                    } else {
+                        joinedButton.setText("Join");
+                        joinedButton.setBackgroundColor(ContextCompat.getColor(RegistrationEventPage.this, R.color.green));
+                        Toast.makeText(RegistrationEventPage.this, "Not joining event", Toast.LENGTH_SHORT).show();
+
+                        // Remove the event from the shared list
+                        for (int i = 0; i < JoinedEventPage.joinedEvents.size(); i++) {
+                            if (JoinedEventPage.joinedEvents.get(i).getEventTitle().getName().equals(eventName)) {
+                                JoinedEventPage.joinedEvents.remove(i);
+                                break;
+                            }
+                        }
+
+                        // Remove the event from Firestore
+                        joinedEventsCollection.document(eventName)
+                                .delete()
+                                .addOnSuccessListener(aVoid -> Log.d("Firestore", "Event successfully removed from joined events."))
+                                .addOnFailureListener(e -> Log.e("Firestore", "Error removing joined event: ", e));
+                    }
+                }
+            }
+        });
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish(); // Close current activity and return to the previous one
+            }
+        });
+
+        eventsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegistrationEventPage.this, CreatedEventPage.class);
+                startActivity(intent); // Start the CreatedEventsPage activity
             }
         });
 

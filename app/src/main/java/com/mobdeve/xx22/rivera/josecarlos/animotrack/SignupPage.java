@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -111,6 +112,38 @@ public class SignupPage extends AppCompatActivity {
                                                                                 // Successfully saved user data to Firestore
                                                                                 Log.d("SignupPage", "User data saved to Firestore!");
                                                                                 Toast.makeText(SignupPage.this, "User data saved to Firestore User UID: " + user.getUid(), Toast.LENGTH_SHORT).show();
+
+
+                                                                                // After successful sign-up, retrieve FCM token
+                                                                                FirebaseMessaging.getInstance().getToken()
+                                                                                        .addOnCompleteListener(new OnCompleteListener<String>() {
+                                                                                            @Override
+                                                                                            public void onComplete(@NonNull Task<String> task) {
+                                                                                                if (!task.isSuccessful()) {
+                                                                                                    Log.w("SignupPage", "Fetching FCM registration token failed", task.getException());
+                                                                                                    return;
+                                                                                                }
+
+                                                                                                // Get new FCM registration token
+                                                                                                String token = task.getResult();
+                                                                                                FirebaseUser user = mAuth.getCurrentUser();
+                                                                                                if (user != null) {
+                                                                                                    db.collection("AnimoTrackUsers")
+                                                                                                            .document(user.getUid())
+                                                                                                            .update("fcm_token", token)
+                                                                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                                @Override
+                                                                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                    if (task.isSuccessful()) {
+                                                                                                                        Toast.makeText(SignupPage.this, "FCM token saved", Toast.LENGTH_SHORT).show();
+                                                                                                                    } else {
+                                                                                                                        Toast.makeText(SignupPage.this, "Error saving FCM token", Toast.LENGTH_SHORT).show();
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            });
+                                                                                                }
+                                                                                            }
+                                                                                        });
 
                                                                                 // Redirect to LoginPage
                                                                                 Intent intent = new Intent(SignupPage.this, LoginPage.class);

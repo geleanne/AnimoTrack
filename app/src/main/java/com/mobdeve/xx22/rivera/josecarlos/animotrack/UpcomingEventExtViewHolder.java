@@ -19,7 +19,12 @@ public class UpcomingEventExtViewHolder extends RecyclerView.ViewHolder {
         eventTitle = itemView.findViewById(R.id.eventTitle);
         eventDate = itemView.findViewById(R.id.eventDate);
         eventLocation = itemView.findViewById(R.id.eventLocation);
+    }
 
-
+    public void bindData(UpcomingEvent event) {
+        imageView.setImageResource(event.getEventTitle().getImageId());
+        eventTitle.setText(event.getEventTitle().getName());
+        eventDate.setText(event.getEventDate());
+        eventLocation.setText(event.getEventVenue());
     }
 }

@@ -10,18 +10,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class BookmarkPage extends AppCompatActivity {
+public class JoinedEventPage extends AppCompatActivity {
 
-    public static ArrayList<BookmarkEvent> bookmarkEvents = new ArrayList<>();
-    private RecyclerView recyclerViewBookmarkEvents;
-    private BookmarkEventAdapter adapter;
+    public static ArrayList<JoinedEvent> joinedEvents = new ArrayList<>();
+    private RecyclerView recyclerViewJoinedEvents;
+    private JoinedEventAdapter adapter;
 
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
@@ -33,20 +36,21 @@ public class BookmarkPage extends AppCompatActivity {
     ImageButton homeButton; // Declare homeButton
     ImageView addEventButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.bookmark_events);
+        setContentView(R.layout.joined_events);
 
-        recyclerViewBookmarkEvents = findViewById(R.id.recycler_view_bookmarked_events);
-        recyclerViewBookmarkEvents.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewJoinedEvents = findViewById(R.id.recycler_view_joined_events);
+        recyclerViewJoinedEvents.setLayoutManager(new LinearLayoutManager(this));
 
         // Initialize the adapter
-        adapter = new BookmarkEventAdapter(this, bookmarkEvents);
-        recyclerViewBookmarkEvents.setAdapter(adapter);
+        adapter = new JoinedEventAdapter(this, joinedEvents);
+        recyclerViewJoinedEvents.setAdapter(adapter);
 
-        // Fetch bookmarked events from Firestore
-        fetchBookmarkedEvents();
+        // Fetch joined events from Firestore
+        fetchJoinedEvents();
 
         backArrow = findViewById(R.id.back_arrow);
         profileButton = findViewById(R.id.profileButton);
@@ -58,32 +62,32 @@ public class BookmarkPage extends AppCompatActivity {
         backArrow.setOnClickListener(v -> finish());
 
         profileButton.setOnClickListener(v -> {
-            Intent intent = new Intent(BookmarkPage.this, ProfilePage.class);
+            Intent intent = new Intent(JoinedEventPage.this, ProfilePage.class);
             startActivity(intent);
         });
 
         eventsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(BookmarkPage.this, CreatedEventPage.class);
+            Intent intent = new Intent(JoinedEventPage.this, CreatedEventPage.class);
             startActivity(intent);
         });
 
         bookmarkButton.setOnClickListener(v -> {
-            Intent intent = new Intent(BookmarkPage.this, BookmarkPage.class);
+            Intent intent = new Intent(JoinedEventPage.this, BookmarkPage.class);
             startActivity(intent);
         });
 
         homeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(BookmarkPage.this, MainActivity.class);
+            Intent intent = new Intent(JoinedEventPage.this, MainActivity.class);
             startActivity(intent);
         });
 
         addEventButton.setOnClickListener(v -> {
-            Intent intent = new Intent(BookmarkPage.this, CreateEventActivity.class);
+            Intent intent = new Intent(JoinedEventPage.this, CreateEventActivity.class);
             startActivity(intent);
         });
     }
 
-    private void fetchBookmarkedEvents() {
+    private void fetchJoinedEvents() {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
@@ -91,16 +95,15 @@ public class BookmarkPage extends AppCompatActivity {
             String userId = currentUser.getUid();
 
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-            db.collection("BookmarkedEvents")
+            db.collection("JoinedEvents")
                     .whereEqualTo("userId", userId)
                     .get()
                     .addOnSuccessListener(queryDocumentSnapshots -> {
-                        bookmarkEvents.clear(); // Clear old data
+                        joinedEvents.clear(); // Clear old data
                         for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                            BookmarkEvent event = new BookmarkEvent(
+                            JoinedEvent event = new JoinedEvent(
                                     new Event(
-                                            doc.getLong("eventImageId").intValue(),
+                                            Objects.requireNonNull(doc.getLong("eventImageId")).intValue(),
                                             doc.getString("eventName"),
                                             doc.getString("category")
                                     ),
@@ -108,26 +111,26 @@ public class BookmarkPage extends AppCompatActivity {
                                     doc.getString("eventVenue"),
                                     doc.getString("eventFacilitator"),
                                     doc.getString("eventDescription"),
-                                    doc.getBoolean("isBookmarked")
+                                    doc.getBoolean("isJoined")
                             );
-                            bookmarkEvents.add(event);
+                            joinedEvents.add(event);
                         }
-                        adapter.notifyDataSetChanged(); // Notify adapter of new data
+                        adapter.notifyDataSetChanged();
+                        // Notify adapter of new data
                     })
                     .addOnFailureListener(e -> {
                         // Handle the error appropriately
-                        Log.e("Firestore", "Error loading bookmarks", e);
+                        Log.e("Firestore", "Error loading joined events", e);
                     });
         }
     }
-
 
     @Override
     protected void onResume() {
         super.onResume();
         if (adapter != null) {
-            adapter.notifyDataSetChanged(); // Refresh the list
+//            fetchJoinedEvents();
+            adapter.notifyDataSetChanged();
         }
     }
 }
-

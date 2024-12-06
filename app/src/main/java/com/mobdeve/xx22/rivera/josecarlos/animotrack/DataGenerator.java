@@ -1,93 +1,33 @@
 package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class DataGenerator {
-    private final static Event event1 = new Event(R.drawable.event1, "UAAP SEASON 87 MENS VOLLEYBALL", "Sports"); // Sports
-    private final static Event event2 = new Event(R.drawable.event2, "In Sync: Group Studies", "Academics"); // Academic
-    private final static Event event3 = new Event(R.drawable.event3, "LLM Tuning Methods for Specific Tasks.", "Seminars"); // Seminar
-    private final static Event event4 = new Event(R.drawable.event4, "Annual Recruitment Week 2024: The Archer Calls", "Organizations"); //
-    private final static Event event5 = new Event(R.drawable.event5, "DLSU Chorale Annual Recruitment Week", "Cultural");
-    private final static Event event6 = new Event(R.drawable.event6, "International Lasallian Days of Peace", "Cultural");
-    private final static Event event7 = new Event(R.drawable.event7, "Banner Making Contest", "Sports");
-    private final static Event event8 = new Event(R.drawable.event8, "Animo Christmas Concert", "Cultural");
-    private final static Event event9 = new Event(R.drawable.event9, "Arts, Crafts & Powerpuffs!", "Cultural");
-    private final static Event event10 = new Event(R.drawable.event10, "EmoSyonaryo Escape Room", "Organizations");
-    private final static Event event11 = new Event(R.drawable.event11, "Catch That Merch", "Organizations");
-    private final static Event event12 = new Event(R.drawable.event12, "Cyber Leap: InnovateTech Hub", "Academics");
+    private final static Event event1 = new Event(R.drawable.event1, "UAAP SEASON 87 MENS VOLLEYBALL", "Sports", "All"); // Sports
+    private final static Event event2 = new Event(R.drawable.event2, "In Sync: Group Studies", "Academics", "CCS"); // Academic
+    private final static Event event3 = new Event(R.drawable.event3, "LLM Tuning Methods for Specific Tasks.", "Seminars", "CCS"); // Seminar
+    private final static Event event4 = new Event(R.drawable.event4, "Annual Recruitment Week 2024: The Archer Calls", "Organizations", "All"); //
+    private final static Event event5 = new Event(R.drawable.event5, "DLSU Chorale Annual Recruitment Week", "Cultural", "All");
+    private final static Event event6 = new Event(R.drawable.event6, "International Lasallian Days of Peace", "Cultural", "CLA");
+    private final static Event event7 = new Event(R.drawable.event7, "Banner Making Contest", "Sports", "All");
+    private final static Event event8 = new Event(R.drawable.event8, "Animo Christmas Concert", "Cultural", "All");
+    private final static Event event9 = new Event(R.drawable.event9, "Arts, Crafts & Powerpuffs!", "Cultural", "COB");
+    private final static Event event10 = new Event(R.drawable.event10, "EmoSyonaryo Escape Room", "Organizations", "CLA" );
+    private final static Event event11 = new Event(R.drawable.event11, "Catch That Merch", "Organizations", "CCS");
+    private final static Event event12 = new Event(R.drawable.event12, "Cyber Leap: InnovateTech Hub", "Academics", "CCS");
 
-//    public static ArrayList<Event> generateCalendarEventData() {
-//        ArrayList<Event> tempList = new ArrayList<>();
-//
-//        tempList.add(new Event(event1.getName(), "October 26, 2024", event1.getImageId()));
-//        tempList.add(new Event(event2.getName(), "October 16, 2024", event2.getImageId()));
-//        tempList.add(new Event(event3.getName(), "October 26, 2024", event3.getImageId()));
-//        tempList.add(new Event(event4.getName(), "October 7, 2024", event4.getImageId()));
-//        tempList.add(new Event(event5.getName(), "September 16, 2024", event5.getImageId()));
-//        tempList.add(new Event(event6.getName(), "November 29, 2024", event6.getImageId()));
-//        tempList.add(new Event(event7.getName(), "November 20, 2024", event7.getImageId()));
-//        tempList.add(new Event(event7.getName(), "November 21, 2024", event7.getImageId()));
-//        tempList.add(new Event(event7.getName(), "November 22, 2024", event7.getImageId()));
-//        tempList.add(new Event(event7.getName(), "November 23, 2024", event7.getImageId()));
-//        tempList.add(new Event(event7.getName(), "November 24, 2024", event7.getImageId()));
-//        tempList.add(new Event(event7.getName(), "November 25, 2024", event7.getImageId()));
-//        tempList.add(new Event(event8.getName(), "November 27, 2024", event8.getImageId()));
-//        tempList.add(new Event(event9.getName(), "November 26, 2024", event9.getImageId()));
-//        tempList.add(new Event(event10.getName(), "November 18, 2024", event10.getImageId()));
-//        tempList.add(new Event(event10.getName(), "November 19, 2024", event10.getImageId()));
-//        tempList.add(new Event(event10.getName(), "November 20, 2024", event10.getImageId()));
-//        tempList.add(new Event(event11.getName(), "December 5, 2024", event11.getImageId()));
-//        tempList.add(new Event(event11.getName(), "December 15, 2024", event11.getImageId()));
-//        tempList.add(new Event(event12.getName(), "December 1, 2024", event12.getImageId()));
-//
-//        return tempList;
-//    }
-
-
-//    // Return a list of dates with events
-//    public static List<CalendarDay> getDecoratedDates() {
-//        List<CalendarDay> decoratedDates = new ArrayList<>();
-//        for (Event event : generateCalendarEventData()) {
-//            String[] dateParts = event.getDate().split(" ");
-//            CalendarDay day = CalendarDay.from(
-//                    Integer.parseInt(dateParts[2]),  // Year
-//                    monthToInt(dateParts[0]),      // Month
-//                    Integer.parseInt(dateParts[1]) // Day
-//            );
-//            decoratedDates.add(day);
-//        }
-//        return decoratedDates;
-//    }
-
-//    // Map dates to drawable IDs
-//    public static Map<CalendarDay, Integer> getEventImages() {
-//        Map<CalendarDay, Integer> eventImages = new HashMap<>();
-//        for (Event event : generateCalendarEventData()) {
-//            String[] dateParts = event.getDate().split(" ");
-//            CalendarDay day = CalendarDay.from(
-//                    Integer.parseInt(dateParts[2]),  // Year
-//                    monthToInt(dateParts[0]),      // Month
-//                    Integer.parseInt(dateParts[1]) // Day
-//            );
-//            eventImages.put(day, event.getImageId());
-//        }
-//        return eventImages;
-//    }
-
-//    // Convert month name to integer
-//    private static int monthToInt(String month) {
-//        List<String> months = Arrays.asList(
-//                "January", "February", "March", "April", "May", "June",
-//                "July", "August", "September", "October", "November", "December"
-//        );
-//        return months.indexOf(month) + 1;
-//    }
+//    private final static Event event1 = new Event(R.drawable.event1, "UAAP SEASON 87 MENS VOLLEYBALL"); // Sports
+//    private final static Event event2 = new Event(R.drawable.event2, "In Sync: Group Studies"); // Academic
+//    private final static Event event3 = new Event(R.drawable.event3, "LLM Tuning Methods for Specific Tasks."); // Seminar
+//    private final static Event event4 = new Event(R.drawable.event4, "Annual Recruitment Week 2024: The Archer Calls"); //
+//    private final static Event event5 = new Event(R.drawable.event5, "DLSU Chorale Annual Recruitment Week");
+//    private final static Event event6 = new Event(R.drawable.event6, "International Lasallian Days of Peace");
+//    private final static Event event7 = new Event(R.drawable.event7, "Banner Making Contest");
+//    private final static Event event8 = new Event(R.drawable.event8, "Animo Christmas Concert");
+//    private final static Event event9 = new Event(R.drawable.event9, "Arts, Crafts & Powerpuffs!");
+//    private final static Event event10 = new Event(R.drawable.event10, "EmoSyonaryo Escape Room");
+//    private final static Event event11 = new Event(R.drawable.event11, "Catch That Merch");
+//    private final static Event event12 = new Event(R.drawable.event12, "Cyber Leap: InnovateTech Hub");
 
     public static ArrayList<UpcomingEvent> generateUpcomingEventsData() {
         ArrayList<UpcomingEvent> tempList = new ArrayList<>();
@@ -138,47 +78,22 @@ public class DataGenerator {
         return filteredList;
     }
 
-    public static List<CalendarDay> getDecoratedDates() {
-        return Arrays.asList(
-                CalendarDay.from(2024, 10, 26),
-                CalendarDay.from(2024, 10, 16),
-                CalendarDay.from(2024, 10, 26),
-                CalendarDay.from(2024, 10, 7),
-                CalendarDay.from(2024, 9, 16),
-                CalendarDay.from(2024, 11, 29),
-                CalendarDay.from(2024, 11, 20),
-                CalendarDay.from(2024, 11, 21),
-                CalendarDay.from(2024, 11, 22),
-                CalendarDay.from(2024, 11, 23),
-                CalendarDay.from(2024, 11, 24),
-                CalendarDay.from(2024, 11, 25),
-                CalendarDay.from(2024, 11, 26),
-                CalendarDay.from(2024, 11, 27),
-                CalendarDay.from(2024, 12, 8),
-                CalendarDay.from(2024, 11, 26),
-                CalendarDay.from(2024, 11, 18),
-                CalendarDay.from(2024, 11, 19),
-                CalendarDay.from(2024, 11, 20),
-                CalendarDay.from(2024, 12, 5),
-                CalendarDay.from(2024, 12, 15),
-                CalendarDay.from(2024, 12, 1)
-        );
-    }
-
-    public static List<Integer> getEventDrawables() {
-        return Arrays.asList(
-                R.drawable.event1,
-                R.drawable.event2,
-                R.drawable.event3,
-                R.drawable.event4,
-                R.drawable.event5,
-                R.drawable.event6,
-                R.drawable.event7,
-                R.drawable.event8,
-                R.drawable.event9,
-                R.drawable.event10,
-                R.drawable.event11,
-                R.drawable.event12
-        );
-    }
+//    public static ArrayList<CollegeEvent> generateCollegeEventData() {
+//        ArrayList<CollegeEvent> tempList = new ArrayList<>();
+//
+//        tempList.add(new CollegeEvent("All", event1));
+//        tempList.add(new CollegeEvent("CCS", event2));
+//        tempList.add(new CollegeEvent("CCS", event3));
+//        tempList.add(new CollegeEvent("All", event4));
+//        tempList.add(new CollegeEvent("All", event5));
+//        tempList.add(new CollegeEvent("CLA", event6));
+//        tempList.add(new CollegeEvent("All", event7));
+//        tempList.add(new CollegeEvent("All", event8));
+//        tempList.add(new CollegeEvent("COB", event9));
+//        tempList.add(new CollegeEvent("CLA", event10));
+//        tempList.add(new CollegeEvent("CCS", event11));
+//        tempList.add(new CollegeEvent("CCS", event12));
+//
+//        return tempList;
+//    }
 }

@@ -5,30 +5,31 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
-public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventViewHolder> {
+public class JoinedEventAdapter extends RecyclerView.Adapter<JoinedEventViewHolder> {
     private final Context context;
-    private final ArrayList<UpcomingEvent> events;
+    private final ArrayList<JoinedEvent> events;
 
-    public UpcomingEventAdapter(Context context, ArrayList<UpcomingEvent> events) {
+    public JoinedEventAdapter(Context context, ArrayList<JoinedEvent> events) {
         this.context = context;
         this.events = events;
     }
 
     @NonNull
     @Override
-    public UpcomingEventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.upcoming_events_layout, parent, false);
-        return new UpcomingEventViewHolder(view);
+    public JoinedEventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.joined_events_layout, parent, false);
+        return new JoinedEventViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UpcomingEventViewHolder holder, int position) {
-        UpcomingEvent event = events.get(position);
+    public void onBindViewHolder(@NonNull JoinedEventViewHolder holder, int position) {
+        JoinedEvent event = events.get(position);
 
         holder.eventTitle.setText(event.getEventTitle().getName());
         holder.eventDate.setText(event.getEventDate());
@@ -36,7 +37,6 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventView
 
         holder.imageView.setImageResource(event.getEventTitle().getImageId());
 
-        // Set click listener for the entire item view
         holder.itemView.setOnClickListener(v -> {
             // Start the EventsRegistrationPage activity with the event details
             startEventDetailsActivity(context, event);
@@ -48,7 +48,7 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventView
         return events.size();
     }
 
-    public void startEventDetailsActivity(Context context, UpcomingEvent event) {
+    public void startEventDetailsActivity(Context context, JoinedEvent event) {
         Intent intent = new Intent(context, RegistrationEventPage.class);
         intent.putExtra("event_name", event.getEventTitle().getName());
         intent.putExtra("event_date", event.getEventDate());
@@ -56,7 +56,7 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventView
         intent.putExtra("event_image", event.getEventTitle().getImageId());
         intent.putExtra("event_facilitator", event.getEventFacilitator());
         intent.putExtra("event_description", event.getEventDescription());
-        intent.putExtra("event_isBookmarked", event.isBookmarked());
+        intent.putExtra("event_isJoined", event.isJoined()); // Pass the joined status as an extra"
         context.startActivity(intent);
     }
 }

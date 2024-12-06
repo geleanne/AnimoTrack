@@ -1,6 +1,7 @@
 package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,21 +34,29 @@ public class BookmarkEventAdapter extends RecyclerView.Adapter<BookmarkEventView
         holder.eventTitle.setText(event.getEventTitle().getName());
         holder.eventDate.setText(event.getEventDate());
         holder.eventLocation.setText(event.getEventVenue());
+
         holder.imageView.setImageResource(event.getEventTitle().getImageId());
 
-        holder.rsvpButton.setOnClickListener(v -> {
-            if (holder.rsvpButton.isSelected()) {
-                holder.rsvpButton.setSelected(false);
-                Toast.makeText(holder.itemView.getContext(), "RSVP clicked for " + event.getEventTitle(), Toast.LENGTH_SHORT).show();
-            } else {
-                holder.rsvpButton.setSelected(true);
-                Toast.makeText(holder.itemView.getContext(), "RSVP clicked for " + event.getEventTitle(), Toast.LENGTH_SHORT).show();
-            }
+        holder.itemView.setOnClickListener(v -> {
+            // Start the EventsRegistrationPage activity with the event details
+            startEventDetailsActivity(context, event);
         });
     }
 
     @Override
     public int getItemCount() {
         return events.size();
+    }
+
+    public void startEventDetailsActivity(Context context, BookmarkEvent event) {
+        Intent intent = new Intent(context, RegistrationEventPage.class);
+        intent.putExtra("event_name", event.getEventTitle().getName());
+        intent.putExtra("event_date", event.getEventDate());
+        intent.putExtra("event_venue", event.getEventVenue());
+        intent.putExtra("event_image", event.getEventTitle().getImageId());
+        intent.putExtra("event_facilitator", event.getEventFacilitator());
+        intent.putExtra("event_description", event.getEventDescription());
+        intent.putExtra("event_isBookmarked", event.isBookmarked());
+        context.startActivity(intent);
     }
 }

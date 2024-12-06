@@ -4,6 +4,7 @@ public class UpcomingEvent {
     private Event event;
     private String eventDate;
     private String eventVenue;
+    private String eventCollege;
     private String eventFacilitator;
     private String eventDescription;
     private boolean isBookmarked;
@@ -15,6 +16,20 @@ public class UpcomingEvent {
         this.eventFacilitator = eventFacilitator;
         this.eventDescription = eventDescription;
         this.isBookmarked = isBookmarked;
+    }
+
+    public UpcomingEvent(Event event, String eventDate, String eventVenue, String eventCollege, String eventFacilitator, String eventDescription, boolean isBookmarked) {
+        this.event = event;
+        this.eventDate = eventDate;
+        this.eventVenue = eventVenue;
+        this.eventCollege = eventCollege;
+        this.eventFacilitator = eventFacilitator;
+        this.eventDescription = eventDescription;
+        this.isBookmarked = isBookmarked;
+    }
+
+    public Event getEvent() {
+        return this.event;
     }
 
     public Event getEventTitle() {
@@ -29,6 +44,10 @@ public class UpcomingEvent {
         return this.eventVenue;
     }
 
+    public String getEventCollege() {
+        return this.eventCollege;
+    }
+
     public String getEventFacilitator() {
         return this.eventFacilitator;
     }
@@ -39,10 +58,6 @@ public class UpcomingEvent {
 
     public boolean isBookmarked() {
         return isBookmarked;  // Getter for the favorite status
-    }
-
-    public void setBookmarked(boolean bookmarked) {
-        this.isBookmarked = bookmarked;  // Setter for the favorite status
     }
 
     @Override
@@ -57,5 +72,4 @@ public class UpcomingEvent {
     public int hashCode() {
         return this.event.getName().hashCode();
     }
-
 }

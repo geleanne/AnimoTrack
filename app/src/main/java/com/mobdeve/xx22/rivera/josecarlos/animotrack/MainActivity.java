@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,10 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.installations.FirebaseInstallations;
 
 import java.util.ArrayList;
 
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewUpcomingEvents;
     ImageView addEventButton;
+    ImageButton notificationsButton;
     ImageButton profileButton;
     ImageButton bookmarkButton;
     ImageButton homeButton;
@@ -53,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         recyclerViewUpcomingEvents = findViewById(R.id.recyclerViewUpcomingEvents);
+
+        notificationsButton = findViewById(R.id.notificationsButton);
         profileButton = findViewById(R.id.profileButton);
         bookmarkButton = findViewById(R.id.bookmarksButton);
         homeButton = findViewById(R.id.homeButton);
@@ -65,6 +70,27 @@ public class MainActivity extends AppCompatActivity {
         culturalIconImageButton = findViewById(R.id.culturalIconImageButton);
         addEventButton = findViewById(R.id.add_event_button);
         greetNameTextView = findViewById(R.id.greetNameTextView);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("events")
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("FCM", "Subscribed to events topic.");
+                    } else {
+                        Log.e("FCM", "Failed to subscribe.");
+                    }
+                });
+
+        FirebaseInstallations.getInstance().getId()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("Installations", "Installation ID: " + task.getResult());
+                        } else {
+                            Log.e("Installations", "Unable to get Installation ID");
+                        }
+                    }
+                });
 
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
@@ -106,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewUpcomingEvents.setAdapter(upcomingEventAdapter);
         recyclerViewUpcomingEvents.setLayoutManager(new LinearLayoutManager(this));
 
+
         upcomingEventsExtButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         eventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CreatedEvent.class);
+                Intent intent = new Intent(MainActivity.this, CreatedEventPage.class);
                 startActivity(intent); // Start the CreatedEvent activity
             }
         });
@@ -201,6 +228,31 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        notificationsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NotificationsPage.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    // Method to update the notification icon
+    public void updateNotificationIcon(boolean hasNewNotification) {
+        if (hasNewNotification) {
+            notificationsButton.setImageResource(R.drawable.notif_icon_badge);
+        } else {
+            notificationsButton.setImageResource(R.drawable.notif_icon); // Default icon
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Reset the notification icon
+        updateNotificationIcon(false);
     }
 }
 

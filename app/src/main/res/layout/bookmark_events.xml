@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".CreatedEventPage">
+    tools:context=".BookmarkEvent">
 
     <LinearLayout
         android:id="@+id/toolbar_layout"
@@ -65,7 +65,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_layout">
 
-
         <ImageButton
             android:id="@+id/back_arrow"
             android:layout_width="18dp"
@@ -83,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Added Events"
+            android:text="Bookmarked Events"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -94,16 +93,18 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_created_events"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:id="@+id/recycler_view_bookmarked_events"
+        android:layout_width="409dp"
+        android:layout_height="724dp"
+        android:layout_marginBottom="72dp"
         android:clipToPadding="false"
         android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/navBookmark"
-        app:layout_constraintBottom_toTopOf="@id/circular_button_layout"
+        app:layout_constraintBottom_toTopOf="@+id/circular_button_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/navBookmark"
+        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
         android:id="@+id/circular_button_layout"

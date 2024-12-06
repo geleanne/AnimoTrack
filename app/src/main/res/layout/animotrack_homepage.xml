@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/homepageImageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="600dp"
+        android:layout_height="950dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

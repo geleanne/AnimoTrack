@@ -35,8 +35,22 @@
             android:text="@string/app_name"
             android:textColor="@color/black"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/notificationsButton"
+            android:layout_width="43dp"
+            android:layout_height="33dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="190dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/notif_icon"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </LinearLayout>
 
     <!-- Navigation Arrows -->
@@ -97,23 +111,9 @@
         android:text="Calculus 101 Review Session"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/event_image"
         app:layout_constraintTop_toBottomOf="@id/event_image" />
-
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/favorite_button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_marginTop="-19dp"-->
-<!--        android:layout_marginEnd="5dp"-->
-<!--        android:backgroundTint="@color/white"-->
-<!--        android:clickable="true"-->
-<!--        android:focusable="true"-->
-<!--        app:srcCompat="@android:drawable/btn_star"-->
-<!--        app:layout_constraintTop_toTopOf="@id/event_name"-->
-<!--        app:layout_constraintEnd_toEndOf="@id/event_image"-->
-<!--        app:tint="#FFAE42" />-->
 
     <ImageButton
         android:id="@+id/bookmarkBtn"
@@ -138,16 +138,27 @@
         app:layout_constraintTop_toBottomOf="@id/event_name"
         app:layout_constraintStart_toStartOf="@id/event_name"
         android:layout_marginTop="8dp" />
+    
+    <TextView
+        android:id="@+id/event_college"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="College"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/event_date"
+        app:layout_constraintStart_toStartOf="@id/event_date"
+        android:layout_marginTop="4dp" />
 
     <TextView
         android:id="@+id/event_venue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Venue: Gokongwei Hall, Room 104"
+        android:text="Venue"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/event_date"
-        app:layout_constraintStart_toStartOf="@id/event_date"
+        app:layout_constraintTop_toBottomOf="@id/event_college"
+        app:layout_constraintStart_toStartOf="@id/event_college"
         android:layout_marginTop="4dp" />
 
     <TextView
@@ -175,13 +186,13 @@
 
     <!-- RSVP Button -->
     <Button
-        android:id="@+id/rsvp_button"
+        android:id="@+id/joinButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/green"
-        android:text="RSVP"
+        android:text="Join"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@id/event_description"
         app:layout_constraintHorizontal_bias="0.498"
@@ -193,14 +204,13 @@
         android:id="@+id/circular_button_layout"
         android:layout_width="match_parent"
         android:layout_height="105dp"
-        android:background="@color/light_green"
+        android:background="@color/white_ice"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!-- Black line separator -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -215,6 +225,7 @@
                 android:id="@+id/homeButton"
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/home_button"
@@ -227,7 +238,8 @@
                 android:id="@+id/eventsButton"
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="105dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="90dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/events_button"
                 android:scaleType="centerCrop"
@@ -239,8 +251,9 @@
                 android:id="@+id/bookmarksButton"
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
                 android:layout_gravity="center"
-                android:layout_marginEnd="105dp"
+                android:layout_marginEnd="90dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/bookmarks_button"
                 android:scaleType="centerCrop"
@@ -253,6 +266,7 @@
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:layout_alignParentEnd="true"
                 android:layout_marginEnd="10dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/profile_buton"
@@ -277,7 +291,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

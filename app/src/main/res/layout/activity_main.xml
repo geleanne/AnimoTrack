@@ -39,9 +39,21 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-        </LinearLayout>
 
-        <!-- Green rectangle & text -->
+        <ImageButton
+            android:id="@+id/notificationsButton"
+            android:layout_width="43dp"
+            android:layout_height="33dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="190dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/notif_icon" />
+
+    </LinearLayout>
+
     <View
         android:id="@+id/rectangleView"
         android:layout_width="0dp"
@@ -86,11 +98,8 @@
         android:textStyle="bold"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@android:color/black"
         app:layout_constraintTop_toBottomOf="@+id/rectangleView" />
-
-    <!-- categories icons -->
-
-    <!--Upcoming Events and scroll (Recycler) view-->
 
     <LinearLayout
         android:id="@+id/category_icons"
@@ -110,13 +119,14 @@
 
             <ImageButton
                 android:id="@+id/orgsIconImageButton"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:layout_marginStart="22dp"
-                android:layout_marginTop="14dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="centerCrop"
                 android:contentDescription="@string/orgs_category_icon"
+                android:scaleType="centerCrop"
                 android:src="@drawable/icon_orgs"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -126,7 +136,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="19dp"
+                android:layout_marginStart="12dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Organizations"
@@ -139,13 +149,14 @@
 
             <ImageButton
                 android:id="@+id/acadsIconImageButton"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_alignParentStart="true"
                 android:layout_marginStart="18dp"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="16dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="centerCrop"
                 android:contentDescription="@string/acads_category_icon"
+                android:scaleType="centerCrop"
                 android:src="@drawable/icon_acads"
                 app:layout_constraintStart_toEndOf="@+id/orgsIconImageButton"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -155,57 +166,58 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="112dp"
+                android:layout_marginStart="14dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Academics"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/orgsLabel"
                 app:layout_constraintTop_toBottomOf="@+id/acadsIconImageButton"
-                app:layout_constraintVertical_bias="0.562" />
+                app:layout_constraintVertical_bias="0.533" />
 
             <ImageButton
                 android:id="@+id/seminarIconImageButton"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="14dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="16dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="centerCrop"
                 android:contentDescription="@string/seminar_category_icon"
+                android:scaleType="centerCrop"
                 android:src="@drawable/icon_seminar"
-                app:layout_constraintStart_toEndOf="@+id/acadsIconImageButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/seminarLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="30dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Seminars"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/sportsLabel"
+                app:layout_constraintHorizontal_bias="0.4"
                 app:layout_constraintStart_toEndOf="@+id/acadsLabel"
-                app:layout_constraintTop_toBottomOf="@+id/seminarIconImageButton"
-                app:layout_constraintVertical_bias="0.562" />
+                app:layout_constraintTop_toBottomOf="@+id/seminarIconImageButton" />
 
             <ImageButton
                 android:id="@+id/sportsIconImageButton"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="14dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="centerCrop"
                 android:contentDescription="@string/sports_category_icon"
+                android:scaleType="centerCrop"
                 android:src="@drawable/icon_sports"
-                app:layout_constraintStart_toEndOf="@+id/seminarIconImageButton"
+                app:layout_constraintEnd_toStartOf="@+id/culturalIconImageButton"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -213,28 +225,29 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginEnd="118dp"
+                android:layout_marginEnd="38dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Sports"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/culturalLabel"
                 app:layout_constraintTop_toBottomOf="@+id/sportsIconImageButton"
-                app:layout_constraintVertical_bias="0.562" />
+                app:layout_constraintVertical_bias="0.538" />
 
             <ImageButton
                 android:id="@+id/culturalIconImageButton"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:layout_marginStart="18dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="14dp"
+                android:layout_marginEnd="20dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="centerCrop"
                 android:contentDescription="@string/cultural_category_icon"
+                android:scaleType="centerCrop"
                 android:src="@drawable/icon_cultural"
-                app:layout_constraintStart_toEndOf="@+id/sportsIconImageButton"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -266,6 +279,7 @@
         android:textStyle="bold"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@android:color/black"
         app:layout_constraintTop_toBottomOf="@+id/category_icons" />
 
     <ImageButton
@@ -273,7 +287,7 @@
         android:layout_width="18dp"
         android:layout_height="16dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="230dp"
+        android:layout_marginStart="190dp"
         android:layout_marginTop="185dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/right_arrow"
@@ -283,8 +297,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewUpcomingEvents"
-        android:layout_width="409dp"
-        android:layout_height="381dp"
+        android:layout_width="412dp"
+        android:layout_height="431dp"
         android:layout_marginTop="12dp"
         app:layout_constraintBottom_toTopOf="@id/circular_button_layout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -296,7 +310,7 @@
         android:id="@+id/circular_button_layout"
         android:layout_width="match_parent"
         android:layout_height="105dp"
-        android:background="@color/white"
+        android:background="@color/white_ice"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -317,6 +331,7 @@
                 android:id="@+id/homeButton"
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/home_button"
@@ -329,7 +344,8 @@
                 android:id="@+id/eventsButton"
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="105dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="90dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/events_button"
                 android:scaleType="centerCrop"
@@ -341,8 +357,9 @@
                 android:id="@+id/bookmarksButton"
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
                 android:layout_gravity="center"
-                android:layout_marginEnd="105dp"
+                android:layout_marginEnd="90dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/bookmarks_button"
                 android:scaleType="centerCrop"
@@ -355,6 +372,7 @@
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:layout_alignParentEnd="true"
                 android:layout_marginEnd="10dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/profile_buton"
@@ -379,7 +397,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

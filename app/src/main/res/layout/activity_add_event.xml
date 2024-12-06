@@ -50,10 +50,10 @@
                 android:scaleType="centerCrop" />
 
             <TextView
-                android:layout_width="266dp"
-                android:layout_height="wrap_content"
+                android:layout_width="128dp"
+                android:layout_height="22dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="75dp"
+                android:layout_marginStart="95dp"
                 android:text="Add A New Event"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Event Date (MM/DD/YYYY)"
-            android:inputType="date"
+            android:inputType="text"
             android:padding="14dp"
             android:background="@drawable/edittext_background"
             android:textColor="@android:color/black"

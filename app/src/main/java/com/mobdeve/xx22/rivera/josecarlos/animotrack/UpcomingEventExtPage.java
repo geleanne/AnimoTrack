@@ -2,6 +2,7 @@ package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +27,9 @@ public class UpcomingEventExtPage extends AppCompatActivity {
     private ImageButton bookmarkButton; // Declare bookmarkButton
     private ImageButton homeButton; // Declare homeButton
     private ImageButton eventsButton;
+    private Spinner spinnerDepartments;
+    private FirestoreHelper firestoreHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +52,34 @@ public class UpcomingEventExtPage extends AppCompatActivity {
         recyclerViewUpcomingEventsExtended.setAdapter(upcomingEventAdapter);
         recyclerViewUpcomingEventsExtended.setLayoutManager(new LinearLayoutManager(this));
 
-        upcomingEvents = DataGenerator.generateUpcomingEventsData();
+        spinnerDepartments = findViewById(R.id.spinner_departments);
+
+        // Initialize FirestoreHelper
+        firestoreHelper = new FirestoreHelper();
+
+        // Set up RecyclerView
+        upcomingEvents = new ArrayList<>();
         adapter = new UpcomingEventExtAdapter(this, upcomingEvents);
         recyclerViewUpcomingEventsExtended.setAdapter(adapter);
+        recyclerViewUpcomingEventsExtended.setLayoutManager(new LinearLayoutManager(this));
+
+        // Load initial data (default filter is "All")
+        fetchEventsByCollege("All");
+
+        // Set up Spinner
+        spinnerDepartments.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedCollege = parent.getItemAtPosition(position).toString();
+                fetchEventsByCollege(selectedCollege);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Default to "All" if nothing is selected
+                fetchEventsByCollege("All");
+            }
+        });
 
 //        // Reference the Spinner
 //        Spinner departmentSpinner = findViewById(R.id.spinner_departments);
@@ -126,6 +155,21 @@ public class UpcomingEventExtPage extends AppCompatActivity {
                 Intent intent = new Intent(UpcomingEventExtPage.this, MainActivity.class);
                 intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the HomePage activity
+            }
+        });
+    }
+    private void fetchEventsByCollege(String college) {
+        firestoreHelper.getEventsByCollege(college, new FirestoreHelper.EventCallback() {
+            @Override
+            public void onEventsFetched(ArrayList<UpcomingEvent> events) {
+                upcomingEvents.clear();
+                upcomingEvents.addAll(events);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.e("Firestore", "Error fetching events: ", e);
             }
         });
     }

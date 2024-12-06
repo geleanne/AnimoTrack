@@ -6,7 +6,7 @@
     <string name="animotrack_logo">AnimoTrack logo</string>
     <string name="banner">banner</string>
     <string name="categories">Categories</string>
-    <string name="hello_name">Hello, Ange!</string>
+    <string name="hello_name">Hello, User!</string>
     <string name="greeting">Ready to explore today\'s events?</string>
     <string name="continue_button">CONTINUE</string>
     <string name="seminar_category_icon">Seminar Category Icon</string>
@@ -37,4 +37,18 @@
         <item>Sports</item>
         <item>Cultural</item>
     </string-array>
+
+    <string-array name="event_college">
+        <item>CCS</item>
+        <item>COS</item>
+        <item>RVRCOB</item>
+        <item>CLA</item>
+        <item>BAGCED</item>
+        <item>COL</item>
+        <item>GCOE</item>
+        <item>SOE</item>
+        <item>All</item>
+    </string-array>
+
+    <!-- Define event locations for the spinner -->
 </resources>

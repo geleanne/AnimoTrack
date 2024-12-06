@@ -1,7 +1,7 @@
 package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
 public class Event {
-    private final int imageId; // For event image
+    private int imageId; // For event image
     private final String name; // Event title
     private String category; // Event category
     private String collegeDept; // Event college department
@@ -30,7 +30,7 @@ public class Event {
     }
 
     public int getImageId() {
-        return this.imageId;
+        return imageId;
     }
 
     public String getName() {
@@ -43,5 +43,9 @@ public class Event {
 
     public String getEventCollege() {
         return this.collegeDept;
+    }
+
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
     }
 }

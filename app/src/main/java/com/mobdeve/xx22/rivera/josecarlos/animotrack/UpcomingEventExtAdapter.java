@@ -31,6 +31,8 @@ public class UpcomingEventExtAdapter extends RecyclerView.Adapter<UpcomingEventE
         UpcomingEvent event = events.get(position);
         holder.eventTitle.setText(event.getEventTitle().getName());
         holder.eventDate.setText(event.getEventDate());
+        holder.eventCollege.setText(event.getEventCollege());  // Set the collegeDept text
+        holder.imageView.setImageResource(event.getEventTitle().getImageId());  // Set the event image
         holder.eventLocation.setText(event.getEventVenue());
 
         holder.imageView.setImageResource(event.getEventTitle().getImageId());

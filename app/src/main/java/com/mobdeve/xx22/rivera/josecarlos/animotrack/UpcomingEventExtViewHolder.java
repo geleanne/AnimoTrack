@@ -9,22 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class UpcomingEventExtViewHolder extends RecyclerView.ViewHolder {
     ImageView imageView;
-    TextView eventTitle;
-    TextView eventDate;
-    TextView eventLocation;
+    TextView eventTitle, eventDate, eventLocation, eventCollege;
 
     public UpcomingEventExtViewHolder(@NonNull View itemView) {
         super(itemView);
         imageView = itemView.findViewById(R.id.eventPoster);
         eventTitle = itemView.findViewById(R.id.eventTitle);
         eventDate = itemView.findViewById(R.id.eventDate);
+        eventCollege = itemView.findViewById(R.id.collegeDept);
         eventLocation = itemView.findViewById(R.id.eventLocation);
     }
-
-//    public void bindData(UpcomingEvent event) {
-//        imageView.setImageResource(event.getEventTitle().getImageId());
-//        eventTitle.setText(event.getEventTitle().getName());
-//        eventDate.setText(event.getEventDate());
-//        eventLocation.setText(event.getEventVenue());
-//    }
 }

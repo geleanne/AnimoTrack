@@ -17,19 +17,6 @@ public class DataGenerator {
     private final static Event event11 = new Event(R.drawable.event11, "Catch That Merch", "Organizations", "CCS");
     private final static Event event12 = new Event(R.drawable.event12, "Cyber Leap: InnovateTech Hub", "Academics", "CCS");
 
-//    private final static Event event1 = new Event(R.drawable.event1, "UAAP SEASON 87 MENS VOLLEYBALL"); // Sports
-//    private final static Event event2 = new Event(R.drawable.event2, "In Sync: Group Studies"); // Academic
-//    private final static Event event3 = new Event(R.drawable.event3, "LLM Tuning Methods for Specific Tasks."); // Seminar
-//    private final static Event event4 = new Event(R.drawable.event4, "Annual Recruitment Week 2024: The Archer Calls"); //
-//    private final static Event event5 = new Event(R.drawable.event5, "DLSU Chorale Annual Recruitment Week");
-//    private final static Event event6 = new Event(R.drawable.event6, "International Lasallian Days of Peace");
-//    private final static Event event7 = new Event(R.drawable.event7, "Banner Making Contest");
-//    private final static Event event8 = new Event(R.drawable.event8, "Animo Christmas Concert");
-//    private final static Event event9 = new Event(R.drawable.event9, "Arts, Crafts & Powerpuffs!");
-//    private final static Event event10 = new Event(R.drawable.event10, "EmoSyonaryo Escape Room");
-//    private final static Event event11 = new Event(R.drawable.event11, "Catch That Merch");
-//    private final static Event event12 = new Event(R.drawable.event12, "Cyber Leap: InnovateTech Hub");
-
     public static ArrayList<UpcomingEvent> generateUpcomingEventsData() {
         ArrayList<UpcomingEvent> tempList = new ArrayList<>();
 

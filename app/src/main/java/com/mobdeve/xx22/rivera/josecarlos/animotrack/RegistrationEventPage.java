@@ -74,14 +74,14 @@ public class RegistrationEventPage extends AppCompatActivity {
         String eventVenue = getIntent().getStringExtra("event_venue");
         String eventFacilitator = getIntent().getStringExtra("event_facilitator");
         String eventDescription = getIntent().getStringExtra("event_description");
-        String eventCollegeText = getIntent().getStringExtra("event_college");
+        String eventCollegeDept = getIntent().getStringExtra("event_college");
         int eventImageId = getIntent().getIntExtra("event_image", R.drawable.event1);
 
         // Set the data to the TextViews
         eventNameTextView.setText(eventName);
         eventDateTextView.setText(eventDate);
         eventVenueTextView.setText(eventVenue);
-        eventCollegeTextView.setText(eventCollegeText);
+        eventCollegeTextView.setText(eventCollegeDept);
         eventDescriptionTextView.setText(eventDescription);
         eventImageView.setImageResource(eventImageId);
 
@@ -138,6 +138,7 @@ public class RegistrationEventPage extends AppCompatActivity {
                                 eventVenue,
                                 eventFacilitator,
                                 eventDescription,
+                                eventCollegeDept,
                                 true
                         );
 
@@ -153,6 +154,7 @@ public class RegistrationEventPage extends AppCompatActivity {
                             eventData.put("eventVenue", eventVenue);
                             eventData.put("eventFacilitator", eventFacilitator);
                             eventData.put("eventDescription", eventDescription);
+                            eventData.put("collegeDept", eventCollegeDept);  // Add collegeDept here
                             eventData.put("isBookmarked", true);
 
                             bookmarkedEventsCollection.document(eventName)
@@ -181,6 +183,7 @@ public class RegistrationEventPage extends AppCompatActivity {
                 }
             }
         });
+
 
         // Check if the event is already joined
         isJoined = false; // Reset the status before checking

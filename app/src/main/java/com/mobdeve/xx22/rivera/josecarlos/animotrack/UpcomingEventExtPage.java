@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -81,39 +79,6 @@ public class UpcomingEventExtPage extends AppCompatActivity {
             }
         });
 
-//        // Reference the Spinner
-//        Spinner departmentSpinner = findViewById(R.id.spinner_departments);
-//
-//        // Create an ArrayAdapter using the event categories from strings.xml
-//        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(
-//                this,
-//                R.array.event_categories,
-//                android.R.layout.simple_spinner_item
-//        );
-//        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        departmentSpinner.setAdapter(spinnerAdapter);
-//
-//        // Specify the layout for dropdown items
-//        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        // Set the adapter to the Spinner
-//        departmentSpinner.setAdapter(spinnerAdapter);
-//
-//        // Handle Spinner selection
-//        departmentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String selectedDepartment = parent.getItemAtPosition(position).toString();
-//                filterEvents(selectedDepartment);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//                // Do nothing
-//                adapter.updateData(DataGenerator.generateUpcomingEventsData());
-//            }
-//        });
-
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,6 +123,7 @@ public class UpcomingEventExtPage extends AppCompatActivity {
             }
         });
     }
+
     private void fetchEventsByCollege(String college) {
         firestoreHelper.getEventsByCollege(college, new FirestoreHelper.EventCallback() {
             @Override
@@ -173,20 +139,4 @@ public class UpcomingEventExtPage extends AppCompatActivity {
             }
         });
     }
-
-//    // Method to filter events
-//    private void filterEvents(String eventCollege) {
-//        ArrayList<UpcomingEvent> filteredEvents = new ArrayList<>();
-//        for (UpcomingEvent event : DataGenerator.generateUpcomingEventsData()) {
-//            if (event.getEventCollege().equalsIgnoreCase(eventCollege)) {
-//                filteredEvents.add(event);
-//            }
-//        }
-//
-//        if (filteredEvents.isEmpty()) {
-//            Toast.makeText(this, "No events found for " + eventCollege, Toast.LENGTH_SHORT).show();
-//        }
-//
-//        adapter.updateData(filteredEvents);
-//    }
 }

@@ -24,8 +24,9 @@ public class FirestoreHelper {
         eventData.put("venue", event.getEventVenue());
         eventData.put("facilitator", event.getEventFacilitator());
         eventData.put("description", event.getEventDescription());
-        eventData.put("collegeDept", event.getEventCollege());
+        eventData.put("collegeDept", event.getEventCollege() != null ? event.getEventCollege() : "Unknown College"); // Ensure it's not null
         eventData.put("isBookmarked", event.isBookmarked());
+        eventData.put("imageId", event.getEventTitle().getImageId());
 
         // Save to Firestore
         db.collection("AnimoTrackEvents")
@@ -34,6 +35,7 @@ public class FirestoreHelper {
                 .addOnSuccessListener(aVoid -> Log.d("Firestore", "Event saved successfully!"))
                 .addOnFailureListener(e -> Log.e("Firestore", "Error saving event", e));
     }
+
 
     public void getEventsByCollege(String college, EventCallback callback) {
         db.collection("AnimoTrackEvents")
@@ -52,8 +54,11 @@ public class FirestoreHelper {
                             boolean isBookmarked = document.getBoolean("isBookmarked") != null && document.getBoolean("isBookmarked");
 
                             // fetch event image here
+                            // Fetch the image ID from Firestore and assign it to the event
+                            int imageId = document.getLong("imageId") != null ? document.getLong("imageId").intValue() : R.drawable.default_poster_squared;
+
                             // Create Event and UpcomingEvent objects
-                            Event event = new Event(R.drawable.default_poster_squared, title, "Category", eventCollege);
+                            Event event = new Event(imageId, title, "Category", eventCollege);
                             UpcomingEvent upcomingEvent = new UpcomingEvent(event, date, venue, eventCollege, facilitator, description, isBookmarked);
                             events.add(upcomingEvent);
                         }

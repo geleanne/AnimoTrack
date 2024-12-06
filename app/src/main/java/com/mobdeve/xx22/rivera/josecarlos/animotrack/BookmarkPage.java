@@ -89,7 +89,6 @@ public class BookmarkPage extends AppCompatActivity {
 
         if (currentUser != null) {
             String userId = currentUser.getUid();
-
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
             db.collection("BookmarkedEvents")
@@ -98,28 +97,38 @@ public class BookmarkPage extends AppCompatActivity {
                     .addOnSuccessListener(queryDocumentSnapshots -> {
                         bookmarkEvents.clear(); // Clear old data
                         for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                            BookmarkEvent event = new BookmarkEvent(
-                                    new Event(
-                                            doc.getLong("eventImageId").intValue(),
-                                            doc.getString("eventName"),
-                                            doc.getString("category")
-                                    ),
-                                    doc.getString("eventDate"),
-                                    doc.getString("eventVenue"),
-                                    doc.getString("eventFacilitator"),
-                                    doc.getString("eventDescription"),
-                                    doc.getBoolean("isBookmarked")
-                            );
-                            bookmarkEvents.add(event);
+                            String eventName = doc.getString("eventName");
+                            if (eventName != null) {
+                                // Fetch collegeDept from AnimoTrackEvents collection
+                                db.collection("AnimoTrackEvents")
+                                        .document(eventName)
+                                        .get()
+                                        .addOnSuccessListener(eventDoc -> {
+                                            String collegeDept = eventDoc.getString("collegeDept");
+                                            BookmarkEvent event = new BookmarkEvent(
+                                                    new Event(
+                                                            doc.getLong("eventImageId").intValue(),
+                                                            eventName,
+                                                            doc.getString("category")
+                                                    ),
+                                                    doc.getString("eventDate"),
+                                                    doc.getString("eventVenue"),
+                                                    doc.getString("eventFacilitator"),
+                                                    doc.getString("eventDescription"),
+                                                    collegeDept != null ? collegeDept : "Unknown College",
+                                                    doc.getBoolean("isBookmarked")
+                                            );
+                                            bookmarkEvents.add(event);
+                                            adapter.notifyDataSetChanged(); // Notify adapter of new data
+                                        })
+                                        .addOnFailureListener(e -> Log.e("Firestore", "Error fetching collegeDept", e));
+                            }
                         }
-                        adapter.notifyDataSetChanged(); // Notify adapter of new data
                     })
-                    .addOnFailureListener(e -> {
-                        // Handle the error appropriately
-                        Log.e("Firestore", "Error loading bookmarks", e);
-                    });
+                    .addOnFailureListener(e -> Log.e("Firestore", "Error loading bookmarks", e));
         }
     }
+
 
 
     @Override

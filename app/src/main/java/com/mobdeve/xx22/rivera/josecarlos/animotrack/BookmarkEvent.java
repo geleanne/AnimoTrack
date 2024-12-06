@@ -6,14 +6,16 @@ public class BookmarkEvent {
     private String eventVenue;
     private String eventFacilitator;
     private String eventDescription;
+    private String collegeDept;
     private boolean isBookmarked;
 
-    public BookmarkEvent(Event event, String eventDate, String eventVenue, String eventFacilitator, String eventDescription, boolean isBookmarked) {
+    public BookmarkEvent(Event event, String eventDate, String eventVenue, String eventFacilitator, String eventDescription, String collegeDept, boolean isBookmarked) {
         this.event = event;
         this.eventDate = eventDate;
         this.eventVenue = eventVenue;
         this.eventFacilitator = eventFacilitator;
         this.eventDescription = eventDescription;
+        this.collegeDept = collegeDept;
         this.isBookmarked = isBookmarked;
     }
 
@@ -23,6 +25,10 @@ public class BookmarkEvent {
 
     public String getEventDate() {
         return this.eventDate;
+    }
+
+    public String getCollegeDept() {
+        return collegeDept;
     }
 
     public String getEventVenue() {

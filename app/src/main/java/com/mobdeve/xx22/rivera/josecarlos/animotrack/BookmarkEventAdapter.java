@@ -33,6 +33,7 @@ public class BookmarkEventAdapter extends RecyclerView.Adapter<BookmarkEventView
 
         holder.eventTitle.setText(event.getEventTitle().getName());
         holder.eventDate.setText(event.getEventDate());
+        holder.eventCollege.setText(event.getCollegeDept());
         holder.eventLocation.setText(event.getEventVenue());
 
         holder.imageView.setImageResource(event.getEventTitle().getImageId());

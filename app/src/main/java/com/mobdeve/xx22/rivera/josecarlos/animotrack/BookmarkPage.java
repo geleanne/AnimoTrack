@@ -31,6 +31,7 @@ public class BookmarkPage extends AppCompatActivity {
     ImageButton bookmarkButton; // Declare bookmarkButton
     ImageButton eventsButton;
     ImageButton homeButton; // Declare homeButton
+    ImageView notificationsButton;
     ImageView addEventButton;
 
     @Override
@@ -54,6 +55,7 @@ public class BookmarkPage extends AppCompatActivity {
         homeButton = findViewById(R.id.homeButton);
         eventsButton = findViewById(R.id.eventsButton);
         addEventButton = findViewById(R.id.add_event_button);
+        notificationsButton = findViewById(R.id.notificationsButton);
 
         backArrow.setOnClickListener(v -> finish());
 
@@ -79,6 +81,11 @@ public class BookmarkPage extends AppCompatActivity {
 
         addEventButton.setOnClickListener(v -> {
             Intent intent = new Intent(BookmarkPage.this, CreateEventActivity.class);
+            startActivity(intent);
+        });
+
+        notificationsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(BookmarkPage.this, NotificationsPage.class);
             startActivity(intent);
         });
     }

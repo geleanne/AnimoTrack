@@ -24,7 +24,7 @@ import java.util.Objects;
 public class CreatedEventPage extends AppCompatActivity {
 
     private ImageButton backArrow, profileButton, bookmarkButton, homeButton;
-    private ImageView addEventButton;
+    private ImageView addEventButton, notificationButton;
     private TextView titleTextView;
     private RecyclerView recyclerViewCreatedEvents;
 
@@ -45,6 +45,7 @@ public class CreatedEventPage extends AppCompatActivity {
         bookmarkButton = findViewById(R.id.bookmarksButton);
         homeButton = findViewById(R.id.homeButton);
         addEventButton = findViewById(R.id.add_event_button);
+        notificationButton = findViewById(R.id.notificationsButton);
 
         // Initialize views
         recyclerViewCreatedEvents = findViewById(R.id.recycler_view_created_events);
@@ -78,6 +79,11 @@ public class CreatedEventPage extends AppCompatActivity {
 
         addEventButton.setOnClickListener(v -> {
             Intent intent = new Intent(CreatedEventPage.this, CreateEventActivity.class);
+            startActivity(intent);
+        });
+
+        notificationButton.setOnClickListener(v -> {
+            Intent intent = new Intent(CreatedEventPage.this, NotificationsPage.class);
             startActivity(intent);
         });
     }

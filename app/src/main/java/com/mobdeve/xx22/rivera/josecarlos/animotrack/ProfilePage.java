@@ -23,6 +23,7 @@ public class ProfilePage extends AppCompatActivity {
     ImageButton bookmarkButton;
     ImageButton homeButton;
     ImageButton eventsButton;
+    ImageView notificationsButton;
     ImageView addEventButton;
     Button logoutButton;
     Button deleteAccButton;
@@ -54,6 +55,7 @@ public class ProfilePage extends AppCompatActivity {
         fullNameTextView = findViewById(R.id.fullNameTextView);
         numberJoinedEvents = findViewById(R.id.numberJoinedEvents);
         numberBookmarkedEvents = findViewById(R.id.numberBookmarkedEvents);
+        notificationsButton = findViewById(R.id.notificationsButton);
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -175,6 +177,11 @@ public class ProfilePage extends AppCompatActivity {
         addEventButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, CreateEventActivity.class);
             startActivity(intent); // Start the CreateEventActivity activity
+        });
+
+        notificationsButton.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfilePage.this, NotificationsPage.class);
+            startActivity(intent); // Start the NotificationsPage activity
         });
     }
 }

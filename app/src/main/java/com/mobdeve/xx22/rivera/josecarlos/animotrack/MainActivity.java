@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,8 @@ import com.google.firebase.installations.FirebaseInstallations;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     RecyclerView recyclerViewUpcomingEvents;
     ImageView addEventButton;
@@ -50,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         // Initialize FirebaseAuth and Firestore
         mAuth = FirebaseAuth.getInstance();
@@ -76,12 +78,17 @@ public class MainActivity extends AppCompatActivity {
         addEventButton = findViewById(R.id.add_event_button);
         greetNameTextView = findViewById(R.id.greetNameTextView);
 
+        // Debugging Toast to check Firebase setup
+        Toast.makeText(this, "Firebase Initialized", Toast.LENGTH_SHORT).show();
+
         FirebaseMessaging.getInstance().subscribeToTopic("events")
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Log.d("FCM", "Subscribed to events topic.");
+                        Toast.makeText(MainActivity.this, "Subscribed to events topic", Toast.LENGTH_SHORT).show();
                     } else {
                         Log.e("FCM", "Failed to subscribe.");
+                        Toast.makeText(MainActivity.this, "Subscription failed", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -237,10 +244,14 @@ public class MainActivity extends AppCompatActivity {
         notificationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Debugging Toast to verify button click
+                Toast.makeText(MainActivity.this, "Notifications Button Clicked", Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(MainActivity.this, NotificationsPage.class);
                 startActivity(intent);
             }
         });
+
     }
 
     // Method to update the notification icon
@@ -260,16 +271,4 @@ public class MainActivity extends AppCompatActivity {
         updateNotificationIcon(false);
     }
 }
-
-
-//        ImageView myImageButton = findViewById(R.id.my_image_button);
-//        myImageButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Perform your action here, similar to a button click
-//                // For example, you can start a new activity:
-//                Intent intent = new Intent(MainActivity.this, LoginPage.class);
-//                startActivity(intent);
-//            }
-//        });
 

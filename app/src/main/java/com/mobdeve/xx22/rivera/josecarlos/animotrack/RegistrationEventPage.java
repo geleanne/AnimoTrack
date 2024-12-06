@@ -44,6 +44,7 @@ public class RegistrationEventPage extends AppCompatActivity {
     ImageButton bookmarkButton; // Declare bookmarkButton
     ImageButton homeButton; // Declare homeButton
     ImageButton eventsButton;
+    ImageView notificationsButton;
     Button joinedButton;
 
     @Override
@@ -58,6 +59,7 @@ public class RegistrationEventPage extends AppCompatActivity {
         bookmarkBtn = findViewById(R.id.bookmarkBtn);
         eventsButton = findViewById(R.id.eventsButton);
         joinedButton = findViewById(R.id.joinButton);
+        notificationsButton = findViewById(R.id.notificationsButton);
 
         // Initialize views
         eventNameTextView = findViewById(R.id.event_name);
@@ -309,6 +311,14 @@ public class RegistrationEventPage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RegistrationEventPage.this, MainActivity.class);
                 startActivity(intent); // Start the HomePage activity
+            }
+        });
+
+        notificationsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegistrationEventPage.this, NotificationsPage.class);
+                startActivity(intent); // Start the NotificationsPage activity
             }
         });
     }

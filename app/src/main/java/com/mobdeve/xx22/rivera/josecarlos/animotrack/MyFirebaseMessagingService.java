@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -22,13 +23,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String title = remoteMessage.getNotification().getTitle();
         String body = remoteMessage.getNotification().getBody();
 
+        // Debugging Toast to check if notification data is being received
+        Toast.makeText(this, "Received Notification: " + title, Toast.LENGTH_SHORT).show();
+
         showNotification(title, body);
     }
+
 
     private void showNotification(String title, String body) {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         String channelId = "animo_notifications";
 
+        // For Android Oreo and above, you need to create a notification channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
                     channelId,
@@ -55,7 +61,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentIntent(pendingIntent);
 
         notificationManager.notify(0, builder.build());
+
+        // Debugging Toast when notification is shown
+        Toast.makeText(this, "Notification Shown: " + title, Toast.LENGTH_SHORT).show();
     }
+
 }
 
 //package com.mobdeve.xx22.rivera.josecarlos.animotrack;

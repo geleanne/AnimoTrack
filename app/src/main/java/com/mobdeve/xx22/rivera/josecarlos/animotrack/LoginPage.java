@@ -17,44 +17,23 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginPage extends AppCompatActivity {
 
-    // Declare views
     private EditText emailField;
     private EditText passwordField;
-    private Button loginButton;
-    private Button noAccountYetButton;
 
-    private FirebaseFirestore db;
     private FirebaseAuth mAuth;
-
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if (currentUser != null) {
-//            // If a user is already signed in, navigate to the MainActivity
-//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//            startActivity(intent);
-//            finish(); // Optional: To remove LoginPage from the back stack
-//        }
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page); // layout's filename
 
-        // Initialize Firebase components
         mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
 
-        // Initialize views
         emailField = findViewById(R.id.editTextTextEmailAddress);
         passwordField = findViewById(R.id.editTextNumberPassword);
-        loginButton = findViewById(R.id.buttonLogin);
-        noAccountYetButton = findViewById(R.id.noAccountYetButton);
+        Button loginButton = findViewById(R.id.buttonLogin);
+        Button noAccountYetButton = findViewById(R.id.noAccountYetButton);
 
-        // onClickListener for the login button
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,13 +51,9 @@ public class LoginPage extends AppCompatActivity {
             }
         });
 
-
-
-        // onClickListener for the no account yet button
         noAccountYetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create an intent to start the Sign Up activity
                 Intent intent = new Intent(LoginPage.this, SignupPage.class);
                 startActivity(intent);
             }
@@ -93,7 +68,7 @@ public class LoginPage extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
-                                String fullName = user.getDisplayName();  // Get the full name from Firebase user profile
+                                String fullName = user.getDisplayName();
                                 Intent intent = new Intent(LoginPage.this, MainActivity.class);
                                 intent.putExtra("fullName", fullName);
                                 startActivity(intent);
@@ -105,5 +80,4 @@ public class LoginPage extends AppCompatActivity {
                     }
                 });
     }
-
 }

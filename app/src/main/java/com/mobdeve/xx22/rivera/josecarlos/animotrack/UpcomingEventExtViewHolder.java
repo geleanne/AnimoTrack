@@ -9,7 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class UpcomingEventExtViewHolder extends RecyclerView.ViewHolder {
     ImageView imageView;
-    TextView eventTitle, eventDate, eventLocation, eventCollege;
+    TextView eventTitle;
+    TextView eventDate;
+    TextView eventLocation;
+    TextView eventCollege;
 
     public UpcomingEventExtViewHolder(@NonNull View itemView) {
         super(itemView);

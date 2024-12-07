@@ -27,7 +27,7 @@ public class CategoryPage  extends AppCompatActivity {
 
         // Access the current logged-in user's full name directly from Firebase
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String fullName = user != null ? user.getDisplayName() : "Guest"; // Default if null
+        String fullName = user != null ? user.getDisplayName() : "Guest";
 
         backArrowButton = findViewById(R.id.back_arrow);
         profileButton = findViewById(R.id.profileButton);
@@ -37,45 +37,43 @@ public class CategoryPage  extends AppCompatActivity {
         eventsButton = findViewById(R.id.eventsButton);
         recyclerViewEventsOfSpecificCategory = findViewById(R.id.recyclerViewEventsOfSpecificCategory);
 
-        // Retrieve category from intent
         String category = getIntent().getStringExtra("category");
 
-        // Get filtered data and set up RecyclerView
+        // Get filtered data and update the RecyclerView
         ArrayList<CategorizedEvent> categorizedEvents = DataGenerator.getEventsByCategory(category);
         CategorizedEventAdapter adapter = new CategorizedEventAdapter(this, categorizedEvents, DataGenerator.generateUpcomingEventsData());
         recyclerViewEventsOfSpecificCategory.setAdapter(adapter);
         recyclerViewEventsOfSpecificCategory.setLayoutManager(new LinearLayoutManager(this));
 
-        // Set OnClickListener for the buttons
         eventsButton.setOnClickListener(v -> {
             Intent intent = new Intent(CategoryPage.this, CreatedEventPage.class);
             intent.putExtra("fullName", fullName);
-            startActivity(intent); // Start the CreatedEvent activity
+            startActivity(intent);
         });
 
         addEventButton.setOnClickListener(v -> {
             Intent intent = new Intent(CategoryPage.this, CreateEventActivity.class);
-            startActivity(intent); // Start the CreateEventActivity activity
+            startActivity(intent);
         });
 
         backArrowButton.setOnClickListener(v -> {
             Intent intent = new Intent(CategoryPage.this, MainActivity.class);
-            startActivity(intent); // Start the HomePage activity
+            startActivity(intent);
         });
 
         profileButton.setOnClickListener(v -> {
             Intent intent = new Intent(CategoryPage.this, ProfilePage.class);
-            startActivity(intent); // Start the ProfilePage activity
+            startActivity(intent);
         });
 
         bookmarkButton.setOnClickListener(v -> {
             Intent intent = new Intent(CategoryPage.this, BookmarkPage.class);
-            startActivity(intent); // Start the BookmarksPage activity
+            startActivity(intent);
         });
 
         homeButton.setOnClickListener(v -> {
             Intent intent = new Intent(CategoryPage.this, MainActivity.class);
-            startActivity(intent); // Start the HomePage activity
+            startActivity(intent);
         });
     }
 }

@@ -31,19 +31,16 @@ public class UpcomingEventExtAdapter extends RecyclerView.Adapter<UpcomingEventE
         UpcomingEvent event = events.get(position);
         holder.eventTitle.setText(event.getEventTitle().getName());
         holder.eventDate.setText(event.getEventDate());
-        holder.eventCollege.setText(event.getEventCollege());  // Set the collegeDept text
-        holder.imageView.setImageResource(event.getEventTitle().getImageId());  // Set the event image
+        holder.eventCollege.setText(event.getEventCollege());
+        holder.imageView.setImageResource(event.getEventTitle().getImageId());
         holder.eventLocation.setText(event.getEventVenue());
 
         holder.imageView.setImageResource(event.getEventTitle().getImageId());
 
-        // Set click listener for the entire item view
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start the EventsRegistrationPage activity
                 Intent intent = new Intent(context, RegistrationEventPage.class);
-                // Optionally, pass event data to the new activity if needed
                 intent.putExtra("event_name", event.getEventTitle().getName());
                 intent.putExtra("event_date", event.getEventDate());
                 intent.putExtra("event_venue", event.getEventVenue());

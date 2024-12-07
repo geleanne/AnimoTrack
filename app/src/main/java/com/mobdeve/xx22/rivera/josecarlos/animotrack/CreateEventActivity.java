@@ -36,10 +36,8 @@ public class CreateEventActivity extends AppCompatActivity {
     // Declare UI elements
     private EditText eventNameEditText, eventVenueEditText, eventDateEditText, eventFacilitatorEditText, eventDescriptionEditText;
     private Spinner eventCollegeSpinner, eventCategorySpinner;
-    private FirebaseDatabase database;
-    private DatabaseReference eventsRef;
     Button buttonSubmitEvent;
-    ImageButton backArrow; // Declare backArrow
+    ImageButton backArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +47,8 @@ public class CreateEventActivity extends AppCompatActivity {
         String fullName = getIntent().getStringExtra("fullName");
 
         // Initialize Firebase database reference
-        database = FirebaseDatabase.getInstance();
-        eventsRef = database.getReference("created_events");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference eventsRef = database.getReference("created_events");
 
         // Initialize UI elements
         eventNameEditText = findViewById(R.id.eventNameEditText);
@@ -70,11 +68,10 @@ public class CreateEventActivity extends AppCompatActivity {
         List<String> categoryList = new ArrayList<>();
         List<String> collegeList = new ArrayList<>();
 
-        // Add default text
-        collegeList.add("College"); // Add default text
+        collegeList.add("College");
         collegeList.addAll(Arrays.asList(eventColleges));
 
-        categoryList.add("Category"); // Add default text
+        categoryList.add("Category");
         categoryList.addAll(Arrays.asList(eventCategories));
 
         // Set the adapter for the spinner
@@ -91,16 +88,15 @@ public class CreateEventActivity extends AppCompatActivity {
                 TextView selectedView = (TextView) parent.getChildAt(0);
                 if (selectedView != null) {
                     if (position == 0) {
-                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.gray)); // Default text color
+                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.gray));
                     } else {
-                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.black)); // Selected text color
+                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.black));
                     }
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Do nothing
             }
         });
 
@@ -111,16 +107,15 @@ public class CreateEventActivity extends AppCompatActivity {
                 TextView selectedView = (TextView) parent.getChildAt(0);
                 if (selectedView != null) {
                     if (position == 0) {
-                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.gray)); // Default text color
+                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.gray));
                     } else {
-                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.black)); // Selected text color
+                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.black));
                     }
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Do nothing
             }
         });
 
@@ -130,9 +125,9 @@ public class CreateEventActivity extends AppCompatActivity {
                 TextView selectedView = (TextView) parent.getChildAt(0);
                 if (selectedView != null) {
                     if (position == 0) {
-                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.gray)); // Default text color
+                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.gray));
                     } else {
-                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.black)); // Selected text color
+                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.black));
                     }
                 }
             }
@@ -143,7 +138,6 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
 
-        // handle back arrow
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,9 +147,7 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
 
-        // Handle Submit Button click
         buttonSubmitEvent.setOnClickListener(v -> {
-            // Capture event details
             String eventName = eventNameEditText.getText().toString().trim();
             String eventVenue = eventVenueEditText.getText().toString().trim();
             String eventDate = eventDateEditText.getText().toString().trim();
@@ -209,8 +201,7 @@ public class CreateEventActivity extends AppCompatActivity {
             eventData.put("eventName", eventName);
             eventData.put("eventVenue", eventVenue);
             eventData.put("isBookmarked", isBookmarked);
-//            eventData.put("collegeDept", collegeDept);
-            eventData.put("eventDrawableId", R.drawable.default_poster_squared); // Default image
+            eventData.put("eventDrawableId", R.drawable.default_poster_squared);
 
             // Add to Firestore
             eventsCollection.add(eventData)
@@ -222,13 +213,12 @@ public class CreateEventActivity extends AppCompatActivity {
         });
     }
 
-    // Method to check if a date is valid
+    // Method to check date validity
     private boolean isValidDate(String dateStr) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
-        sdf.setLenient(false); // Disallow lenient parsing (to avoid invalid dates being accepted)
+        sdf.setLenient(false);
         try {
             Date date = sdf.parse(dateStr);
-            // Check if the date is valid by comparing it with the current date
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             calendar.get(Calendar.MONTH);
@@ -238,14 +228,14 @@ public class CreateEventActivity extends AppCompatActivity {
         }
     }
 
-    // Method to clear all the form fields after submission
+    // Method to clear all the form fields (after)
     private void clearFields() {
         eventNameEditText.setText("");
         eventVenueEditText.setText("");
         eventDateEditText.setText("");
         eventFacilitatorEditText.setText("");
         eventDescriptionEditText.setText("");
-        eventCollegeSpinner.setSelection(0); // Reset spinner to default selection
-        eventCategorySpinner.setSelection(0); // Reset spinner to default selection
+        eventCollegeSpinner.setSelection(0);
+        eventCategorySpinner.setSelection(0);
     }
 }

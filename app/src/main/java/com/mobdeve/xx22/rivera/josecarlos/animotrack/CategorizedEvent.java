@@ -1,8 +1,8 @@
 package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
 public class CategorizedEvent {
-    private String category;
-    private Event event;
+    private final String category;
+    private final Event event;
 
     public CategorizedEvent(String category, Event event) {
         this.category = category;

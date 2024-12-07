@@ -36,9 +36,7 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventView
 
         holder.imageView.setImageResource(event.getEventTitle().getImageId());
 
-        // Set click listener for the entire item view
         holder.itemView.setOnClickListener(v -> {
-            // Start the EventsRegistrationPage activity with the event details
             startEventDetailsActivity(context, event);
         });
     }

@@ -43,7 +43,7 @@ public class CategorizedEventAdapter extends RecyclerView.Adapter<CategorizedEve
                 // Find the corresponding UpcomingEvent by matching category and name
                 UpcomingEvent event = getEventByCategoryAndName(currentEvent.getEvent().getCategory(), currentEvent.getEvent().getName());
                 if (event != null) {
-                    // Start the event details activity for the correct event
+                    // Start the event details (correct event)
                     UpcomingEventAdapter upcomingEventAdapter = new UpcomingEventAdapter(context, events);
                     upcomingEventAdapter.startEventDetailsActivity(context, event);
                 }
@@ -56,7 +56,7 @@ public class CategorizedEventAdapter extends RecyclerView.Adapter<CategorizedEve
         return categorizedEvents.size();
     }
 
-    // Helper method to find an event by category and name
+    // Helper method: find an event by category and name
     private UpcomingEvent getEventByCategoryAndName(String category, String eventName) {
         for (UpcomingEvent event : events) {
             if (event.getEventTitle().getCategory().equals(category) && event.getEventTitle().getName().equals(eventName)) {

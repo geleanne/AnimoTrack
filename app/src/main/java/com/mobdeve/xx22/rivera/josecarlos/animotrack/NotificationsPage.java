@@ -16,19 +16,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
 public class NotificationsPage extends AppCompatActivity {
 
-    private RecyclerView notificationsRecyclerView;
     private NotificationsAdapter adapter;
-    private ArrayList<NotificationsItem> notificationsList;
-    ImageButton backArrow; // Declare backArrow
-    ImageButton profileButton; // Declare profileButton
-    ImageButton bookmarkButton; // Declare bookmarkButton
-    ImageButton homeButton; // Declare homeButton
+    ImageButton backArrow;
+    ImageButton profileButton;
+    ImageButton bookmarkButton;
+    ImageButton homeButton;
     ImageButton eventsButton;
     ImageView addEventButton;
 
@@ -37,9 +34,8 @@ public class NotificationsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification_page);
 
-        notificationsRecyclerView = findViewById(R.id.notificationsRecyclerView);
+        RecyclerView notificationsRecyclerView = findViewById(R.id.notificationsRecyclerView);
 
-        // Initialize the buttons
         addEventButton = findViewById(R.id.add_event_button);
         backArrow = findViewById(R.id.back_arrow);
         profileButton = findViewById(R.id.profileButton);
@@ -47,8 +43,7 @@ public class NotificationsPage extends AppCompatActivity {
         homeButton = findViewById(R.id.homeButton);
         eventsButton = findViewById(R.id.eventsButton);
 
-        // Initialize the notifications list.
-        notificationsList = new ArrayList<>();
+        ArrayList<NotificationsItem> notificationsList = new ArrayList<>();
         adapter = new NotificationsAdapter(this, notificationsList);
 
         notificationsRecyclerView = findViewById(R.id.notificationsRecyclerView);
@@ -57,14 +52,12 @@ public class NotificationsPage extends AppCompatActivity {
         notificationsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         notificationsRecyclerView.setAdapter(adapter);
 
-        // Fetch notifications
         fetchNotificationsFromFirestore();
-
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish(); // Close current activity and return to the previous one
+                finish();
             }
         });
 
@@ -72,7 +65,7 @@ public class NotificationsPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(NotificationsPage.this, CreatedEventPage.class);
-                startActivity(intent); // Start the CreatedEventsPage activity
+                startActivity(intent);
             }
         });
 
@@ -80,7 +73,7 @@ public class NotificationsPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(NotificationsPage.this, ProfilePage.class);
-                startActivity(intent); // Start the LoginPage activity
+                startActivity(intent);
             }
         });
 
@@ -88,7 +81,7 @@ public class NotificationsPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(NotificationsPage.this, BookmarkPage.class);
-                startActivity(intent); // Start the BookmarksPage activity
+                startActivity(intent);
             }
         });
 
@@ -96,7 +89,7 @@ public class NotificationsPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(NotificationsPage.this, MainActivity.class);
-                startActivity(intent); // Start the HomePage activity
+                startActivity(intent);
             }
         });
 
@@ -104,7 +97,7 @@ public class NotificationsPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(NotificationsPage.this, CreateEventActivity.class);
-                startActivity(intent); // Start the AddEventPage activity
+                startActivity(intent);
             }
         });
     }
@@ -128,7 +121,6 @@ public class NotificationsPage extends AppCompatActivity {
                             String body = document.getString("body");
                             notifications.add(new NotificationsItem(title, body));
                         }
-                        // Update RecyclerView
                         adapter.notifyDataSetChanged();
                     })
                     .addOnFailureListener(e -> {

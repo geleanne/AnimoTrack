@@ -32,15 +32,13 @@ public class ProfilePage extends AppCompatActivity {
     TextView numberBookmarkedEvents;
 
     private FirebaseFirestore db;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
 
-        // Initialize Firebase components
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
         eventsJoinedButton = findViewById(R.id.eventsJoinedCountView);
@@ -59,14 +57,14 @@ public class ProfilePage extends AppCompatActivity {
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            // Regular user data fetching from 'AnimoTrackUsers' collection
+            // Fetch user from 'AnimoTrackUsers' collection
             db.collection("AnimoTrackUsers").document(currentUser.getUid())
                     .get()
                     .addOnSuccessListener(documentSnapshot -> {
                 if (documentSnapshot.exists()) {
                     String fullName = documentSnapshot.getString("name");
                     if (fullName != null && !fullName.isEmpty()) {
-                        fullNameTextView.setText(fullName); // Set the full name to TextView
+                        fullNameTextView.setText(fullName);
                     }
                 }
             })
@@ -75,14 +73,12 @@ public class ProfilePage extends AppCompatActivity {
             });
         }
 
-        // if the user has bookmarked events, display and update the numberBookmarkedEvents TextView accordingly
         if (!BookmarkPage.bookmarkEvents.isEmpty()) {
             numberBookmarkedEvents.setText(String.valueOf(BookmarkPage.bookmarkEvents.size()));
         } else {
             numberBookmarkedEvents.setText("0");
         }
 
-        // if the user has joined events, display and update the numberJoinedEvents TextView accordingly
         if (!JoinedEventPage.joinedEvents.isEmpty()) {
             numberJoinedEvents.setText(String.valueOf(JoinedEventPage.joinedEvents.size()));
         } else {
@@ -91,17 +87,16 @@ public class ProfilePage extends AppCompatActivity {
 
         eventsJoinedButton.setOnClickListener(v -> {
             Intent intent = new Intent(ProfilePage.this, JoinedEventPage.class);
-            startActivity(intent); // Start the JoinedEvent activity
+            startActivity(intent);
         });
 
         eventsBookmarkedButton.setOnClickListener(v -> {
             Intent intent = new Intent(ProfilePage.this, BookmarkPage.class);
-            startActivity(intent); // Start the Bookmark activity
+            startActivity(intent);
         });
 
         deleteAccButton.setOnClickListener(v -> {
             if (currentUser != null) {
-                // Show confirmation dialog
                 new AlertDialog.Builder(ProfilePage.this)
                         .setMessage("Are you sure you want to delete your account? This action cannot be undone.")
                         .setCancelable(false)
@@ -112,7 +107,6 @@ public class ProfilePage extends AppCompatActivity {
                                         currentUser.delete()
                                                 .addOnSuccessListener(aVoid1 -> {
                                                     Toast.makeText(ProfilePage.this, "Account deleted successfully.", Toast.LENGTH_SHORT).show();
-                                                    // Redirect to a landing or login page
                                                     Intent intent = new Intent(ProfilePage.this, LoginPage.class);
                                                     startActivity(intent);
                                                     finish();
@@ -141,13 +135,13 @@ public class ProfilePage extends AppCompatActivity {
                         FirebaseAuth.getInstance().signOut();
 
                         // Clear locally stored data
-                        BookmarkPage.bookmarkEvents.clear(); // Clear bookmarked events
-                        JoinedEventPage.joinedEvents.clear(); // Clear joined events
+                        BookmarkPage.bookmarkEvents.clear();
+                        JoinedEventPage.joinedEvents.clear();
 
                         // Redirect to the login page
                         Intent intent = new Intent(ProfilePage.this, LoginPage.class);
                         startActivity(intent);
-                        finish(); // Close the current activity
+                        finish();
                     })
                     .setNegativeButton("Cancel", null)
                     .show();
@@ -156,32 +150,32 @@ public class ProfilePage extends AppCompatActivity {
 
         eventsButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, CreatedEventPage.class);
-            startActivity(intent); // Start the CreatedEvent activity
+            startActivity(intent);
         });
 
         profileButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, ProfilePage.class);
-            startActivity(intent); // Start the ProfilePage activity
+            startActivity(intent);
         });
 
         bookmarkButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, BookmarkPage.class);
-            startActivity(intent); // Start the BookmarksPage activity
+            startActivity(intent);
         });
 
         homeButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, MainActivity.class);
-            startActivity(intent); // Start the MainActivity activity
+            startActivity(intent);
         });
 
         addEventButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, CreateEventActivity.class);
-            startActivity(intent); // Start the CreateEventActivity activity
+            startActivity(intent);
         });
 
         notificationsButton.setOnClickListener(view -> {
             Intent intent = new Intent(ProfilePage.this, NotificationsPage.class);
-            startActivity(intent); // Start the NotificationsPage activity
+            startActivity(intent);
         });
     }
 }

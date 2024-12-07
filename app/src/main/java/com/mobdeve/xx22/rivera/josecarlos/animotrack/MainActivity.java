@@ -6,11 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,8 +29,6 @@ import com.google.firebase.installations.FirebaseInstallations;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
-    EditText eToken;
 
     RecyclerView recyclerViewUpcomingEvents;
     ImageView addEventButton;
@@ -58,11 +54,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize FirebaseAuth and Firestore
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // Call saveEventsToFirestore to save events to Firestore when the app starts
         DataGenerator dataGenerator = new DataGenerator();
         dataGenerator.saveEventsToFirestore();
 
@@ -81,16 +75,6 @@ public class MainActivity extends AppCompatActivity {
         culturalIconImageButton = findViewById(R.id.culturalIconImageButton);
         addEventButton = findViewById(R.id.add_event_button);
         greetNameTextView = findViewById(R.id.greetNameTextView);
-//        eToken = findViewById(R.id.eToken);
-
-//        FirebaseMessaging.getInstance().subscribeToTopic("events")
-//                .addOnCompleteListener(task -> {
-//                    if (task.isSuccessful()) {
-//                        Log.d("FCM", "Subscribed to events topic.");
-//                    } else {
-//                        Log.e("FCM", "Failed to subscribe.");
-//                    }
-//                });
 
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -107,15 +91,9 @@ public class MainActivity extends AppCompatActivity {
 
                         // Log and toast
                         System.out.println(token);
-                        Toast.makeText(MainActivity.this, "Your device registration token is" + token, Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "FCM Token: " + token); // Make sure the token is logged
-
-//                        eToken.setText(token);
-
+                        Log.d(TAG, "FCM Token: " + token); // Make sure the token is logg
                     }
                 });
-
-
 
         FirebaseInstallations.getInstance().getId()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -132,21 +110,8 @@ public class MainActivity extends AppCompatActivity {
 
                                 // Save the Installation ID to Firestore under the user's document
                                 db.collection("AnimoTrackUsers").document(uid)
-                                        .update("installation_id", installationId)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-                                                    // Show a toast confirming that the Installation ID was saved
-                                                    Toast.makeText(MainActivity.this, "Installation ID saved successfully!", Toast.LENGTH_SHORT).show();
-                                                } else {
-                                                    // Handle any errors
-                                                    Toast.makeText(MainActivity.this, "Failed to save Installation ID", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
+                                        .update("installation_id", installationId);
                             }
-
                         } else {
                             Log.e("Installations", "Unable to get Installation ID");
                         }
@@ -182,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                     });
         }
 
-        // Proceed with setting up your RecyclerView and other buttons
+        // Setup of RecyclerView and other buttons
         ArrayList<UpcomingEvent> events = DataGenerator.generateUpcomingEventsData();
         int maxEventsToShow = 5;
         if (events.size() > maxEventsToShow) {
@@ -202,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Set OnClickListener for the buttons
         eventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -215,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreateEventActivity.class);
-                startActivity(intent); // Start the CreateEventActivity
+                startActivity(intent);
             }
         });
 
@@ -223,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ProfilePage.class);
-                startActivity(intent); // Start the LoginPage activity
+                startActivity(intent);
             }
         });
 
@@ -243,8 +207,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // --------------------------------- //
-        // Set OnClickListener for the categories
         orgsIconImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -293,9 +255,6 @@ public class MainActivity extends AppCompatActivity {
         notificationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Debugging Toast to verify button click
-                Toast.makeText(MainActivity.this, "Notifications Button Clicked", Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(MainActivity.this, NotificationsPage.class);
                 startActivity(intent);
             }
@@ -308,14 +267,13 @@ public class MainActivity extends AppCompatActivity {
         if (hasNewNotification) {
             notificationsButton.setImageResource(R.drawable.notif_icon_badge);
         } else {
-            notificationsButton.setImageResource(R.drawable.notif_icon); // Default icon
+            notificationsButton.setImageResource(R.drawable.notif_icon);
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         // Reset the notification icon
         updateNotificationIcon(false);
     }

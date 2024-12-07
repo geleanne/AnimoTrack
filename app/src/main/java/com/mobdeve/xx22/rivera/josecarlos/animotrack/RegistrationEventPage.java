@@ -22,44 +22,34 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class RegistrationEventPage extends AppCompatActivity {
     private TextView eventNameTextView;
     private TextView eventDateTextView;
-    private TextView eventVenueTextView;
-    private TextView eventFacilitatorTextView;
     TextView eventCollegeTextView;
-    private TextView eventDescriptionTextView;
     private ImageView eventImageView;
     private boolean isBookmarked = false;
     private boolean isJoined = false;
 
-    private FirebaseAuth mAuth;
-    private FirebaseUser currentUser;
 
     ImageButton bookmarkBtn;
-    ImageButton backArrow; // Declare backArrow
-    ImageButton profileButton; // Declare profileButton
-    ImageButton bookmarkButton; // Declare bookmarkButton
-    ImageButton homeButton; // Declare homeButton
+    ImageButton backArrow;
+    ImageButton profileButton;
+    ImageButton bookmarkButton;
+    ImageButton homeButton;
     ImageButton eventsButton;
     ImageView notificationsButton;
     Button joinedButton;
-
 
     private GestureDetector gestureDetector;
     private ArrayList<UpcomingEvent> eventsList;
     private int currentEventIndex = 0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.events_registration); // Make sure your layout file has the correct views
-
-
+        setContentView(R.layout.events_registration);
 
         backArrow = findViewById(R.id.back_arrow);
         profileButton = findViewById(R.id.profileButton);
@@ -70,16 +60,13 @@ public class RegistrationEventPage extends AppCompatActivity {
         joinedButton = findViewById(R.id.joinButton);
         notificationsButton = findViewById(R.id.notificationsButton);
 
-        // Initialize views
         eventNameTextView = findViewById(R.id.event_name);
         eventDateTextView = findViewById(R.id.event_date);
-        eventVenueTextView = findViewById(R.id.event_venue);
+        TextView eventVenueTextView = findViewById(R.id.event_venue);
         eventCollegeTextView = findViewById(R.id.event_college);
         eventImageView = findViewById(R.id.event_image);
-        eventFacilitatorTextView = findViewById(R.id.event_facilitator);
-        eventDescriptionTextView = findViewById(R.id.event_description);
+        TextView eventDescriptionTextView = findViewById(R.id.event_description);
 
-        // Retrieve data from Intent
         String eventName = getIntent().getStringExtra("event_name");
         String eventDate = getIntent().getStringExtra("event_date");
         String eventVenue = getIntent().getStringExtra("event_venue");
@@ -95,7 +82,6 @@ public class RegistrationEventPage extends AppCompatActivity {
         eventCollegeTextView.setText(eventCollegeDept);
         eventDescriptionTextView.setText(eventDescription);
         eventImageView.setImageResource(eventImageId);
-
 
         // Load events data
         eventsList = DataGenerator.generateUpcomingEventsData();
@@ -183,7 +169,6 @@ public class RegistrationEventPage extends AppCompatActivity {
                         if (!BookmarkPage.bookmarkEvents.contains(newEvent)) {
                             BookmarkPage.bookmarkEvents.add(newEvent);
 
-                            // Add the event to Firestore
                             Map<String, Object> eventData = new HashMap<>();
                             eventData.put("userId", userId);
                             eventData.put("eventImageId", eventImageId);
@@ -222,7 +207,6 @@ public class RegistrationEventPage extends AppCompatActivity {
             }
         });
 
-
         // Check if the event is already joined
         isJoined = false; // Reset the status before checking
         for (JoinedEvent joinedEvent : JoinedEventPage.joinedEvents) {
@@ -244,7 +228,6 @@ public class RegistrationEventPage extends AppCompatActivity {
         joinedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // if it is clicked, it will show a toast message and changed the text of the button to RSVP'd
                 isJoined = !isJoined;
 
                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -272,7 +255,6 @@ public class RegistrationEventPage extends AppCompatActivity {
                         if (!JoinedEventPage.joinedEvents.contains(newEvent)) {
                             JoinedEventPage.joinedEvents.add(newEvent);
 
-                            // Add the event to Firestore
                             Map<String, Object> eventData = new HashMap<>();
                             eventData.put("userId", userId);
                             eventData.put("eventImageId", eventImageId);
@@ -314,7 +296,7 @@ public class RegistrationEventPage extends AppCompatActivity {
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish(); // Close current activity and return to the previous one
+                finish();
             }
         });
 
@@ -322,7 +304,7 @@ public class RegistrationEventPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RegistrationEventPage.this, CreatedEventPage.class);
-                startActivity(intent); // Start the CreatedEventsPage activity
+                startActivity(intent);
             }
         });
 
@@ -330,7 +312,7 @@ public class RegistrationEventPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RegistrationEventPage.this, ProfilePage.class);
-                startActivity(intent); // Start the LoginPage activity
+                startActivity(intent);
             }
         });
 
@@ -338,7 +320,7 @@ public class RegistrationEventPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RegistrationEventPage.this, BookmarkPage.class);
-                startActivity(intent); // Start the BookmarksPage activity
+                startActivity(intent);
             }
         });
 
@@ -346,7 +328,7 @@ public class RegistrationEventPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RegistrationEventPage.this, MainActivity.class);
-                startActivity(intent); // Start the HomePage activity
+                startActivity(intent);
             }
         });
 
@@ -354,7 +336,7 @@ public class RegistrationEventPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RegistrationEventPage.this, NotificationsPage.class);
-                startActivity(intent); // Start the NotificationsPage activity
+                startActivity(intent);
             }
         });
     }

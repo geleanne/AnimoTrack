@@ -28,34 +28,28 @@ import java.util.Map;
 
 public class SignupPage extends AppCompatActivity {
 
-    // Declare views
     private EditText fullNameField;
     private EditText idNumberField;
     private EditText emailField;
     private EditText passwordField;
-    private Button signUpButton;
-    private Button hasAnAccountButton; // Button to redirect to login page
 
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup_page); // Ensure this matches your XML layout name
+        setContentView(R.layout.activity_signup_page);
 
-        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-        FirebaseFirestore db = FirebaseFirestore.getInstance(); // Initialize Firestore
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // Initialize views
         fullNameField = findViewById(R.id.editTextFullName);
         idNumberField = findViewById(R.id.editTextIdNumber);
         emailField = findViewById(R.id.editTextEmailAddress);
         passwordField = findViewById(R.id.editTextPassword);
-        signUpButton = findViewById(R.id.buttonLogin); // This button is labeled "Sign Up" in the XML
-        hasAnAccountButton = findViewById(R.id.hasAnAccountButton); // Button to go back to login
+        Button signUpButton = findViewById(R.id.buttonLogin);
+        Button hasAnAccountButton = findViewById(R.id.hasAnAccountButton);
 
-        // Set OnClickListener for the Sign Up button
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,8 +59,6 @@ public class SignupPage extends AppCompatActivity {
                 String email = emailField.getText().toString().trim();
                 String password = passwordField.getText().toString().trim();
 
-                // Simple validation
-                // Check for admin credentials (for testing purposes)
                 if (fullName.isEmpty() || idNumber.isEmpty() || email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(SignupPage.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 } else if (!email.endsWith("@dlsu.edu.ph") || email.indexOf('@') == 0) {
@@ -95,26 +87,22 @@ public class SignupPage extends AppCompatActivity {
                                                                 // Successfully updated the profile
                                                                 Toast.makeText(SignupPage.this, "Account created!", Toast.LENGTH_SHORT).show();
 
-                                                                // Save additional user data to Firestore
-                                                                // Create a Map to store the user data
                                                                 Map<String, Object> userData = new HashMap<>();
-                                                                userData.put("name", fullName); // Store full name
-                                                                userData.put("id_number", idNumber); // Store id_number
-                                                                userData.put("email", email); // Store email
-                                                                userData.put("password", password); // Store password
+                                                                userData.put("name", fullName);
+                                                                userData.put("id_number", idNumber);
+                                                                userData.put("email", email);
+                                                                userData.put("password", password);
 
-                                                                // Get a reference to the 'AnimoTrackUsers' collection
+                                                                // Reference to the 'AnimoTrackUsers' collection
                                                                 CollectionReference usersRef = db.collection("AnimoTrackUsers");
 
                                                                 // Add the new user document with the user's UID as the document ID
-                                                                usersRef.document(user.getUid()) // Use UID to ensure the document ID is unique
+                                                                usersRef.document(user.getUid())
                                                                         .set(userData)
                                                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                             @Override
                                                                             public void onSuccess(Void aVoid) {
-                                                                                // Successfully saved user data to Firestore
                                                                                 Log.d("SignupPage", "User data saved to Firestore!");
-                                                                                Toast.makeText(SignupPage.this, "User data saved to Firestore User UID: " + user.getUid(), Toast.LENGTH_SHORT).show();
 
 
                                                                                 // After successful sign-up, retrieve FCM token
@@ -128,30 +116,17 @@ public class SignupPage extends AppCompatActivity {
                                                                                                     return;
                                                                                                 }
 
-                                                                                                // Get new FCM registration token
                                                                                                 String token = task.getResult();
 
-                                                                                                Toast.makeText(SignupPage.this, "Your device registration token is" + token, Toast.LENGTH_SHORT).show();
                                                                                                 FirebaseUser user = mAuth.getCurrentUser();
                                                                                                 if (user != null) {
                                                                                                     db.collection("AnimoTrackUsers")
                                                                                                             .document(user.getUid())
-                                                                                                            .update("fcm_token", token)
-                                                                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                                @Override
-                                                                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                                                                    if (task.isSuccessful()) {
-                                                                                                                        Toast.makeText(SignupPage.this, "FCM token saved", Toast.LENGTH_SHORT).show();
-                                                                                                                    } else {
-                                                                                                                        Toast.makeText(SignupPage.this, "Error saving FCM token", Toast.LENGTH_SHORT).show();
-                                                                                                                    }
-                                                                                                                }
-                                                                                                            });
+                                                                                                            .update("fcm_token", token);
                                                                                                 }
                                                                                             }
                                                                                         });
 
-                                                                                // Redirect to LoginPage
                                                                                 Intent intent = new Intent(SignupPage.this, LoginPage.class);
                                                                                 intent.putExtra("fullName", fullName);
                                                                                 startActivity(intent);
@@ -179,20 +154,18 @@ public class SignupPage extends AppCompatActivity {
             }
         });
 
-        // Set OnClickListener for the already have an account button
         hasAnAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Redirect to LoginPage
                 Intent intent = new Intent(SignupPage.this, LoginPage.class);
                 startActivity(intent);
-                finish(); // Optional: Call finish() if you want to remove SignUpPage from the back stack
+                finish();
             }
         });
     }
 
     // Validate ID number (8 digits, starts with '1')
     private boolean isValidIdNumber(String idNumber) {
-        return idNumber.matches("^12\\d{6}$"); // Must start with '1' and followed by 7 digits
+        return idNumber.matches("^12\\d{6}$");
     }
 }

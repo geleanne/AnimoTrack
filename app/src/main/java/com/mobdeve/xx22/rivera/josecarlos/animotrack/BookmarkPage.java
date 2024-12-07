@@ -16,21 +16,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class BookmarkPage extends AppCompatActivity {
 
     public static ArrayList<BookmarkEvent> bookmarkEvents = new ArrayList<>();
-    private RecyclerView recyclerViewBookmarkEvents;
     private BookmarkEventAdapter adapter;
 
-    private FirebaseAuth mAuth;
-    private FirebaseUser currentUser;
-
     ImageButton backArrow;
-    ImageButton profileButton; // Declare profileButton
-    ImageButton bookmarkButton; // Declare bookmarkButton
+    ImageButton profileButton;
+    ImageButton bookmarkButton;
     ImageButton eventsButton;
-    ImageButton homeButton; // Declare homeButton
+    ImageButton homeButton;
     ImageView notificationsButton;
     ImageView addEventButton;
 
@@ -39,14 +36,12 @@ public class BookmarkPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bookmark_events);
 
-        recyclerViewBookmarkEvents = findViewById(R.id.recycler_view_bookmarked_events);
+        RecyclerView recyclerViewBookmarkEvents = findViewById(R.id.recycler_view_bookmarked_events);
         recyclerViewBookmarkEvents.setLayoutManager(new LinearLayoutManager(this));
 
-        // Initialize the adapter
         adapter = new BookmarkEventAdapter(this, bookmarkEvents);
         recyclerViewBookmarkEvents.setAdapter(adapter);
 
-        // Fetch bookmarked events from Firestore
         fetchBookmarkedEvents();
 
         backArrow = findViewById(R.id.back_arrow);
@@ -91,8 +86,8 @@ public class BookmarkPage extends AppCompatActivity {
     }
 
     private void fetchBookmarkedEvents() {
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
             String userId = currentUser.getUid();
@@ -102,11 +97,10 @@ public class BookmarkPage extends AppCompatActivity {
                     .whereEqualTo("userId", userId)
                     .get()
                     .addOnSuccessListener(queryDocumentSnapshots -> {
-                        bookmarkEvents.clear(); // Clear old data
+                        bookmarkEvents.clear();
                         for (DocumentSnapshot doc : queryDocumentSnapshots) {
                             String eventName = doc.getString("eventName");
                             if (eventName != null) {
-                                // Fetch collegeDept from AnimoTrackEvents collection
                                 db.collection("AnimoTrackEvents")
                                         .document(eventName)
                                         .get()
@@ -114,7 +108,7 @@ public class BookmarkPage extends AppCompatActivity {
                                             String collegeDept = eventDoc.getString("collegeDept");
                                             BookmarkEvent event = new BookmarkEvent(
                                                     new Event(
-                                                            doc.getLong("eventImageId").intValue(),
+                                                            Objects.requireNonNull(doc.getLong("eventImageId")).intValue(),
                                                             eventName,
                                                             doc.getString("category")
                                                     ),
@@ -123,10 +117,10 @@ public class BookmarkPage extends AppCompatActivity {
                                                     doc.getString("eventFacilitator"),
                                                     doc.getString("eventDescription"),
                                                     collegeDept != null ? collegeDept : "Unknown College",
-                                                    doc.getBoolean("isBookmarked")
+                                                    Boolean.TRUE.equals(doc.getBoolean("isBookmarked"))
                                             );
                                             bookmarkEvents.add(event);
-                                            adapter.notifyDataSetChanged(); // Notify adapter of new data
+                                            adapter.notifyDataSetChanged();
                                         })
                                         .addOnFailureListener(e -> Log.e("Firestore", "Error fetching collegeDept", e));
                             }
@@ -142,7 +136,7 @@ public class BookmarkPage extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (adapter != null) {
-            adapter.notifyDataSetChanged(); // Refresh the list
+            adapter.notifyDataSetChanged();
         }
     }
 }

@@ -1,12 +1,12 @@
 package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
 public class JoinedEvent {
-    private Event event;
-    private String eventDate;
-    private String eventVenue;
-    private String eventFacilitator;
-    private String eventDescription;
-    private boolean isJoined;
+    private final Event event;
+    private final String eventDate;
+    private final String eventVenue;
+    private final String eventFacilitator;
+    private final String eventDescription;
+    private final boolean isJoined;
 
     public JoinedEvent(Event event, String eventDate, String eventVenue, String eventFacilitator, String eventDescription, boolean isJoined) {
         this.event = event;
@@ -38,6 +38,6 @@ public class JoinedEvent {
     }
 
     public boolean isJoined() {
-        return isJoined;  // Getter for the joined status
+        return isJoined;
     }
 }

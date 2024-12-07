@@ -1,13 +1,12 @@
 package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
 public class Event {
-    private int imageId; // For event image
-    private final String name; // Event title
-    private String category; // Event category
-    private String collegeDept; // Event college department
-    boolean isBookmarked; // Bookmark status
+    private final int imageId;
+    private final String name;
+    private String category;
+    private String collegeDept;
+    boolean isBookmarked;
 
-    // Main Constructor
     public Event(int eventImageId, String eventName) {
         this.imageId = eventImageId;
         this.name = eventName;
@@ -43,9 +42,5 @@ public class Event {
 
     public String getEventCollege() {
         return this.collegeDept;
-    }
-
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
     }
 }

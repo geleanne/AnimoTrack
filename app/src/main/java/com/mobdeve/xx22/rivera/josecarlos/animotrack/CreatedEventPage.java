@@ -3,6 +3,7 @@ package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,8 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.Timestamp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -23,43 +22,30 @@ import java.util.Objects;
 
 public class CreatedEventPage extends AppCompatActivity {
 
-    private ImageButton backArrow, profileButton, bookmarkButton, homeButton;
-    private ImageView addEventButton, notificationButton;
-    private TextView titleTextView;
-    private RecyclerView recyclerViewCreatedEvents;
-
-    private ArrayList<UpcomingEvent> createdEventsList = new ArrayList<>();
+    private final ArrayList<UpcomingEvent> createdEventsList = new ArrayList<>();
     private CreatedEventAdapter adapter;
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.created_events);
 
-        // Initialize views
-        titleTextView = findViewById(R.id.toolbar_title);
-        backArrow = findViewById(R.id.back_arrow);
-        profileButton = findViewById(R.id.profileButton);
-        bookmarkButton = findViewById(R.id.bookmarksButton);
-        homeButton = findViewById(R.id.homeButton);
-        addEventButton = findViewById(R.id.add_event_button);
-        notificationButton = findViewById(R.id.notificationsButton);
+        ImageButton backArrow = findViewById(R.id.back_arrow);
+        ImageButton profileButton = findViewById(R.id.profileButton);
+        ImageButton bookmarkButton = findViewById(R.id.bookmarksButton);
+        ImageButton homeButton = findViewById(R.id.homeButton);
+        ImageView addEventButton = findViewById(R.id.add_event_button);
+        ImageView notificationButton = findViewById(R.id.notificationsButton);
 
-        // Initialize views
-        recyclerViewCreatedEvents = findViewById(R.id.recycler_view_created_events);
+        RecyclerView recyclerViewCreatedEvents = findViewById(R.id.recycler_view_created_events);
         recyclerViewCreatedEvents.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CreatedEventAdapter(this, createdEventsList);
         recyclerViewCreatedEvents.setAdapter(adapter);
 
-        // Set user info in the toolbar
-//        setUserInfo();
-
-        // Fetch created events from Firestore
         fetchCreatedEvents();
 
-        // Set button listeners
         backArrow.setOnClickListener(v -> finish());
 
         profileButton.setOnClickListener(v -> {
@@ -88,26 +74,6 @@ public class CreatedEventPage extends AppCompatActivity {
         });
     }
 
-//    private void setUserInfo() {
-//        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-//        if (currentUser != null) {
-//            String userId = currentUser.getUid();
-//            db.collection("AnimoTrackUsers").document(userId)
-//                    .get()
-//                    .addOnSuccessListener(documentSnapshot -> {
-//                        if (documentSnapshot.exists()) {
-//                            String fullName = documentSnapshot.getString("name");
-//                            titleTextView.setText("Would you like to add an event,\n" + fullName + "?");
-//                        } else {
-//                            Log.w("SetUserInfo", "User data not found.");
-//                        }
-//                    })
-//                    .addOnFailureListener(e -> {
-//                        Log.e("SetUserInfo", "Error fetching user data.", e);
-//                    });
-//        }
-//    }
-
     private void fetchCreatedEvents() {
         db.collection("UserCreatedEvents")
                 .get()
@@ -116,24 +82,24 @@ public class CreatedEventPage extends AppCompatActivity {
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {
                         try {
                             String eventName = doc.getString("eventName");
-                            Timestamp eventTimestamp = doc.getTimestamp("eventDate");  // Retrieve timestamp
+                            Timestamp eventTimestamp = doc.getTimestamp("eventDate");
                             String eventDate = "";
                             if (eventTimestamp != null) {
-                                eventDate = eventTimestamp.toDate().toString();  // Convert timestamp to string
+                                eventDate = eventTimestamp.toDate().toString();
                             }
                             String eventVenue = doc.getString("eventVenue");
                             String eventFacilitator = doc.getString("eventFacilitator");
                             String eventDescription = doc.getString("eventDescription");
                             boolean isBookmarked = doc.getBoolean("isBookmarked") != null && doc.getBoolean("isBookmarked");
 
-                            // Use default image if not set
+                            // default event image
                             int eventImageId = doc.contains("eventDrawableId") ? Objects.requireNonNull(doc.getLong("eventDrawableId")).intValue() : R.drawable.default_poster_squared;
 
                             // Log the event data for debugging
                             Log.d("FetchEvents", "Event Name: " + eventName);
 
                             // Validate required fields
-                            if (eventName != null && eventDate != null && eventVenue != null) {
+                            if (eventName != null && eventVenue != null) {
                                 UpcomingEvent event = new UpcomingEvent(
                                         new Event(eventImageId, eventName, "General"),
                                         eventDate, eventVenue, "Unknown College", eventFacilitator, eventDescription, isBookmarked
@@ -146,7 +112,7 @@ public class CreatedEventPage extends AppCompatActivity {
                             Log.e("FetchEvents", "Error parsing event data.", e);
                         }
                     }
-                    Log.d("FetchEvents", "Events fetched: " + createdEventsList.size()); // Check how many events are fetched
+                    Log.d("FetchEvents", "Events fetched: " + createdEventsList.size());
                     adapter.notifyDataSetChanged();
                 })
                 .addOnFailureListener(e -> {
@@ -154,9 +120,6 @@ public class CreatedEventPage extends AppCompatActivity {
                     Toast.makeText(this, "Error loading events", Toast.LENGTH_SHORT).show();
                 });
     }
-
-
-
 
     @Override
     protected void onResume() {

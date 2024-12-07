@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
@@ -23,17 +22,13 @@ import java.util.Objects;
 public class JoinedEventPage extends AppCompatActivity {
 
     public static ArrayList<JoinedEvent> joinedEvents = new ArrayList<>();
-    private RecyclerView recyclerViewJoinedEvents;
     private JoinedEventAdapter adapter;
 
-    private FirebaseAuth mAuth;
-    private FirebaseUser currentUser;
-
     ImageButton backArrow;
-    ImageButton profileButton; // Declare profileButton
-    ImageButton bookmarkButton; // Declare bookmarkButton
+    ImageButton profileButton;
+    ImageButton bookmarkButton;
     ImageButton eventsButton;
-    ImageButton homeButton; // Declare homeButton
+    ImageButton homeButton;
     ImageView addEventButton;
 
 
@@ -42,14 +37,12 @@ public class JoinedEventPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.joined_events);
 
-        recyclerViewJoinedEvents = findViewById(R.id.recycler_view_joined_events);
+        RecyclerView recyclerViewJoinedEvents = findViewById(R.id.recycler_view_joined_events);
         recyclerViewJoinedEvents.setLayoutManager(new LinearLayoutManager(this));
 
-        // Initialize the adapter
         adapter = new JoinedEventAdapter(this, joinedEvents);
         recyclerViewJoinedEvents.setAdapter(adapter);
 
-        // Fetch joined events from Firestore
         fetchJoinedEvents();
 
         backArrow = findViewById(R.id.back_arrow);
@@ -88,8 +81,8 @@ public class JoinedEventPage extends AppCompatActivity {
     }
 
     private void fetchJoinedEvents() {
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
             String userId = currentUser.getUid();

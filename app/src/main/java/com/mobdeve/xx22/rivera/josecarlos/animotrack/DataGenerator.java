@@ -2,12 +2,11 @@ package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
 import java.util.ArrayList;
 
-
 public class DataGenerator {
-    private final static Event event1 = new Event(R.drawable.event1, "UAAP SEASON 87 MENS VOLLEYBALL", "Sports", "All"); // Sports
-    private final static Event event2 = new Event(R.drawable.event2, "In Sync: Group Studies", "Academics", "CCS"); // Academic
-    private final static Event event3 = new Event(R.drawable.event3, "LLM Tuning Methods for Specific Tasks.", "Seminars", "CCS"); // Seminar
-    private final static Event event4 = new Event(R.drawable.event4, "Annual Recruitment Week 2024: The Archer Calls", "Organizations", "All"); //
+    private final static Event event1 = new Event(R.drawable.event1, "UAAP SEASON 87 MENS VOLLEYBALL", "Sports", "All");
+    private final static Event event2 = new Event(R.drawable.event2, "In Sync: Group Studies", "Academics", "CCS");
+    private final static Event event3 = new Event(R.drawable.event3, "LLM Tuning Methods for Specific Tasks.", "Seminars", "CCS");
+    private final static Event event4 = new Event(R.drawable.event4, "Annual Recruitment Week 2024: The Archer Calls", "Organizations", "All");
     private final static Event event5 = new Event(R.drawable.event5, "DLSU Chorale Annual Recruitment Week", "Cultural", "All");
     private final static Event event6 = new Event(R.drawable.event6, "International Lasallian Days of Peace", "Cultural", "CLA");
     private final static Event event7 = new Event(R.drawable.event7, "Banner Making Contest", "Sports", "All");
@@ -32,7 +31,6 @@ public class DataGenerator {
         tempList.add(new UpcomingEvent(event10, "November 18-20, 2024", "Velasco Hall, Room 207", "CLA", "DLSU Psychology Society", "Test your emotional intelligence and problem-solving skills in this thrilling escape room challenge. Decode clues and escape within 45 minutes to win exciting prizes!","Organization", false));
         tempList.add(new UpcomingEvent(event11, "December 5-15, 2024", "Online", "CCS", "DLSU CSG", "Don’t miss out on this exciting pop-up merchandise market! Catch That Merch brings together local vendors, student-made products, and exclusive DLSU-themed items for sale. Perfect for anyone looking to grab unique gifts and school spirit gear, all while supporting local entrepreneurs and student projects.","Organization", false));
         tempList.add(new UpcomingEvent(event12, "December 1, 2024", "Gokongwei Building 105 ", "CCS", "DLSU CSG", "Explore the future of technology in this tech conference featuring innovative workshops, guest speakers from the tech industry, and hands-on experiences with cutting-edge gadgets and software. Discover how you can contribute to the digital future!","Academics", false));
-        // tempList.add(new UpcomingEvent(event6, "", "", "", ""));
 
         return tempList;
     }

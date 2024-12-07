@@ -1,14 +1,14 @@
 package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
 public class UpcomingEvent {
-    private Event event;
-    private String eventDate;
-    private String eventVenue;
-    private String eventCollege;
-    private String eventFacilitator;
-    private String eventDescription;
+    private final Event event;
+    private final String eventDate;
+    private final String eventVenue;
+    private final String eventCollege;
+    private final String eventFacilitator;
+    private final String eventDescription;
     private String category;
-    private boolean isBookmarked;
+    private final boolean isBookmarked;
 
     public UpcomingEvent(Event event, String eventDate, String eventVenue, String eventCollege, String eventFacilitator, String eventDescription, boolean isBookmarked) {
         this.event = event;
@@ -64,7 +64,7 @@ public class UpcomingEvent {
     }
 
     public boolean isBookmarked() {
-        return isBookmarked;  // Getter for the favorite status
+        return isBookmarked;
     }
 
     @Override

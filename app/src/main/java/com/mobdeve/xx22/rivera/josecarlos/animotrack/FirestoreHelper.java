@@ -20,7 +20,7 @@ public class FirestoreHelper {
         // Map the event data
         Map<String, Object> eventData = new HashMap<>();
         eventData.put("category", event.getCategory());
-        eventData.put("collegeDept", event.getEventCollege() != null ? event.getEventCollege() : "Unknown College"); // Ensure it's not null
+        eventData.put("collegeDept", event.getEventCollege() != null ? event.getEventCollege() : "Unknown College");
         eventData.put("date", event.getEventDate());
         eventData.put("description", event.getEventDescription());
         eventData.put("facilitator", event.getEventFacilitator());
@@ -55,8 +55,7 @@ public class FirestoreHelper {
                             String category = document.getString("category");
                             boolean isBookmarked = document.getBoolean("isBookmarked") != null && document.getBoolean("isBookmarked");
 
-                            // fetch event image here
-                            // Fetch the image ID from Firestore and assign it to the event
+                            // Fetch the image ID and assign it to the event
                             int imageId = document.getLong("imageId") != null ? document.getLong("imageId").intValue() : R.drawable.default_poster_squared;
 
                             // Create Event and UpcomingEvent objects

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,7 +37,6 @@ public class JoinedEventAdapter extends RecyclerView.Adapter<JoinedEventViewHold
         holder.imageView.setImageResource(event.getEventTitle().getImageId());
 
         holder.itemView.setOnClickListener(v -> {
-            // Start the EventsRegistrationPage activity with the event details
             startEventDetailsActivity(context, event);
         });
     }
@@ -56,7 +54,7 @@ public class JoinedEventAdapter extends RecyclerView.Adapter<JoinedEventViewHold
         intent.putExtra("event_image", event.getEventTitle().getImageId());
         intent.putExtra("event_facilitator", event.getEventFacilitator());
         intent.putExtra("event_description", event.getEventDescription());
-        intent.putExtra("event_isJoined", event.isJoined()); // Pass the joined status as an extra"
+        intent.putExtra("event_isJoined", event.isJoined());
         context.startActivity(intent);
     }
 }

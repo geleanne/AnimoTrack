@@ -17,7 +17,6 @@ public class MessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        // Check if the message contains data
         if (remoteMessage.getData().size() > 0) {
             String title = remoteMessage.getData().get("title");
             String body = remoteMessage.getData().get("body");
@@ -50,7 +49,7 @@ public class MessagingService extends FirebaseMessagingService {
         );
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId)
-                .setSmallIcon(R.drawable.notif_icon) // Use your app's notification icon
+                .setSmallIcon(R.drawable.notif_icon)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)

@@ -15,7 +15,7 @@ public class CategorizedEventViewHolder extends RecyclerView.ViewHolder {
 
     public CategorizedEventViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.itemView = itemView; // Store the root view for click handling
+        this.itemView = itemView;
 
         imageView = itemView.findViewById(R.id.eventPoster);
         eventTitle = itemView.findViewById(R.id.eventTitle);

@@ -35,7 +35,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
     // Declare UI elements
     private EditText eventNameEditText, eventVenueEditText, eventDateEditText, eventFacilitatorEditText, eventDescriptionEditText;
-    private Spinner eventCategorySpinner;
+    private Spinner eventCollegeSpinner, eventCategorySpinner;
     private FirebaseDatabase database;
     private DatabaseReference eventsRef;
     Button buttonSubmitEvent;
@@ -58,20 +58,71 @@ public class CreateEventActivity extends AppCompatActivity {
         eventDateEditText = findViewById(R.id.eventDateEditText);
         eventFacilitatorEditText = findViewById(R.id.eventFacilitatorEditText);
         eventDescriptionEditText = findViewById(R.id.eventDescriptionEditText);
+        eventCollegeSpinner = findViewById(R.id.eventCollegeSpinner);
         eventCategorySpinner = findViewById(R.id.eventCategorySpinner);
         buttonSubmitEvent = findViewById(R.id.buttonSubmitEvent);
 
         backArrow = findViewById(R.id.back_arrow);
 
-        String[] categories = getResources().getStringArray(R.array.event_categories);
+        String[] eventCategories = getResources().getStringArray(R.array.event_categories);
+        String[] eventColleges = getResources().getStringArray(R.array.event_college);
+
         List<String> categoryList = new ArrayList<>();
-        categoryList.add("Select Category"); // Add default text
-        categoryList.addAll(Arrays.asList(categories));
+        List<String> collegeList = new ArrayList<>();
+
+        // Add default text
+        collegeList.add("College"); // Add default text
+        collegeList.addAll(Arrays.asList(eventColleges));
+
+        categoryList.add("Category"); // Add default text
+        categoryList.addAll(Arrays.asList(eventCategories));
 
         // Set the adapter for the spinner
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoryList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        eventCategorySpinner.setAdapter(adapter);
+        ArrayAdapter<String> collegeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, collegeList);
+        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoryList);
+
+        collegeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        eventCollegeSpinner.setAdapter(collegeAdapter);
+        eventCollegeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TextView selectedView = (TextView) parent.getChildAt(0);
+                if (selectedView != null) {
+                    if (position == 0) {
+                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.gray)); // Default text color
+                    } else {
+                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.black)); // Selected text color
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
+
+        eventCategorySpinner.setAdapter(categoriesAdapter);
+        eventCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TextView selectedView = (TextView) parent.getChildAt(0);
+                if (selectedView != null) {
+                    if (position == 0) {
+                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.gray)); // Default text color
+                    } else {
+                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.black)); // Selected text color
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
 
         eventCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -110,6 +161,7 @@ public class CreateEventActivity extends AppCompatActivity {
             String eventDate = eventDateEditText.getText().toString().trim();
             String eventFacilitator = eventFacilitatorEditText.getText().toString().trim();
             String eventDescription = eventDescriptionEditText.getText().toString().trim();
+            String eventCollege = eventCollegeSpinner.getSelectedItem().toString();
             String eventCategory = eventCategorySpinner.getSelectedItem().toString();
             Boolean isBookmarked = false;
 
@@ -119,7 +171,12 @@ public class CreateEventActivity extends AppCompatActivity {
                 return;
             }
 
-            if (eventCategory.equals("Select Category")) {
+            if (eventCollege.equals("College")) {
+                Toast.makeText(this, "Please select a valid college", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (eventCategory.equals("Category")) {
                 Toast.makeText(this, "Please select a valid category", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -142,7 +199,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
             // Prepare Firestore data
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-            CollectionReference eventsCollection = db.collection("AnimoTrackEvents");
+            CollectionReference eventsCollection = db.collection("UserCreatedEvents");
 
             Map<String, Object> eventData = new HashMap<>();
             eventData.put("category", eventCategory);
@@ -152,6 +209,7 @@ public class CreateEventActivity extends AppCompatActivity {
             eventData.put("eventName", eventName);
             eventData.put("eventVenue", eventVenue);
             eventData.put("isBookmarked", isBookmarked);
+//            eventData.put("collegeDept", collegeDept);
             eventData.put("eventDrawableId", R.drawable.default_poster_squared); // Default image
 
             // Add to Firestore
@@ -187,6 +245,7 @@ public class CreateEventActivity extends AppCompatActivity {
         eventDateEditText.setText("");
         eventFacilitatorEditText.setText("");
         eventDescriptionEditText.setText("");
+        eventCollegeSpinner.setSelection(0); // Reset spinner to default selection
         eventCategorySpinner.setSelection(0); // Reset spinner to default selection
     }
 }

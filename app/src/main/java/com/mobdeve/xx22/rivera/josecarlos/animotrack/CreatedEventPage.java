@@ -109,7 +109,7 @@ public class CreatedEventPage extends AppCompatActivity {
 //    }
 
     private void fetchCreatedEvents() {
-        db.collection("AnimoTrackEvents")
+        db.collection("UserCreatedEvents")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     createdEventsList.clear();

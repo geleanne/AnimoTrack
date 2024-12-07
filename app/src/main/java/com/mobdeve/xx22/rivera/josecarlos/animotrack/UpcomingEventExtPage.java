@@ -113,7 +113,8 @@ public class UpcomingEventExtPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UpcomingEventExtPage.this, CreateEventActivity.class);
-                startActivity(intent); // Start the CreateEventActivity activity
+                intent.putExtra("fullName", fullName);
+                startActivity(intent); // Start the CreateEventPage activity
             }
         });
 
@@ -121,6 +122,7 @@ public class UpcomingEventExtPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UpcomingEventExtPage.this, BookmarkPage.class);
+                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the BookmarksPage activity
             }
         });

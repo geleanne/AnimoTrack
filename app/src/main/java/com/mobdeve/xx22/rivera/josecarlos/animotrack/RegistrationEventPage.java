@@ -3,6 +3,8 @@ package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -18,13 +20,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RegistrationEventPage extends AppCompatActivity {
-
-    private UpcomingEvent currentEvent;
-
     private TextView eventNameTextView;
     private TextView eventDateTextView;
     private TextView eventVenueTextView;
@@ -47,10 +48,18 @@ public class RegistrationEventPage extends AppCompatActivity {
     ImageView notificationsButton;
     Button joinedButton;
 
+
+    private GestureDetector gestureDetector;
+    private ArrayList<UpcomingEvent> eventsList;
+    private int currentEventIndex = 0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.events_registration); // Make sure your layout file has the correct views
+
+
 
         backArrow = findViewById(R.id.back_arrow);
         profileButton = findViewById(R.id.profileButton);
@@ -88,6 +97,33 @@ public class RegistrationEventPage extends AppCompatActivity {
         eventImageView.setImageResource(eventImageId);
 
 
+        // Load events data
+        eventsList = DataGenerator.generateUpcomingEventsData();
+
+        // Display the first event
+        updateEventDisplay();
+
+        // Gesture detector
+        gestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+            private static final int SWIPE_THRESHOLD = 100;
+            private static final int SWIPE_VELOCITY_THRESHOLD = 100;
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                float diffX = e2.getX() - e1.getX();
+                if (Math.abs(diffX) > Math.abs(e2.getY() - e1.getY())) {
+                    if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                        if (diffX > 0) {
+                            onSwipeRight();
+                        } else {
+                            onSwipeLeft();
+                        }
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("AnimoTrackEvents").document(eventName)
                 .get()
@@ -321,5 +357,35 @@ public class RegistrationEventPage extends AppCompatActivity {
                 startActivity(intent); // Start the NotificationsPage activity
             }
         });
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return gestureDetector.onTouchEvent(event) || super.onTouchEvent(event);
+    }
+
+    private void updateEventDisplay() {
+        UpcomingEvent event = eventsList.get(currentEventIndex);
+        eventNameTextView.setText(event.getEventTitle().getName());
+        eventDateTextView.setText(event.getEventDate());
+        eventImageView.setImageResource(event.getEventTitle().getImageId());
+    }
+
+    private void onSwipeLeft() {
+        if (currentEventIndex < eventsList.size() - 1) {
+            currentEventIndex++;
+            updateEventDisplay();
+        } else {
+            Toast.makeText(this, "No more events.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void onSwipeRight() {
+        if (currentEventIndex > 0) {
+            currentEventIndex--;
+            updateEventDisplay();
+        } else {
+            Toast.makeText(this, "This is the first event", Toast.LENGTH_SHORT).show();
+        }
     }
 }

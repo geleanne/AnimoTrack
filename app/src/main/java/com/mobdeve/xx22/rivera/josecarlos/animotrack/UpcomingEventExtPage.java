@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -25,14 +26,11 @@ public class UpcomingEventExtPage extends AppCompatActivity {
     private RecyclerView recyclerViewUpcomingEventsExtended;
     private UpcomingEventExtAdapter adapter;
     private ArrayList<UpcomingEvent> upcomingEvents;
-    private ImageButton backArrow;
-    private ImageButton profileButton; // Declare profileButton
-    private ImageButton bookmarkButton; // Declare bookmarkButton
-    private ImageButton homeButton; // Declare homeButton
-    private ImageButton eventsButton;
+    private ImageButton backArrow, profileButton,bookmarkButton, homeButton, eventsButton;
+    private ImageView addButton;
     private Spinner spinnerDepartments;
     private FirestoreHelper firestoreHelper;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +45,7 @@ public class UpcomingEventExtPage extends AppCompatActivity {
         bookmarkButton = findViewById(R.id.bookmarksButton); // Initialize bookmarkButton
         homeButton = findViewById(R.id.homeButton); // Initialize homeButton
         eventsButton = findViewById(R.id.eventsButton);
+        addButton = findViewById(R.id.add_event_button);
 
         ArrayList<UpcomingEvent> events = DataGenerator.generateUpcomingEventsData();
 
@@ -110,11 +109,18 @@ public class UpcomingEventExtPage extends AppCompatActivity {
             }
         });
 
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UpcomingEventExtPage.this, CreateEventActivity.class);
+                startActivity(intent); // Start the CreateEventActivity activity
+            }
+        });
+
         bookmarkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UpcomingEventExtPage.this, BookmarkPage.class);
-                intent.putExtra("fullName", fullName);
                 startActivity(intent); // Start the BookmarksPage activity
             }
         });

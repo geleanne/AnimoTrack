@@ -82,19 +82,14 @@ public class MainActivity extends AppCompatActivity {
         greetNameTextView = findViewById(R.id.greetNameTextView);
 //        eToken = findViewById(R.id.eToken);
 
-        // Debugging Toast to check Firebase setup
-        Toast.makeText(this, "Firebase Initialized", Toast.LENGTH_SHORT).show();
-
-        FirebaseMessaging.getInstance().subscribeToTopic("events")
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Log.d("FCM", "Subscribed to events topic.");
-                        Toast.makeText(MainActivity.this, "Subscribed to events topic", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.e("FCM", "Failed to subscribe.");
-                        Toast.makeText(MainActivity.this, "Subscription failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
+//        FirebaseMessaging.getInstance().subscribeToTopic("events")
+//                .addOnCompleteListener(task -> {
+//                    if (task.isSuccessful()) {
+//                        Log.d("FCM", "Subscribed to events topic.");
+//                    } else {
+//                        Log.e("FCM", "Failed to subscribe.");
+//                    }
+//                });
 
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -126,7 +121,31 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<String> task) {
                         if (task.isSuccessful()) {
-                            Log.d("Installations", "Installation ID: " + task.getResult());
+                            String installationId = task.getResult();
+                            Log.d("Installations", "Installation ID: " + installationId);
+
+                            // Get the current user's UID
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            if (user != null) {
+                                String uid = user.getUid();
+
+                                // Save the Installation ID to Firestore under the user's document
+                                db.collection("AnimoTrackUsers").document(uid)
+                                        .update("installation_id", installationId)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    // Show a toast confirming that the Installation ID was saved
+                                                    Toast.makeText(MainActivity.this, "Installation ID saved successfully!", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    // Handle any errors
+                                                    Toast.makeText(MainActivity.this, "Failed to save Installation ID", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                            }
+
                         } else {
                             Log.e("Installations", "Unable to get Installation ID");
                         }

@@ -7,6 +7,7 @@ public class UpcomingEvent {
     private String eventCollege;
     private String eventFacilitator;
     private String eventDescription;
+    private String category;
     private boolean isBookmarked;
 
     public UpcomingEvent(Event event, String eventDate, String eventVenue, String eventCollege, String eventFacilitator, String eventDescription, boolean isBookmarked) {
@@ -16,6 +17,17 @@ public class UpcomingEvent {
         this.eventCollege = eventCollege;
         this.eventFacilitator = eventFacilitator;
         this.eventDescription = eventDescription;
+        this.isBookmarked = isBookmarked;
+    }
+
+    public UpcomingEvent(Event event, String eventDate, String eventVenue, String eventCollege, String eventFacilitator, String eventDescription, String category, boolean isBookmarked) {
+        this.event = event;
+        this.eventDate = eventDate;
+        this.eventVenue = eventVenue;
+        this.eventCollege = eventCollege;
+        this.eventFacilitator = eventFacilitator;
+        this.eventDescription = eventDescription;
+        this.category = category;
         this.isBookmarked = isBookmarked;
     }
 
@@ -45,6 +57,10 @@ public class UpcomingEvent {
 
     public String getEventDescription() {
         return this.eventDescription;
+    }
+
+    public String getCategory() {
+        return this.category;
     }
 
     public boolean isBookmarked() {

@@ -19,14 +19,16 @@ public class FirestoreHelper {
     public void saveEventToFirestore(UpcomingEvent event) {
         // Map the event data
         Map<String, Object> eventData = new HashMap<>();
-        eventData.put("title", event.getEventTitle().getName());
-        eventData.put("date", event.getEventDate());
-        eventData.put("venue", event.getEventVenue());
-        eventData.put("facilitator", event.getEventFacilitator());
-        eventData.put("description", event.getEventDescription());
+        eventData.put("category", event.getCategory());
         eventData.put("collegeDept", event.getEventCollege() != null ? event.getEventCollege() : "Unknown College"); // Ensure it's not null
-        eventData.put("isBookmarked", event.isBookmarked());
+        eventData.put("date", event.getEventDate());
+        eventData.put("description", event.getEventDescription());
+        eventData.put("facilitator", event.getEventFacilitator());
         eventData.put("imageId", event.getEventTitle().getImageId());
+
+        eventData.put("title", event.getEventTitle().getName());
+        eventData.put("venue", event.getEventVenue());
+        eventData.put("isBookmarked", event.isBookmarked());
 
         // Save to Firestore
         db.collection("AnimoTrackEvents")
@@ -35,7 +37,6 @@ public class FirestoreHelper {
                 .addOnSuccessListener(aVoid -> Log.d("Firestore", "Event saved successfully!"))
                 .addOnFailureListener(e -> Log.e("Firestore", "Error saving event", e));
     }
-
 
     public void getEventsByCollege(String college, EventCallback callback) {
         db.collection("AnimoTrackEvents")
@@ -51,6 +52,7 @@ public class FirestoreHelper {
                             String venue = document.getString("venue");
                             String facilitator = document.getString("facilitator");
                             String description = document.getString("description");
+                            String category = document.getString("category");
                             boolean isBookmarked = document.getBoolean("isBookmarked") != null && document.getBoolean("isBookmarked");
 
                             // fetch event image here
@@ -59,7 +61,7 @@ public class FirestoreHelper {
 
                             // Create Event and UpcomingEvent objects
                             Event event = new Event(imageId, title, "Category", eventCollege);
-                            UpcomingEvent upcomingEvent = new UpcomingEvent(event, date, venue, eventCollege, facilitator, description, isBookmarked);
+                            UpcomingEvent upcomingEvent = new UpcomingEvent(event, date, venue, eventCollege, facilitator, description, category, isBookmarked);
                             events.add(upcomingEvent);
                         }
                     }

@@ -39,6 +39,16 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/eventCollege"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/event_date"
+            app:layout_constraintStart_toStartOf="@id/event_date"
+            android:layout_marginTop="4dp" />
+
+        <TextView
             android:id="@+id/eventLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

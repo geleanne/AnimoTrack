@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/eText"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_green"
@@ -40,6 +40,7 @@
             android:text="@string/sign_up"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="@color/black"
             android:layout_gravity="center" />
 
         <TextView
@@ -49,55 +50,48 @@
             android:textSize="24sp"
             android:layout_gravity="center"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_marginTop="8dp" />
 
         <EditText
             android:id="@+id/editTextFullName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:hint="Full Name"
             android:inputType="text"
-            android:padding="14dp"
             android:background="@drawable/edittext_background"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="16dp"
-            android:textSize="16sp" />
+            style="@style/EditTextStyle"/>
 
         <EditText
             android:id="@+id/editTextIdNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:hint="ID Number"
-            android:inputType="number"
-            android:padding="14dp"
+            android:inputType="text"
             android:background="@drawable/edittext_background"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp" />
+            style="@style/EditTextStyle"/>
 
         <EditText
             android:id="@+id/editTextEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:hint="DLSU email"
-            android:inputType="textEmailAddress"
-            android:padding="14dp"
+            android:inputType="text"
             android:background="@drawable/edittext_background"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp" />
+            style="@style/EditTextStyle"/>
 
         <EditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:hint="Password"
             android:inputType="textPassword"
-            android:padding="14dp"
             android:background="@drawable/edittext_background"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp" />
+            style="@style/EditTextStyle"/>
 
         <Button
             android:id="@+id/buttonLogin"

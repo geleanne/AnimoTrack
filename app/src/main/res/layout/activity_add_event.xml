@@ -1,7 +1,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/eText"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_green"
@@ -53,10 +53,11 @@
                 android:layout_width="128dp"
                 android:layout_height="22dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="95dp"
+                android:layout_marginStart="78dp"
                 android:text="Add A New Event"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <TextView
@@ -66,6 +67,7 @@
             android:textSize="25sp"
             android:layout_gravity="center"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_marginTop="8dp" />
 
         <!-- Event Name -->
@@ -76,10 +78,8 @@
             android:layout_marginTop="16dp"
             android:hint="Event Name"
             android:inputType="text"
-            android:padding="14dp"
             android:background="@drawable/edittext_background"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            style="@style/EditTextStyle"/>
 
         <!-- Event Venue -->
         <EditText
@@ -89,10 +89,8 @@
             android:layout_marginTop="16dp"
             android:hint="Venue"
             android:inputType="text"
-            android:padding="14dp"
             android:background="@drawable/edittext_background"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            style="@style/EditTextStyle"/>
 
         <!-- Event Date -->
         <EditText
@@ -102,10 +100,8 @@
             android:layout_marginTop="16dp"
             android:hint="Event Date (MM/DD/YYYY)"
             android:inputType="text"
-            android:padding="14dp"
             android:background="@drawable/edittext_background"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            style="@style/EditTextStyle"/>
 
         <!-- Event Facilitator -->
         <EditText
@@ -115,10 +111,8 @@
             android:layout_marginTop="16dp"
             android:hint="Facilitator"
             android:inputType="text"
-            android:padding="14dp"
             android:background="@drawable/edittext_background"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            style="@style/EditTextStyle"/>
 
         <!-- Event Description -->
         <EditText
@@ -129,17 +123,19 @@
             android:hint="Event Description"
             android:inputType="textMultiLine"
             android:lines="3"
-            android:padding="14dp"
             android:background="@drawable/edittext_background"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            style="@style/EditTextStyle"/>
 
         <!-- Event Category Dropdown -->
         <Spinner
             android:id="@+id/eventCategorySpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/black"
+            android:spinnerMode="dropdown"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
 
         <!-- Submit Button -->
         <Button

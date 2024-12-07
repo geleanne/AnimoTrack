@@ -7,7 +7,6 @@
     android:background="@color/light_green"
     tools:context=".CreateEventActivity">
 
-    <!-- Toolbar for navigation -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
@@ -19,7 +18,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Card-like container for the event creation form -->
     <LinearLayout
         android:id="@+id/eventFormContainer"
         android:layout_width="0dp"
@@ -32,7 +30,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Horizontal LinearLayout for the back button and title -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -70,7 +67,6 @@
             android:textColor="@color/black"
             android:layout_marginTop="8dp" />
 
-        <!-- Event Name -->
         <EditText
             android:id="@+id/eventNameEditText"
             android:layout_width="match_parent"
@@ -81,7 +77,6 @@
             android:background="@drawable/edittext_background"
             style="@style/EditTextStyle"/>
 
-        <!-- Event Venue -->
         <EditText
             android:id="@+id/eventVenueEditText"
             android:layout_width="match_parent"
@@ -92,7 +87,6 @@
             android:background="@drawable/edittext_background"
             style="@style/EditTextStyle"/>
 
-        <!-- Event Date -->
         <EditText
             android:id="@+id/eventDateEditText"
             android:layout_width="match_parent"
@@ -103,7 +97,6 @@
             android:background="@drawable/edittext_background"
             style="@style/EditTextStyle"/>
 
-        <!-- Event Facilitator -->
         <EditText
             android:id="@+id/eventFacilitatorEditText"
             android:layout_width="match_parent"
@@ -114,7 +107,6 @@
             android:background="@drawable/edittext_background"
             style="@style/EditTextStyle"/>
 
-        <!-- Event Description -->
         <EditText
             android:id="@+id/eventDescriptionEditText"
             android:layout_width="match_parent"
@@ -134,7 +126,6 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <!-- Event College Dropdown -->
             <Spinner
                 android:id="@+id/eventCollegeSpinner"
                 android:layout_width="wrap_content"
@@ -145,7 +136,6 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <!-- Event Category Dropdown -->
             <Spinner
                 android:id="@+id/eventCategorySpinner"
                 android:layout_width="wrap_content"
@@ -157,7 +147,6 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Submit Button -->
         <Button
             android:id="@+id/buttonSubmitEvent"
             android:layout_width="match_parent"

@@ -2,6 +2,7 @@ package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -9,6 +10,13 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
@@ -41,13 +49,17 @@ public class NotificationsPage extends AppCompatActivity {
 
         // Initialize the notifications list.
         notificationsList = new ArrayList<>();
-        // Example: Add sample notifications
-        notificationsList.add(new NotificationsItem("Event Updated", "The venue for Event A has changed."));
-        notificationsList.add(new NotificationsItem("New Event Added", "Event B has been added to the calendar."));
+        adapter = new NotificationsAdapter(this, notificationsList);
 
+        notificationsRecyclerView = findViewById(R.id.notificationsRecyclerView);
+        notificationsList = new ArrayList<>();
         adapter = new NotificationsAdapter(this, notificationsList);
         notificationsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         notificationsRecyclerView.setAdapter(adapter);
+
+        // Fetch notifications
+        fetchNotificationsFromFirestore();
+
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,4 +108,33 @@ public class NotificationsPage extends AppCompatActivity {
             }
         });
     }
+
+    private void fetchNotificationsFromFirestore() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+
+            db.collection("notifications")
+                    .document(userId)
+                    .collection("userNotifications")
+                    .orderBy("timestamp", Query.Direction.DESCENDING)
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        ArrayList<NotificationsItem> notifications = new ArrayList<>();
+                        for (DocumentSnapshot document : queryDocumentSnapshots) {
+                            String title = document.getString("title");
+                            String body = document.getString("body");
+                            notifications.add(new NotificationsItem(title, body));
+                        }
+                        // Update RecyclerView
+                        adapter.notifyDataSetChanged();
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e("Firestore", "Error fetching notifications", e);
+                    });
+        }
+    }
+
 }

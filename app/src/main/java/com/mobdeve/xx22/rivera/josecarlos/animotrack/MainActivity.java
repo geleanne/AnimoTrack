@@ -1,9 +1,12 @@
 package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,7 +32,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    EditText eToken;
 
     RecyclerView recyclerViewUpcomingEvents;
     ImageView addEventButton;
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         culturalIconImageButton = findViewById(R.id.culturalIconImageButton);
         addEventButton = findViewById(R.id.add_event_button);
         greetNameTextView = findViewById(R.id.greetNameTextView);
+//        eToken = findViewById(R.id.eToken);
 
         // Debugging Toast to check Firebase setup
         Toast.makeText(this, "Firebase Initialized", Toast.LENGTH_SHORT).show();
@@ -91,6 +95,31 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Subscription failed", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            System.out.println("Fetching FCM registration token failed");
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        // Log and toast
+                        System.out.println(token);
+                        Toast.makeText(MainActivity.this, "Your device registration token is" + token, Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "FCM Token: " + token); // Make sure the token is logged
+
+//                        eToken.setText(token);
+
+                    }
+                });
+
+
 
         FirebaseInstallations.getInstance().getId()
                 .addOnCompleteListener(new OnCompleteListener<String>() {

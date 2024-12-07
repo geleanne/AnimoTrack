@@ -3,14 +3,17 @@ package com.mobdeve.xx22.rivera.josecarlos.animotrack;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.Timestamp;
 import com.google.firebase.database.DatabaseReference;
@@ -19,8 +22,12 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -56,11 +63,34 @@ public class CreateEventActivity extends AppCompatActivity {
 
         backArrow = findViewById(R.id.back_arrow);
 
+        String[] categories = getResources().getStringArray(R.array.event_categories);
+        List<String> categoryList = new ArrayList<>();
+        categoryList.add("Select Category"); // Add default text
+        categoryList.addAll(Arrays.asList(categories));
+
         // Set the adapter for the spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.event_categories, android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoryList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         eventCategorySpinner.setAdapter(adapter);
+
+        eventCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TextView selectedView = (TextView) parent.getChildAt(0);
+                if (selectedView != null) {
+                    if (position == 0) {
+                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.gray)); // Default text color
+                    } else {
+                        selectedView.setTextColor(ContextCompat.getColor(CreateEventActivity.this, R.color.black)); // Selected text color
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
 
         // handle back arrow
         backArrow.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +102,7 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
 
-// Handle Submit Button click
+        // Handle Submit Button click
         buttonSubmitEvent.setOnClickListener(v -> {
             // Capture event details
             String eventName = eventNameEditText.getText().toString().trim();
@@ -91,6 +121,12 @@ public class CreateEventActivity extends AppCompatActivity {
 
             if (eventCategory.equals("Select Category")) {
                 Toast.makeText(this, "Please select a valid category", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Validate date
+            if (!isValidDate(eventDate)) {
+                Toast.makeText(this, "Please input a valid date (MM/DD/YYYY format)", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -126,6 +162,22 @@ public class CreateEventActivity extends AppCompatActivity {
                     })
                     .addOnFailureListener(e -> Toast.makeText(this, "Failed to create event: " + e.getMessage(), Toast.LENGTH_SHORT).show());
         });
+    }
+
+    // Method to check if a date is valid
+    private boolean isValidDate(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+        sdf.setLenient(false); // Disallow lenient parsing (to avoid invalid dates being accepted)
+        try {
+            Date date = sdf.parse(dateStr);
+            // Check if the date is valid by comparing it with the current date
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            calendar.get(Calendar.MONTH);
+            return calendar.get(Calendar.MONTH) < 12;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     // Method to clear all the form fields after submission

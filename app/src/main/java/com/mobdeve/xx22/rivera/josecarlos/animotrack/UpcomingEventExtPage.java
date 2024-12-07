@@ -32,10 +32,7 @@ public class UpcomingEventExtPage extends AppCompatActivity {
     private ImageButton eventsButton;
     private Spinner spinnerDepartments;
     private FirestoreHelper firestoreHelper;
-    private GestureDetector gestureDetector;
-    private int currentEventIndex = 0; // Track the current event
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,25 +48,12 @@ public class UpcomingEventExtPage extends AppCompatActivity {
         homeButton = findViewById(R.id.homeButton); // Initialize homeButton
         eventsButton = findViewById(R.id.eventsButton);
 
-
-        // Initialize GestureDetector to detect swipe gestures
-        gestureDetector = new GestureDetector(this, new GestureListener());
-
         ArrayList<UpcomingEvent> events = DataGenerator.generateUpcomingEventsData();
 
         // Set up the RecyclerView for events
         UpcomingEventExtAdapter upcomingEventAdapter = new UpcomingEventExtAdapter(this, events);
         recyclerViewUpcomingEventsExtended.setAdapter(upcomingEventAdapter);
         recyclerViewUpcomingEventsExtended.setLayoutManager(new LinearLayoutManager(this));
-
-
-        // Add touch listener for swipe gestures
-        recyclerViewUpcomingEventsExtended.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return gestureDetector.onTouchEvent(event);  // Pass touch events to GestureDetector
-            }
-        });
 
         spinnerDepartments = findViewById(R.id.spinner_departments);
 
@@ -159,47 +143,5 @@ public class UpcomingEventExtPage extends AppCompatActivity {
                 Log.e("Firestore", "Error fetching events: ", e);
             }
         });
-    }
-
-
-
-
-    // GestureListener for detecting swipe gestures
-    private class GestureListener extends GestureDetector.SimpleOnGestureListener {
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            if (e1.getX() - e2.getX() > 100) { // Swipe left
-                currentEventIndex++;
-                if (currentEventIndex >= upcomingEvents.size()) {
-                    currentEventIndex = 0;  // Loop back to the first event
-                }
-                showEventAt(currentEventIndex);
-                Toast.makeText(UpcomingEventExtPage.this, "Swiped Left - Event Index: " + currentEventIndex, Toast.LENGTH_SHORT).show();
-                return true;
-            } else if (e2.getX() - e1.getX() > 100) { // Swipe right
-                currentEventIndex--;
-                if (currentEventIndex < 0) {
-                    currentEventIndex = upcomingEvents.size() - 1;  // Loop back to the last event
-                }
-                showEventAt(currentEventIndex);
-                Toast.makeText(UpcomingEventExtPage.this, "Swiped Right - Event Index: " + currentEventIndex, Toast.LENGTH_SHORT).show();
-                return true;
-            }
-            return false;
-        }
-    }
-
-    // Method to show event details based on currentEventIndex
-    private void showEventAt(int index) {
-        // Set up your RecyclerView or views to display the current event
-        if (index >= 0 && index < upcomingEvents.size()) {
-            UpcomingEvent currentEvent = upcomingEvents.get(index);
-            // Update UI with currentEvent data (event title, date, etc.)
-            // For example:
-            TextView eventTitle = findViewById(R.id.eventTitle);
-            eventTitle.setText(currentEvent.getEventTitle().getName());
-            // If you want to refresh your RecyclerView to show the current event:
-            adapter.notifyDataSetChanged();
-        }
     }
 }

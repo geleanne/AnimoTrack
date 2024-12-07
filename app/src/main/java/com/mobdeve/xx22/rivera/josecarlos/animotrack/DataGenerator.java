@@ -72,24 +72,4 @@ public class DataGenerator {
             firestoreHelper.saveEventToFirestore(event);
         }
     }
-
-
-//    public static ArrayList<CollegeEvent> generateCollegeEventData() {
-//        ArrayList<CollegeEvent> tempList = new ArrayList<>();
-//
-//        tempList.add(new CollegeEvent("All", event1));
-//        tempList.add(new CollegeEvent("CCS", event2));
-//        tempList.add(new CollegeEvent("CCS", event3));
-//        tempList.add(new CollegeEvent("All", event4));
-//        tempList.add(new CollegeEvent("All", event5));
-//        tempList.add(new CollegeEvent("CLA", event6));
-//        tempList.add(new CollegeEvent("All", event7));
-//        tempList.add(new CollegeEvent("All", event8));
-//        tempList.add(new CollegeEvent("COB", event9));
-//        tempList.add(new CollegeEvent("CLA", event10));
-//        tempList.add(new CollegeEvent("CCS", event11));
-//        tempList.add(new CollegeEvent("CCS", event12));
-//
-//        return tempList;
-//    }
 }

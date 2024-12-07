@@ -72,6 +72,9 @@ public class SignupPage extends AppCompatActivity {
                 } else if (!email.endsWith("@dlsu.edu.ph") || email.indexOf('@') == 0) {
                     // Ensure email ends with @dlsu.edu.ph and there is text before the '@'
                     Toast.makeText(SignupPage.this, "Please use a valid DLSU email address", Toast.LENGTH_SHORT).show();
+                } else if (!isValidIdNumber(idNumber)) {
+                    // Validate ID number (should be 8 digits and start with 1)
+                    Toast.makeText(SignupPage.this, "Please input a valid ID number (8 digits starting with '12')", Toast.LENGTH_SHORT).show();
                 } else {
                     // Create a new user with Firebase Authentication
                     mAuth.createUserWithEmailAndPassword(email, password)
@@ -121,11 +124,14 @@ public class SignupPage extends AppCompatActivity {
                                                                                             public void onComplete(@NonNull Task<String> task) {
                                                                                                 if (!task.isSuccessful()) {
                                                                                                     Log.w("SignupPage", "Fetching FCM registration token failed", task.getException());
+                                                                                                    System.out.println("Fetching FCM registration token failed");
                                                                                                     return;
                                                                                                 }
 
                                                                                                 // Get new FCM registration token
                                                                                                 String token = task.getResult();
+
+                                                                                                Toast.makeText(SignupPage.this, "Your device registration token is" + token, Toast.LENGTH_SHORT).show();
                                                                                                 FirebaseUser user = mAuth.getCurrentUser();
                                                                                                 if (user != null) {
                                                                                                     db.collection("AnimoTrackUsers")
@@ -183,5 +189,10 @@ public class SignupPage extends AppCompatActivity {
                 finish(); // Optional: Call finish() if you want to remove SignUpPage from the back stack
             }
         });
+    }
+
+    // Validate ID number (8 digits, starts with '1')
+    private boolean isValidIdNumber(String idNumber) {
+        return idNumber.matches("^12\\d{6}$"); // Must start with '1' and followed by 7 digits
     }
 }
